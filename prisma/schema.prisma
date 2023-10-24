@@ -1,0 +1,184 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id     String @unique @default(uuid())
+  userId String @unique
+  name   String
+  email  String @unique
+  image  String
+
+  recipes Recipe[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+model Recipe {
+  id              String     @unique @default(uuid())
+  slug            String     @unique
+  name            String
+  description     String     @db.Text
+  images          Image[]
+  difficulty      Difficulty @default(EASY)
+  preparationTime Int
+
+  ingredients Ingredient[]
+  steps       PreparationStep[]
+
+  Category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  occasions OccasionsOnRecipes[]
+  cuisines  CuisinesOnRecipes[]
+  diets     DietsOnRecipes[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([categoryId])
+  @@index([userId])
+}
+
+model PreparationStep {
+  id          String @unique @default(uuid())
+  description String
+  order       Int
+
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipeId String
+
+  @@index([recipeId])
+}
+
+model Ingredient {
+  id     String @unique @default(uuid())
+  amount Int
+  unit   String
+  name   String
+  image  String @db.Text
+
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipeId String
+
+  @@index([recipeId])
+}
+
+model Image {
+  id  String @unique @default(uuid())
+  url String @db.Text
+  alt String
+
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipeId String
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@index([recipeId])
+}
+
+model Category {
+  id    String @unique @default(uuid())
+  slug  String @unique
+  name  String
+  image String @db.Text
+
+  recipes Recipe[]
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+model Occasion {
+  id   String @unique @default(uuid())
+  name String
+
+  recipes OccasionsOnRecipes[]
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+model OccasionsOnRecipes {
+  recipe      Recipe   @relation(fields: [recipeId], references: [id])
+  recipeId    String
+  occassion   Occasion @relation(fields: [occassionId], references: [id])
+  occassionId String
+
+  assignedAt DateTime @default(now())
+  assignedBy String
+
+  @@id([recipeId, occassionId])
+  @@index([occassionId])
+  @@index([recipeId])
+}
+
+model Cuisine {
+  id   String @unique @default(uuid())
+  name String
+
+  recipes CuisinesOnRecipes[]
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+model CuisinesOnRecipes {
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipeId String
+
+  cuisines  Cuisine @relation(fields: [cuisineId], references: [id])
+  cuisineId String
+
+  assignedAt DateTime @default(now())
+  assignedBy String
+
+  @@id([recipeId, cuisineId])
+  @@index([cuisineId])
+  @@index([recipeId])
+}
+
+model Diet {
+  id   String @unique @default(uuid())
+  name String
+
+  recipes DietsOnRecipes[]
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+model DietsOnRecipes {
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipeId String
+
+  diet   Diet   @relation(fields: [dietId], references: [id])
+  dietId String
+
+  assignedAt DateTime @default(now())
+  assignedBy String
+
+  @@id([recipeId, dietId])
+  @@index([dietId])
+  @@index([recipeId])
+}
