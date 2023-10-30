@@ -11,12 +11,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User {
-  id     String @unique @default(uuid())
-  userId String @unique
-  name   String
-  email  String @unique
-  image  String
+model Profile {
+  id     String  @unique @default(uuid())
+  userId String  @unique
+  name   String?
+  email  String  @unique
+  image  String?
 
   recipes Recipe[]
 
@@ -30,23 +30,31 @@ enum Difficulty {
   HARD
 }
 
+enum ServingType {
+  SERVINGS
+  PIECES
+}
+
 model Recipe {
   id              String     @unique @default(uuid())
-  slug            String     @unique
+  // slug            String     @unique
   name            String
-  description     String     @db.Text
+  description     String?    @db.Text
   images          Image[]
   difficulty      Difficulty @default(EASY)
-  preparationTime Int
+  preparationTime Int?
+
+  servingType   ServingType @default(SERVINGS)
+  servingAmount Int         @default(1)
 
   ingredients Ingredient[]
   steps       PreparationStep[]
 
-  Category   Category @relation(fields: [categoryId], references: [id])
-  categoryId String
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?
 
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 
   occasions OccasionsOnRecipes[]
   cuisines  CuisinesOnRecipes[]
@@ -56,13 +64,14 @@ model Recipe {
   updatedAt DateTime @updatedAt
 
   @@index([categoryId])
-  @@index([userId])
+  @@index([profileId])
 }
 
 model PreparationStep {
   id          String @unique @default(uuid())
   description String
   order       Int
+  image       String @db.Text
 
   recipe   Recipe @relation(fields: [recipeId], references: [id])
   recipeId String
@@ -70,12 +79,21 @@ model PreparationStep {
   @@index([recipeId])
 }
 
+enum AdditionalQuantity {
+  NULL
+  FRAC1_2
+  FRAC1_3
+  FRAC1_4
+  FRAC1_8
+  FRAC2_3
+  FRAC3_4
+}
+
 model Ingredient {
-  id     String @unique @default(uuid())
-  amount Int
-  unit   String
-  name   String
-  image  String @db.Text
+  id                 String              @unique @default(uuid())
+  quantity           Int
+  additionalQuantity AdditionalQuantity?
+  name               String
 
   recipe   Recipe @relation(fields: [recipeId], references: [id])
   recipeId String
@@ -84,9 +102,11 @@ model Ingredient {
 }
 
 model Image {
-  id  String @unique @default(uuid())
-  url String @db.Text
-  alt String
+  id   String  @unique @default(uuid())
+  url  String  @db.Text
+  alt  String?
+  size Int
+  name String
 
   recipe   Recipe @relation(fields: [recipeId], references: [id])
   recipeId String

@@ -7,6 +7,9 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { ClerkProvider } from "@clerk/nextjs";
+import ModalProvider from "@/components/providers/modal-provider";
+import { currentUser } from "@/lib/current-profile";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -33,11 +36,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${poppins.variable} ${db_serif_display.variable}`}
-    >
-      <body className={cn(poppins.className)}>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html
+        lang="en"
+        className={`${poppins.variable} ${db_serif_display.variable}`}
+      >
+        <body className={cn(poppins.className, "bg-neutral-50")}>
+          {children}
+          <ModalProvider />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
