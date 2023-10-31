@@ -13,7 +13,7 @@ import { storage } from "@/lib/firebase";
 import axios, { AxiosResponse } from "axios";
 import { Image } from "@prisma/client";
 
-interface DropzoneProps {
+interface RecipeDropzoneProps {
   disabled: boolean;
   recipeId: String;
   images: Image[];
@@ -25,7 +25,11 @@ export type uploadImageType = {
   size: number;
 };
 
-const Dropzone = ({ disabled, recipeId, images }: DropzoneProps) => {
+const RecipeDropzone = ({
+  disabled,
+  recipeId,
+  images,
+}: RecipeDropzoneProps) => {
   const [files, setFiles] = useState<Image[]>(images);
   const [isUploading, setIsUploading] = useState(false);
 
@@ -107,4 +111,4 @@ const Dropzone = ({ disabled, recipeId, images }: DropzoneProps) => {
   );
 };
 
-export default Dropzone;
+export default RecipeDropzone;

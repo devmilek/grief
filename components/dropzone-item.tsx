@@ -6,7 +6,7 @@ import { Progress } from "./ui/progress";
 import byteSize from "byte-size";
 import { storage } from "@/lib/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { uploadImageType } from "./dropzone";
+import { uploadImageType } from "./recipe-dropzone";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { Image as PrismaImage } from "@prisma/client";

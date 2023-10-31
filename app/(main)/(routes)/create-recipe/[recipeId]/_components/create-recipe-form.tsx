@@ -16,6 +16,7 @@ import React, { useCallback } from "react";
 import BasicsForm from "./basics-form";
 import IngredientForm from "./ingredient-form";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import StepsForm from "./steps-form";
 
 export interface CreateRecipeFormProps {
   data: Recipe & {
@@ -63,6 +64,9 @@ const CreateRecipeForm = ({ data, categories }: CreateRecipeFormProps) => {
       </TabsContent>
       <TabsContent value="ingredients" className="max-w-4xl mx-auto mt-10">
         <IngredientForm ingredients={data.ingredients} id={data.id} />
+      </TabsContent>
+      <TabsContent value="steps" className="max-w-4xl mx-auto mt-10">
+        <StepsForm id={data.id} />
       </TabsContent>
     </Tabs>
   );

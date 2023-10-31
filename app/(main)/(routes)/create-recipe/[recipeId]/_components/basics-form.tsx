@@ -25,7 +25,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { CreateRecipeFormProps } from "./create-recipe-form";
 import { difficultyMap, servingMap } from "@/maps";
-import Dropzone from "@/components/dropzone";
+import RecipeDropzone from "@/components/recipe-dropzone";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -113,7 +113,7 @@ const BasicsForm = ({ data, categories }: CreateRecipeFormProps) => {
                 <FormItem>
                   <FormLabel>Zdjęcie</FormLabel>
                   <FormControl>
-                    <Dropzone
+                    <RecipeDropzone
                       disabled={isLoading}
                       recipeId={data.id}
                       images={field.value}
