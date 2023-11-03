@@ -70,7 +70,7 @@ model Recipe {
 model PreparationStep {
   id          String @unique @default(uuid())
   description String
-  order       Int
+  order       Int @default(0)
   image       String @db.Text
 
   recipe   Recipe @relation(fields: [recipeId], references: [id])

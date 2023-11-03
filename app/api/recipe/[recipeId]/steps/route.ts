@@ -14,6 +14,8 @@ export async function POST(
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
+    console.log(image, content);
+
     if (!image || !content) {
       return new NextResponse("Missing fields", { status: 400 });
     }
@@ -28,10 +30,13 @@ export async function POST(
           create: {
             image,
             description: content,
+            order: 1,
           },
         },
       },
     });
+
+    return NextResponse.json(step);
   } catch (e) {
     return new NextResponse("Something went wrong", { status: 500 });
   }

@@ -59,9 +59,11 @@ const UserDropdown = ({ profile }: UserButtonProps) => {
             <Plus className="mr-2 w-4 h-4" />
             <span>Utwórz przepis</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Book className="mr-2 w-4 h-4" />
-            <span>Zarządzaj przepisami</span>
+          <DropdownMenuItem asChild>
+            <Link href="/your-recipes">
+              <Book className="mr-2 w-4 h-4" />
+              <span>Zarządzaj przepisami</span>
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

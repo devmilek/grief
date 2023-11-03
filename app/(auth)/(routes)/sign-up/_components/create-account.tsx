@@ -18,7 +18,6 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import OtpInput from "react-otp-input";
 import { useSignUp } from "@clerk/nextjs";
-import { initUser } from "@/lib/init-profile";
 import { useRouter } from "next/navigation";
 import { useProfileDetails } from "@/hooks/use-profile-details";
 

@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -31,8 +33,14 @@ const StepsForm = ({ id }: StepsFormProps) => {
     },
   });
 
+  const router = useRouter();
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    console.log(values);
     try {
+      const step = await axios.post(`/api/recipe/${id}/steps`, values);
+      router.refresh();
+      form.reset();
     } catch (e) {
       console.log(e);
     }
