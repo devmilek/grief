@@ -1,3 +1,6 @@
+"use client";
+
+import StepCard from "@/components/cards/step-card";
 import StepDropzone from "@/components/step-dropzone";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,6 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { PreparationStep } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -16,7 +20,8 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 interface StepsFormProps {
-  id: String;
+  recipeId: String;
+  steps: PreparationStep[];
 }
 
 const formSchema = z.object({
@@ -24,7 +29,9 @@ const formSchema = z.object({
   content: z.string().min(1),
 });
 
-const StepsForm = ({ id }: StepsFormProps) => {
+const StepsForm = ({ recipeId, steps }: StepsFormProps) => {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,12 +40,15 @@ const StepsForm = ({ id }: StepsFormProps) => {
     },
   });
 
-  const router = useRouter();
+  const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
     try {
-      const step = await axios.post(`/api/recipe/${id}/steps`, values);
+      const step = await axios.post(`/api/recipe/${recipeId}/steps`, {
+        ...values,
+        order: steps.length + 1,
+      });
       router.refresh();
       form.reset();
     } catch (e) {
@@ -61,8 +71,8 @@ const StepsForm = ({ id }: StepsFormProps) => {
                     <StepDropzone
                       value={field.value}
                       setValue={field.onChange}
-                      disabled={false}
-                      recipeId={id}
+                      disabled={isLoading}
+                      recipeId={recipeId}
                     />
                   </FormControl>
                 </FormItem>
@@ -75,16 +85,24 @@ const StepsForm = ({ id }: StepsFormProps) => {
                 <FormItem>
                   <FormLabel>Treść kroku</FormLabel>
                   <FormControl>
-                    <Textarea rows={5} {...field} />
+                    <Textarea disabled={isLoading} rows={5} {...field} />
                   </FormControl>
                 </FormItem>
               )}
             />
             <div className="flex justify-end">
-              <Button type="submit">Dodaj do listy</Button>
+              <Button disabled={isLoading} type="submit">
+                Dodaj do listy
+              </Button>
             </div>
           </form>
         </Form>
+      </div>
+      <h1 className="font-display text-3xl mb-8 mt-16">Lista kroków</h1>
+      <div className="space-y-4">
+        {steps.map((step) => (
+          <StepCard key={step.id} step={step} />
+        ))}
       </div>
     </div>
   );

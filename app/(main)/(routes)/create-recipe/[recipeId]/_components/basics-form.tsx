@@ -19,7 +19,13 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Difficulty, ServingType } from "@prisma/client";
+import {
+  Category,
+  Difficulty,
+  Image,
+  Recipe,
+  ServingType,
+} from "@prisma/client";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -31,8 +37,16 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
+interface BasicsFormProps {
+  recipe: Recipe & {
+    images: Image[];
+  };
+  recipeId: String;
+  categories: Category[];
+}
+
 const formSchema = z.object({
-  id: z.string(),
+  // id: z.string(),
   name: z.string().min(1),
   images: z
     .object({
@@ -54,21 +68,20 @@ const formSchema = z.object({
   preparationTime: z.coerce.number(),
 });
 
-const BasicsForm = ({ data, categories }: CreateRecipeFormProps) => {
+const BasicsForm = ({ recipe, recipeId, categories }: BasicsFormProps) => {
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      id: data.id,
-      name: data.name || "",
-      images: data.images || [],
-      description: data.description || "",
-      categoryId: data.categoryId || undefined,
-      servingAmount: data.servingAmount || undefined,
-      servingType: data.servingType || ServingType.SERVINGS,
-      difficulty: data.difficulty || Difficulty.EASY,
-      preparationTime: data.preparationTime || undefined,
+      name: recipe.name || "",
+      images: recipe.images || [],
+      description: recipe.description || "",
+      categoryId: recipe.categoryId || undefined,
+      servingAmount: recipe.servingAmount || undefined,
+      servingType: recipe.servingType || ServingType.SERVINGS,
+      difficulty: recipe.difficulty || Difficulty.EASY,
+      preparationTime: recipe.preparationTime || undefined,
     },
   });
 
@@ -76,7 +89,10 @@ const BasicsForm = ({ data, categories }: CreateRecipeFormProps) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const recipe = await axios.patch(`/api/recipe/${data.id}/basics`, values);
+      const recipe = await axios.patch(
+        `/api/recipe/${recipeId}/basics`,
+        values,
+      );
       router.refresh();
     } catch (e) {
       console.log(e);
@@ -115,7 +131,7 @@ const BasicsForm = ({ data, categories }: CreateRecipeFormProps) => {
                   <FormControl>
                     <RecipeDropzone
                       disabled={isLoading}
-                      recipeId={data.id}
+                      recipeId={recipeId}
                       images={field.value}
                     />
                   </FormControl>
@@ -269,7 +285,12 @@ const BasicsForm = ({ data, categories }: CreateRecipeFormProps) => {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button
+              type="submit"
+              onClick={form.handleSubmit(onSubmit)}
+              className="w-full"
+              disabled={isLoading}
+            >
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Zapisz
             </Button>

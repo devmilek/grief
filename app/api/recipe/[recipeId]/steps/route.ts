@@ -8,7 +8,7 @@ export async function POST(
 ) {
   try {
     const profile = await currentProfile();
-    const { image, content } = await req.json();
+    const { image, content, order } = await req.json();
 
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -16,7 +16,7 @@ export async function POST(
 
     console.log(image, content);
 
-    if (!image || !content) {
+    if (!content || !order) {
       return new NextResponse("Missing fields", { status: 400 });
     }
 
@@ -30,7 +30,7 @@ export async function POST(
           create: {
             image,
             description: content,
-            order: 1,
+            order,
           },
         },
       },

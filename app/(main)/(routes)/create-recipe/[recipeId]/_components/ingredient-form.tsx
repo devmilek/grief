@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,7 +19,7 @@ import {
 } from "@/components/ui/select";
 import { additionalQuantityMap, unitMap } from "@/maps";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AdditionalQuantity, Ingredient } from "@prisma/client";
+import { Ingredient } from "@prisma/client";
 import axios from "axios";
 import { XIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -26,23 +28,23 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 interface IngredientFormProps {
-  id: string;
+  recipeId: string;
   ingredients: Ingredient[];
 }
 
 const formSchema = z.object({
   quantity: z.coerce.number().min(0).optional(),
-  additionalQuantity: z.nativeEnum(AdditionalQuantity).optional(),
+  unit: z.string(),
   name: z.string().min(1),
 });
 
-const IngredientForm = ({ id, ingredients }: IngredientFormProps) => {
+const IngredientForm = ({ recipeId, ingredients }: IngredientFormProps) => {
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      quantity: undefined,
-      additionalQuantity: undefined,
+      quantity: 0,
+      unit: "",
       name: "",
     },
   });
@@ -51,7 +53,7 @@ const IngredientForm = ({ id, ingredients }: IngredientFormProps) => {
     try {
       console.log(values);
       const ingredient = await axios.post(
-        `/api/recipe/${id}/ingredient`,
+        `/api/recipe/${recipeId}/ingredient`,
         values,
       );
       form.reset();
@@ -66,7 +68,7 @@ const IngredientForm = ({ id, ingredients }: IngredientFormProps) => {
   const onDelete = async (ingredientId: string) => {
     try {
       const ingredient = await axios.delete(
-        `/api/recipe/${id}/ingredient/${ingredientId}`,
+        `/api/recipe/${recipeId}/ingredient/${ingredientId}`,
       );
       console.log(ingredient);
       router.refresh();
@@ -84,7 +86,7 @@ const IngredientForm = ({ id, ingredients }: IngredientFormProps) => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="flex flex-col items-end space-y-4"
           >
-            <div className="flex space-x-4 items-end w-full">
+            <div className="flex space-x-3 items-end w-full">
               <FormField
                 name="quantity"
                 control={form.control}
@@ -103,31 +105,14 @@ const IngredientForm = ({ id, ingredients }: IngredientFormProps) => {
                 )}
               />
               <FormField
-                name="additionalQuantity"
+                name="unit"
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger className="w-20">
-                          <SelectValue placeholder="0" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {Object.values(AdditionalQuantity).map((item) => (
-                          <SelectItem key={item} value={item}>
-                            <p
-                              dangerouslySetInnerHTML={{
-                                __html: additionalQuantityMap[item],
-                              }}
-                            ></p>
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <FormLabel>Jednostka</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="np. Gram" />
+                    </FormControl>
                   </FormItem>
                 )}
               />
@@ -142,6 +127,7 @@ const IngredientForm = ({ id, ingredients }: IngredientFormProps) => {
                         {...field}
                         className="w-full"
                         placeholder="np. Mąka"
+                        autoComplete="off"
                       />
                     </FormControl>
                   </FormItem>
@@ -161,16 +147,8 @@ const IngredientForm = ({ id, ingredients }: IngredientFormProps) => {
             className="px-6 py-3 rounded-xl bg-white text-sm flex items-center"
             key={ingredient.id}
           >
-            <p className="font-medium w-12">
-              {ingredient.quantity > 0 ? ingredient.quantity : ""}{" "}
-              {ingredient.additionalQuantity && (
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      additionalQuantityMap[ingredient.additionalQuantity],
-                  }}
-                ></p>
-              )}
+            <p className="font-medium mr-6">
+              {ingredient.quantity} {ingredient.unit}
             </p>
             <p>{ingredient.name}</p>
             <Button

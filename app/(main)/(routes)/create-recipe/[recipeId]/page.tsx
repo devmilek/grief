@@ -1,6 +1,10 @@
 import { db } from "@/lib/db";
-import CreateRecipeForm from "./_components/create-recipe-form";
 import { currentProfile } from "@/lib/current-profile";
+import { redirect } from "next/navigation";
+import CreateRecipeTabs from "./_components/create-recipe-tabs";
+import BasicsForm from "./_components/basics-form";
+import IngredientForm from "./_components/ingredient-form";
+import StepsForm from "./_components/steps-form";
 
 interface CreateRecipePageProps {
   params: {
@@ -10,22 +14,50 @@ interface CreateRecipePageProps {
 
 const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
   const profile = await currentProfile();
+
   if (!profile) {
-    return <div>404</div>;
+    return redirect("/");
   }
+
+  // const recipe = await db.recipe.findUnique({
+  //   where: {
+  //     id: params.recipeId,
+  //     profileId: profile.id,
+  //   },
+  //   include: {
+  //     ingredients: true,
+  //     steps: true,
+  //     category: true,
+  //     cuisines: true,
+  //     diets: true,
+  //     occasions: true,
+  //     images: true,
+  //   },
+  // });
+
   const recipe = await db.recipe.findUnique({
     where: {
       id: params.recipeId,
       profileId: profile.id,
     },
     include: {
-      ingredients: true,
-      steps: true,
-      category: true,
-      cuisines: true,
-      diets: true,
-      occasions: true,
       images: true,
+    },
+  });
+
+  const ingredients = await db.ingredient.findMany({
+    where: {
+      recipeId: params.recipeId,
+    },
+    orderBy: {},
+  });
+
+  const steps = await db.preparationStep.findMany({
+    where: {
+      recipeId: params.recipeId,
+    },
+    orderBy: {
+      order: "asc",
     },
   });
 
@@ -35,7 +67,20 @@ const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
     return <div>404</div>;
   }
 
-  return <CreateRecipeForm data={recipe} categories={categories} />;
+  // return <CreateRecipeForm data={recipe} categories={categories} />;
+  return (
+    <>
+      <CreateRecipeTabs>
+        <BasicsForm
+          recipe={recipe}
+          recipeId={recipe.id}
+          categories={categories}
+        />
+        <IngredientForm ingredients={ingredients} recipeId={recipe.id} />
+        <StepsForm recipeId={recipe.id} steps={steps} />
+      </CreateRecipeTabs>
+    </>
+  );
 };
 
 export default CreateRecipePage;

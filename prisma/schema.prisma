@@ -68,10 +68,10 @@ model Recipe {
 }
 
 model PreparationStep {
-  id          String @unique @default(uuid())
+  id          String  @unique @default(uuid())
   description String
-  order       Int @default(0)
-  image       String @db.Text
+  order       Int
+  image       String? @db.Text
 
   recipe   Recipe @relation(fields: [recipeId], references: [id])
   recipeId String
@@ -90,13 +90,16 @@ enum AdditionalQuantity {
 }
 
 model Ingredient {
-  id                 String              @unique @default(uuid())
-  quantity           Int
-  additionalQuantity AdditionalQuantity?
-  name               String
+  id       String  @unique @default(uuid())
+  quantity Int
+  unit     String?
+  name     String
 
   recipe   Recipe @relation(fields: [recipeId], references: [id])
   recipeId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([recipeId])
 }

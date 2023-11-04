@@ -8,7 +8,7 @@ export async function POST(
 ) {
   try {
     const profile = await currentProfile();
-    const { quantity, additionalQuantity, name } = await req.json();
+    const { quantity, unit, name } = await req.json();
 
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -27,8 +27,7 @@ export async function POST(
         ingredients: {
           create: {
             quantity: quantity ? quantity : 0,
-            additionalQuantity:
-              additionalQuantity !== "NULL" ? additionalQuantity : null,
+            unit,
             name,
           },
         },

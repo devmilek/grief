@@ -38,12 +38,15 @@ const CreateRecipeModal = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const recipe = await axios.post("/api/recipe", values);
-      onClose();
       router.push(`/create-recipe/${recipe.data.id}`);
+      onClose();
+      form.reset();
     } catch (e) {
       console.log(e);
     }
   };
+
+  const isLoading = form.formState.isSubmitting;
 
   return (
     <Dialog
@@ -69,7 +72,7 @@ const CreateRecipeModal = () => {
                 <FormItem>
                   <FormLabel>Nazwa</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input disabled={isLoading} {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -78,9 +81,13 @@ const CreateRecipeModal = () => {
         </Form>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">Anuluj</Button>
+            <Button disabled={isLoading} variant="outline">
+              Anuluj
+            </Button>
           </DialogClose>
-          <Button onClick={form.handleSubmit(onSubmit)}>Utwórz</Button>
+          <Button disabled={isLoading} onClick={form.handleSubmit(onSubmit)}>
+            Utwórz
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

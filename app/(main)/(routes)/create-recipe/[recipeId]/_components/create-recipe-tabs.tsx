@@ -1,37 +1,17 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import queryString from "query-string";
-import {
-  Category,
-  CuisinesOnRecipes,
-  DietsOnRecipes,
-  Image as PrismaImage,
-  Ingredient,
-  OccasionsOnRecipes,
-  PreparationStep,
-  Recipe,
-} from "@prisma/client";
-import React, { useCallback } from "react";
-import BasicsForm from "./basics-form";
-import IngredientForm from "./ingredient-form";
+import { cn } from "@/lib/utils";
+import { CheckCircle } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import StepsForm from "./steps-form";
+import queryString from "query-string";
+import React from "react";
 
-export interface CreateRecipeFormProps {
-  data: Recipe & {
-    ingredients: Ingredient[];
-    steps: PreparationStep[];
-    category: Category | null;
-    cuisines: CuisinesOnRecipes[];
-    diets: DietsOnRecipes[];
-    occasions: OccasionsOnRecipes[];
-    images: PrismaImage[];
-  };
-  categories: Category[];
+interface CreateRecipeTabsProps {
+  children: React.ReactNode[];
 }
 
-const CreateRecipeForm = ({ data, categories }: CreateRecipeFormProps) => {
+const CreateRecipeTabs = ({ children }: CreateRecipeTabsProps) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -60,16 +40,16 @@ const CreateRecipeForm = ({ data, categories }: CreateRecipeFormProps) => {
         </TabsList>
       </div>
       <TabsContent value="basics" className="max-w-4xl mx-auto mt-10">
-        <BasicsForm categories={categories} data={data} />
+        {children[0]}
       </TabsContent>
       <TabsContent value="ingredients" className="max-w-4xl mx-auto mt-10">
-        <IngredientForm ingredients={data.ingredients} id={data.id} />
+        {children[1]}
       </TabsContent>
       <TabsContent value="steps" className="max-w-4xl mx-auto mt-10">
-        <StepsForm id={data.id} />
+        {children[2]}
       </TabsContent>
     </Tabs>
   );
 };
 
-export default CreateRecipeForm;
+export default CreateRecipeTabs;
