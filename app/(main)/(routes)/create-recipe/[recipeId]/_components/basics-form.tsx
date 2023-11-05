@@ -29,7 +29,6 @@ import {
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { CreateRecipeFormProps } from "./create-recipe-form";
 import { difficultyMap, servingMap } from "@/maps";
 import RecipeDropzone from "@/components/recipe-dropzone";
 import { Button } from "@/components/ui/button";

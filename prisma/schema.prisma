@@ -43,6 +43,7 @@ model Recipe {
   images          Image[]
   difficulty      Difficulty @default(EASY)
   preparationTime Int?
+  published       Boolean    @default(false)
 
   servingType   ServingType @default(SERVINGS)
   servingAmount Int         @default(1)
@@ -73,7 +74,7 @@ model PreparationStep {
   order       Int
   image       String? @db.Text
 
-  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   recipeId String
 
   @@index([recipeId])
@@ -111,7 +112,7 @@ model Image {
   size Int
   name String
 
-  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   recipeId String
 
   updatedAt DateTime @updatedAt
@@ -143,13 +144,12 @@ model Occasion {
 }
 
 model OccasionsOnRecipes {
-  recipe      Recipe   @relation(fields: [recipeId], references: [id])
+  recipe      Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   recipeId    String
-  occassion   Occasion @relation(fields: [occassionId], references: [id])
+  occassion   Occasion @relation(fields: [occassionId], references: [id], onDelete: Cascade)
   occassionId String
 
   assignedAt DateTime @default(now())
-  assignedBy String
 
   @@id([recipeId, occassionId])
   @@index([occassionId])
@@ -167,14 +167,13 @@ model Cuisine {
 }
 
 model CuisinesOnRecipes {
-  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   recipeId String
 
-  cuisines  Cuisine @relation(fields: [cuisineId], references: [id])
+  cuisines  Cuisine @relation(fields: [cuisineId], references: [id], onDelete: Cascade)
   cuisineId String
 
   assignedAt DateTime @default(now())
-  assignedBy String
 
   @@id([recipeId, cuisineId])
   @@index([cuisineId])
@@ -192,14 +191,13 @@ model Diet {
 }
 
 model DietsOnRecipes {
-  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   recipeId String
 
-  diet   Diet   @relation(fields: [dietId], references: [id])
+  diet   Diet   @relation(fields: [dietId], references: [id], onDelete: Cascade)
   dietId String
 
   assignedAt DateTime @default(now())
-  assignedBy String
 
   @@id([recipeId, dietId])
   @@index([dietId])

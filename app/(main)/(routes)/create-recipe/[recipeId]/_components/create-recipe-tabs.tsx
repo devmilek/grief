@@ -26,7 +26,7 @@ const CreateRecipeTabs = ({ children }: CreateRecipeTabsProps) => {
 
   return (
     <Tabs
-      className="container pb-12"
+      className="container pb-8 pt-6"
       defaultValue="basics"
       value={activeStep}
       onValueChange={handleTabChange}
@@ -47,6 +47,9 @@ const CreateRecipeTabs = ({ children }: CreateRecipeTabsProps) => {
       </TabsContent>
       <TabsContent value="steps" className="max-w-4xl mx-auto mt-10">
         {children[2]}
+      </TabsContent>
+      <TabsContent value="additional" className="max-w-4xl mx-auto mt-10">
+        {children[3]}
       </TabsContent>
     </Tabs>
   );

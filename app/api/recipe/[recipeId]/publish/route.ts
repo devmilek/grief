@@ -8,34 +8,24 @@ export async function POST(
 ) {
   try {
     const profile = await currentProfile();
-    const { image, content, order } = await req.json();
 
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    if (!content || !order) {
-      return new NextResponse("Missing fields", { status: 400 });
-    }
-
-    const step = await db.recipe.update({
+    const recipe = await db.recipe.update({
       where: {
         id: params.recipeId,
         profileId: profile.id,
       },
       data: {
-        steps: {
-          create: {
-            image,
-            description: content,
-            order,
-          },
-        },
+        published: true,
       },
     });
 
-    return NextResponse.json(step);
+    return NextResponse.json(recipe);
   } catch (e) {
-    return new NextResponse("Something went wrong", { status: 500 });
+    console.log(e);
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }

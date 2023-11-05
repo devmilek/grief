@@ -108,7 +108,7 @@ const CreateAccount = () => {
                   <FormItem>
                     <FormLabel>Imię</FormLabel>
                     <FormControl>
-                      <Input type="name" {...field} />
+                      <Input autoComplete="off" type="name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -132,7 +132,7 @@ const CreateAccount = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>Hasło</FormLabel>
                     <FormControl>
                       <Input type="password" {...field} />
                     </FormControl>

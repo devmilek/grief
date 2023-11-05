@@ -1,0 +1,34 @@
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Ingredient } from "@prisma/client";
+import React from "react";
+
+interface IngredientsFeedProps {
+  ingredients: Ingredient[];
+}
+
+const IngredientsFeed = ({ ingredients }: IngredientsFeedProps) => {
+  return (
+    <div className="bg-white p-8 rounded-xl flex-shrink-0">
+      <h2 className="text-3xl font-display">Składniki</h2>
+      <div className="mt-6">
+        {ingredients.map((ingredient) => (
+          <div
+            key={ingredient.id}
+            className="flex items-center space-x-2 py-4 border-b"
+          >
+            <Checkbox id={ingredient.id} />
+            <Label className="font-medium" htmlFor={ingredient.id}>
+              {ingredient.name}{" "}
+              <span className="font-normal text-neutral-600">
+                ({ingredient.quantity} {ingredient.unit})
+              </span>
+            </Label>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default IngredientsFeed;
