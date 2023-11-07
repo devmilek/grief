@@ -18,13 +18,20 @@ const StepsFeed = ({ steps }: StepsFeedProps) => {
             <h2 className="font-display text-2xl">Krok {step.order}</h2>
             <p className="mt-2">{step.description}</p>
           </div>
-          <Image
-            className="aspect-[4/3] w-52 object-cover flex-shrink-0 rounded-xl"
-            src={step.image}
-            alt=""
-            height={300}
-            width={300}
-          />
+          <div>
+            <div className="aspect-[4/3] flex-shrink-0 object-cover rounded-lg overflow-hidden relative w-52">
+              {step.image ? (
+                <Image
+                  alt="Step image"
+                  src={step.image}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <div className="bg-neutral-50 rounded-lg border h-full w-full"></div>
+              )}
+            </div>
+          </div>
         </div>
       ))}
     </div>
