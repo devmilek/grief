@@ -2,7 +2,6 @@
 
 import React, { useEffect } from "react";
 import UploadImageModal from "../modals/upload-image-modal";
-import ProfileDetailsModal from "../modals/profile-details-modal";
 import CreateRecipeModal from "../modals/create-recipe-modal";
 
 const ModalProvider = () => {
@@ -16,7 +15,6 @@ const ModalProvider = () => {
     return (
       <>
         <UploadImageModal />
-        <ProfileDetailsModal />
         <CreateRecipeModal />
       </>
     );
