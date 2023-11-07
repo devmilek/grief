@@ -9,6 +9,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
 import ModalProvider from "@/components/providers/modal-provider";
+import { Toaster } from "sonner";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -44,6 +45,7 @@ export default function RootLayout({
         <body className={cn(poppins.className, "bg-neutral-50")}>
           {children}
           <ModalProvider />
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

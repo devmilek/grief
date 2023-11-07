@@ -19,6 +19,7 @@ import { useCreateRecipeModal } from "@/hooks/use-create-recipe";
 import { Button } from "../ui/button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2),
@@ -72,7 +73,7 @@ const CreateRecipeModal = () => {
                 <FormItem>
                   <FormLabel>Nazwa</FormLabel>
                   <FormControl>
-                    <Input disabled={isLoading} {...field} />
+                    <Input autoComplete="off" disabled={isLoading} {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -86,6 +87,7 @@ const CreateRecipeModal = () => {
             </Button>
           </DialogClose>
           <Button disabled={isLoading} onClick={form.handleSubmit(onSubmit)}>
+            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Utwórz
           </Button>
         </DialogFooter>

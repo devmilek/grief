@@ -17,6 +17,7 @@ model Profile {
   name   String?
   email  String  @unique
   image  String?
+  bio    String?
 
   recipes Recipe[]
 

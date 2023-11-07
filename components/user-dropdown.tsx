@@ -69,9 +69,11 @@ const UserDropdown = ({ profile }: UserButtonProps) => {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <Settings className="w-4 h-4 mr-2" />
-            <span>Ustawienia</span>
+          <DropdownMenuItem asChild>
+            <Link href="/settings">
+              <Settings className="w-4 h-4 mr-2" />
+              <span>Ustawienia</span>
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <SignOutButton>
