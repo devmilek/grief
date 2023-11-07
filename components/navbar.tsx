@@ -4,7 +4,6 @@ import React from "react";
 import NavbarLinks from "./navbar-links";
 import { db } from "@/lib/db";
 import { Input } from "./ui/input";
-import { Avatar, AvatarFallback } from "./ui/avatar";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import UserDropdown from "./user-dropdown";

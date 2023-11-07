@@ -2,15 +2,8 @@ import { cn } from "@/lib/utils";
 import { UploadCloud } from "lucide-react";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import DropzoneItem from "./dropzone-item";
-import {
-  getDownloadURL,
-  ref,
-  uploadBytes,
-  uploadBytesResumable,
-} from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "@/lib/firebase";
-import axios, { AxiosResponse } from "axios";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import Image from "next/image";

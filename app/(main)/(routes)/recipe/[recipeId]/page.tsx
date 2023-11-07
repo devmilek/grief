@@ -1,4 +1,3 @@
-import RecipeTag from "@/components/recipe/recipe-tag";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { db } from "@/lib/db";
 import Image from "next/image";

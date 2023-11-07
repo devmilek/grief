@@ -3,12 +3,7 @@ import { UploadCloud } from "lucide-react";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import DropzoneItem from "./dropzone-item";
-import {
-  getDownloadURL,
-  ref,
-  uploadBytes,
-  uploadBytesResumable,
-} from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "@/lib/firebase";
 import axios, { AxiosResponse } from "axios";
 import { Image } from "@prisma/client";
@@ -30,9 +25,8 @@ export type uploadImageType = {
 const RecipeDropzone = ({
   disabled,
   recipeId,
-  images,
-} // onImagesChange,
-: RecipeDropzoneProps) => {
+  images, // onImagesChange,
+}: RecipeDropzoneProps) => {
   const [files, setFiles] = useState<any[]>(images);
   const [isUploading, setIsUploading] = useState(false);
   const router = useRouter();
