@@ -19,7 +19,6 @@ import Link from "next/link";
 import OtpInput from "react-otp-input";
 import { useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { useProfileDetails } from "@/hooks/use-profile-details";
 
 const formSchema = z.object({
   name: z.string().min(2),
@@ -33,7 +32,6 @@ const CreateAccount = () => {
 
   const { isLoaded, signUp, setActive } = useSignUp();
   const router = useRouter();
-  const { onOpen } = useProfileDetails();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
