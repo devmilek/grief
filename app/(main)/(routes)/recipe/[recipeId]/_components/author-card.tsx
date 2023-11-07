@@ -9,13 +9,15 @@ interface AuthorCardProps {
 const AuthorCard = ({ profile }: AuthorCardProps) => {
   return (
     <div className="bg-white rounded-xl p-8 flex space-x-4">
-      <Image
-        alt=""
-        src={profile.image}
-        width={42}
-        height={42}
-        className="rounded-full"
-      />
+      {profile.image && (
+        <Image
+          alt=""
+          src={profile.image}
+          width={42}
+          height={42}
+          className="rounded-full"
+        />
+      )}
       <div>
         <p className="text-xs text-neutral-500">Napisane przez</p>
         <h2 className="font-semibold">{profile.name}</h2>
