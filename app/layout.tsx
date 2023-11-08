@@ -45,7 +45,7 @@ export default function RootLayout({
         <body className={cn(poppins.className, "bg-neutral-50")}>
           {children}
           <ModalProvider />
-          <Toaster />
+          <Toaster closeButton richColors />
         </body>
       </html>
     </ClerkProvider>

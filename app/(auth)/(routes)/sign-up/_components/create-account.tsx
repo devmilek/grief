@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import PasswordStrengthBar from "react-password-strength-bar";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,17 +16,27 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import OtpInput from "react-otp-input";
 import { useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { clerkErrorsMap } from "@/maps";
+import OTPInput from "@/components/otp-input";
+import { findClerkError } from "@/lib/find-clerk-error";
 
 const formSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  password: z.string().min(8),
+  name: z.string().min(2, {
+    message: "Imię jest wymagane.",
+  }),
+  email: z.string().email({
+    message: "Nieprawidłowy adres email.",
+  }),
+  password: z.string().min(8, {
+    message: "Hasło musi mieć co najmniej 8 znaków.",
+  }),
 });
 
 const CreateAccount = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [pendingVerification, setPendingVerification] = useState(false);
   const [otp, setOtp] = useState("");
 
@@ -46,9 +56,8 @@ const CreateAccount = () => {
     if (!isLoaded) {
       return;
     }
+    setIsLoading(true);
     try {
-      console.log(values.name);
-
       await signUp.create({
         emailAddress: values.email,
         password: values.password,
@@ -61,7 +70,11 @@ const CreateAccount = () => {
       // change the UI to our pending section.
       setPendingVerification(true);
     } catch (err: any) {
-      console.error(JSON.stringify(err, null, 2));
+      err.errors.forEach((error: any) => {
+        toast.error(findClerkError(error.code));
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -69,6 +82,8 @@ const CreateAccount = () => {
     if (!isLoaded) {
       return;
     }
+
+    setIsLoading(true);
 
     try {
       const completeSignUp = await signUp.attemptEmailAddressVerification({
@@ -85,6 +100,8 @@ const CreateAccount = () => {
       }
     } catch (err: any) {
       console.error(JSON.stringify(err, null, 2));
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -106,7 +123,12 @@ const CreateAccount = () => {
                   <FormItem>
                     <FormLabel>Imię</FormLabel>
                     <FormControl>
-                      <Input autoComplete="off" type="name" {...field} />
+                      <Input
+                        disabled={isLoading}
+                        autoComplete="off"
+                        type="name"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -119,7 +141,7 @@ const CreateAccount = () => {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input type="email" {...field} />
+                      <Input disabled={isLoading} type="email" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -132,14 +154,14 @@ const CreateAccount = () => {
                   <FormItem>
                     <FormLabel>Hasło</FormLabel>
                     <FormControl>
-                      <Input type="password" {...field} />
+                      <Input disabled={isLoading} type="password" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
-            <Button className="w-full mt-6" type="submit">
+            <Button disabled={isLoading} className="w-full mt-6" type="submit">
               Utwórz konto
             </Button>
           </form>
@@ -163,30 +185,9 @@ const CreateAccount = () => {
           aby zweryfikować konto.
         </p>
         <div className="my-10">
-          <OtpInput
-            value={otp}
-            onChange={setOtp}
-            numInputs={6}
-            skipDefaultStyles={true}
-            inputStyle={{
-              borderRadius: "8px",
-              borderColor: "#B4B4B4",
-              border: "1px solid #B4B4B4",
-              fontSize: "32px",
-              padding: "0.2rem",
-              width: "56px",
-              textAlign: "center",
-              outlineColor: "#10B981",
-            }}
-            containerStyle={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-            renderInput={(props) => <input {...props} />}
-          />
+          <OTPInput setValue={setOtp} />
         </div>
-        <Button className="w-full" onClick={onVerify}>
+        <Button disabled={isLoading} className="w-full" onClick={onVerify}>
           Kontynuuj
         </Button>
       </div>

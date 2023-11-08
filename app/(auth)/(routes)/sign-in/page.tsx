@@ -10,12 +10,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { findClerkError } from "@/lib/find-clerk-error";
+import { clerkErrorsMap } from "@/maps";
 import { useSignIn } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import * as z from "zod";
 
 const formSchema = z.object({
@@ -29,6 +33,7 @@ const formSchema = z.object({
 
 const SignIn = () => {
   const { isLoaded, signIn, setActive } = useSignIn();
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,6 +48,8 @@ const SignIn = () => {
       return;
     }
 
+    setIsLoading(true);
+
     try {
       const result = await signIn.create({
         identifier: values.email,
@@ -50,14 +57,17 @@ const SignIn = () => {
       });
 
       if (result.status === "complete") {
-        console.log(result);
         await setActive({ session: result.createdSessionId });
         router.push("/");
       } else {
         console.log(result);
       }
     } catch (err: any) {
-      console.error("error", err.errors[0].longMessage);
+      err.errors.forEach((error: any) => {
+        toast.error(findClerkError(error.code));
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -79,7 +89,7 @@ const SignIn = () => {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input type="email" {...field} />
+                      <Input disabled={isLoading} type="email" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -92,14 +102,23 @@ const SignIn = () => {
                   <FormItem>
                     <FormLabel>Hasło</FormLabel>
                     <FormControl>
-                      <Input type="password" {...field} />
+                      <Input disabled={isLoading} type="password" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              <div className="justify-end flex">
+                <Link
+                  className="text-xs font-semibold text-emerald-600"
+                  href="/forgot-password"
+                >
+                  Zapomniałeś hasła?
+                </Link>
+              </div>
             </div>
-            <Button className="w-full mt-6" type="submit">
+            <Button disabled={isLoading} className="w-full mt-6" type="submit">
+              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Zaloguj się
             </Button>
           </form>
