@@ -1,5 +1,7 @@
+import { authOptions } from "@/lib/auth-options";
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
+import { getServerSession } from "next-auth/next";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(
@@ -7,13 +9,15 @@ export async function DELETE(
   { params }: { params: { recipeId: string; ingredientId: string } },
 ) {
   try {
-    const profile = await currentProfile();
-    if (!profile) {
+    const session = await getServerSession(authOptions);
+
+    if (!session) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
+
     const recipe = await db.recipe.update({
       where: {
-        profileId: profile.id,
+        profileId: session.user.id,
         id: params.recipeId,
       },
       data: {

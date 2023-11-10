@@ -1,27 +1,28 @@
-import { currentProfile } from "@/lib/current-profile";
+import { authOptions } from "@/lib/auth-options";
 import { db } from "@/lib/db";
 import { redirectToSignIn } from "@clerk/nextjs";
 import { PlusIcon } from "lucide-react";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
 
 const YourRecipesPage = async () => {
-  const profile = await currentProfile();
+  const session = await getServerSession(authOptions);
 
-  if (!profile) {
+  if (!session) {
     redirect("/");
   }
 
   const recipesCount = await db.recipe.count({
     where: {
-      profileId: profile.id,
+      profileId: session.user.id,
     },
   });
 
   const recipes = await db.recipe.findMany({
     where: {
-      profileId: profile.id,
+      profileId: session.user.id,
     },
     select: {
       name: true,

@@ -4,13 +4,13 @@ import React from "react";
 import NavbarLinks from "./navbar-links";
 import { db } from "@/lib/db";
 import { Input } from "./ui/input";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import UserDropdown from "./user-dropdown";
 import { currentProfile } from "@/lib/current-profile";
+import { getServerSession } from "next-auth";
 
 const Navbar = async () => {
-  const profile = await currentProfile();
+  const session = await getServerSession();
 
   const [categories, occasions, cuisines, diets] = await db.$transaction([
     db.category.findMany(),
@@ -36,8 +36,9 @@ const Navbar = async () => {
         </div>
         <div className="flex space-x-5">
           <Input className="ml-auto w-72" placeholder="Szukaj przepisu..." />
-          {profile && <UserDropdown profile={profile} />}
-          <SignedOut>
+          {session ? (
+            <UserDropdown profile={session.user} />
+          ) : (
             <div className="space-x-2">
               <Button variant="ghost" asChild>
                 <Link href="/sign-in">Zaloguj się</Link>
@@ -46,7 +47,7 @@ const Navbar = async () => {
                 <Link href="/sign-up">Utwórz konto</Link>
               </Button>
             </div>
-          </SignedOut>
+          )}
         </div>
       </div>
     </header>

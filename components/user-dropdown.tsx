@@ -16,10 +16,11 @@ import { Profile } from "@prisma/client";
 import { Book, LogOut, Plus, Settings, UserIcon } from "lucide-react";
 import Link from "next/link";
 import { useCreateRecipeModal } from "@/hooks/use-create-recipe";
-import { SignOutButton } from "@clerk/nextjs";
+import { User } from "next-auth";
+import { signOut } from "next-auth/react";
 
 interface UserButtonProps {
-  profile: Profile;
+  profile: User;
 }
 
 const UserDropdown = ({ profile }: UserButtonProps) => {
@@ -75,13 +76,13 @@ const UserDropdown = ({ profile }: UserButtonProps) => {
               <span>Ustawienia</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <SignOutButton>
-              <div>
-                <LogOut className="w-4 h-4 mr-2" />
-                <span>Wyloguj się</span>
-              </div>
-            </SignOutButton>
+          <DropdownMenuItem
+            onClick={() => {
+              signOut();
+            }}
+          >
+            <LogOut className="w-4 h-4 mr-2" />
+            <span>Wyloguj się</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

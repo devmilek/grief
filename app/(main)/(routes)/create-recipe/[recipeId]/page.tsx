@@ -1,11 +1,12 @@
 import { db } from "@/lib/db";
-import { currentProfile } from "@/lib/current-profile";
 import { redirect } from "next/navigation";
 import CreateRecipeTabs from "./_components/create-recipe-tabs";
 import BasicsForm from "./_components/basics-form";
 import IngredientForm from "./_components/ingredient-form";
 import StepsForm from "./_components/steps-form";
 import AdditionalInfoForm from "./_components/additional-info-form";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth-options";
 
 interface CreateRecipePageProps {
   params: {
@@ -14,89 +15,80 @@ interface CreateRecipePageProps {
 }
 
 const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
-  const profile = await currentProfile();
+  const session = await getServerSession(authOptions);
 
-  if (!profile) {
+  if (!session) {
     return redirect("/");
   }
-
-  // const recipe = await db.recipe.findUnique({
-  //   where: {
-  //     id: params.recipeId,
-  //     profileId: profile.id,
-  //   },
-  //   include: {
-  //     ingredients: true,
-  //     steps: true,
-  //     category: true,
-  //     cuisines: true,
-  //     diets: true,
-  //     occasions: true,
-  //     images: true,
-  //   },
-  // });
 
   const recipe = await db.recipe.findUnique({
     where: {
       id: params.recipeId,
-      profileId: profile.id,
+      profileId: session.user.id,
     },
     include: {
       images: true,
     },
   });
 
-  const ingredients = await db.ingredient.findMany({
-    where: {
-      recipeId: params.recipeId,
-    },
-    orderBy: {},
-  });
-
-  const steps = await db.preparationStep.findMany({
-    where: {
-      recipeId: params.recipeId,
-    },
-    orderBy: {
-      order: "asc",
-    },
-  });
-
-  const categories = await db.category.findMany();
-  const occasions = await db.occasion.findMany();
-  const cuisines = await db.cuisine.findMany();
-  const diets = await db.diet.findMany();
-
-  const selectedOccasions = await db.occasionsOnRecipes.findMany({
-    where: {
-      recipeId: params.recipeId,
-    },
-    include: {
-      occassion: true,
-    },
-  });
-
-  const selectedCuisines = await db.cuisinesOnRecipes.findMany({
-    where: {
-      recipeId: params.recipeId,
-    },
-    include: {
-      cuisines: true,
-    },
-  });
-
-  const selectedDiets = await db.dietsOnRecipes.findMany({
-    where: {
-      recipeId: params.recipeId,
-    },
-    include: {
-      diet: true,
-    },
-  });
-
   if (!recipe) {
-    return <div>404</div>;
+    return redirect("/");
   }
+
+  const [
+    ingredients,
+    steps,
+    categories,
+    occasions,
+    cuisines,
+    diets,
+    selectedOccasions,
+    selectedCuisines,
+    selectedDiets,
+  ] = await db.$transaction([
+    db.ingredient.findMany({
+      where: {
+        recipeId: params.recipeId,
+      },
+      orderBy: {},
+    }),
+    db.preparationStep.findMany({
+      where: {
+        recipeId: params.recipeId,
+      },
+      orderBy: {
+        order: "asc",
+      },
+    }),
+    db.category.findMany(),
+    db.occasion.findMany(),
+    db.cuisine.findMany(),
+    db.diet.findMany(),
+    db.occasionsOnRecipes.findMany({
+      where: {
+        recipeId: params.recipeId,
+      },
+      include: {
+        occassion: true,
+      },
+    }),
+    db.cuisinesOnRecipes.findMany({
+      where: {
+        recipeId: params.recipeId,
+      },
+      include: {
+        cuisines: true,
+      },
+    }),
+    db.dietsOnRecipes.findMany({
+      where: {
+        recipeId: params.recipeId,
+      },
+      include: {
+        diet: true,
+      },
+    }),
+  ]);
 
   const requiredFields = [
     recipe.name,
@@ -115,7 +107,6 @@ const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
     ingredients.length > 0 &&
     steps.length > 0;
 
-  // return <CreateRecipeForm data={recipe} categories={categories} />;
   return (
     <>
       <CreateRecipeTabs>

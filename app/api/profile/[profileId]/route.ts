@@ -1,5 +1,6 @@
-import { currentProfile } from "@/lib/current-profile";
+import { authOptions } from "@/lib/auth-options";
 import { db } from "@/lib/db";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(
@@ -7,20 +8,16 @@ export async function PATCH(
   { params }: { params: { profileId: string } },
 ) {
   try {
-    const profile = await currentProfile();
+    const session = await getServerSession(authOptions);
 
-    if (!profile) {
+    if (!session) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
     const { name, bio } = await req.json();
 
-    if (profile.id !== params.profileId) {
-      return new NextResponse("Unauthorized", { status: 401 });
-    }
-
     const profileData = await db.profile.update({
-      where: { id: profile.id },
+      where: { id: session.user.id },
       data: { name, bio },
     });
 

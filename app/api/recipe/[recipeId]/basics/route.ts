@@ -1,5 +1,6 @@
-import { currentProfile } from "@/lib/current-profile";
+import { authOptions } from "@/lib/auth-options";
 import { db } from "@/lib/db";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function PATCH(
@@ -7,9 +8,9 @@ export async function PATCH(
   { params }: { params: { recipeId: string } },
 ) {
   try {
-    const profile = await currentProfile();
+    const session = await getServerSession(authOptions);
 
-    if (!profile) {
+    if (!session) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
@@ -42,7 +43,7 @@ export async function PATCH(
     const recipe = await db.recipe.update({
       where: {
         id: params.recipeId,
-        profileId: profile.id,
+        profileId: session.user.id,
       },
       data: {
         name,

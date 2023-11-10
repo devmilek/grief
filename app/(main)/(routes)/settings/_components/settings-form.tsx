@@ -14,6 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Profile } from "@prisma/client";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
+import { User } from "next-auth";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -77,7 +78,7 @@ const SettingsForm = ({ profile }: SettingsFormProps) => {
               <FormItem>
                 <FormLabel>Adres email</FormLabel>
                 <FormControl>
-                  <Input disabled {...field} />
+                  <Input disabled={true} readOnly {...field} />
                 </FormControl>
               </FormItem>
             )}

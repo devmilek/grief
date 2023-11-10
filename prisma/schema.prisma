@@ -12,12 +12,17 @@ generator client {
 }
 
 model Profile {
-  id     String  @unique @default(uuid())
-  userId String  @unique
-  name   String?
-  email  String  @unique
-  image  String?
-  bio    String?
+  id String @unique @default(uuid())
+
+  name  String  @db.TinyText
+  image String? @db.Text
+  bio   String? @db.TinyText
+
+  email          String @unique
+  hashedPassword String
+
+  emailVerified          Boolean @default(false)
+  emailVerificationToken String? @unique
 
   recipes Recipe[]
 
@@ -97,7 +102,7 @@ model Ingredient {
   unit     String?
   name     String
 
-  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   recipeId String
 
   createdAt DateTime @default(now())

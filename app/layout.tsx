@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
 import ModalProvider from "@/components/providers/modal-provider";
 import { Toaster } from "sonner";
+import SessionProvider from "@/components/providers/session-provider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -37,17 +38,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html
-        lang="en"
-        className={`${poppins.variable} ${db_serif_display.variable}`}
-      >
-        <body className={cn(poppins.className, "bg-neutral-50")}>
+    <html
+      lang="pl"
+      className={`${poppins.variable} ${db_serif_display.variable}`}
+    >
+      <body className={cn(poppins.className, "bg-neutral-50")}>
+        <SessionProvider>
           {children}
           <ModalProvider />
           <Toaster closeButton richColors />
-        </body>
-      </html>
-    </ClerkProvider>
+        </SessionProvider>
+      </body>
+    </html>
   );
 }
