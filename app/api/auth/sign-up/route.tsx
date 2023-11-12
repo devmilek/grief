@@ -2,10 +2,11 @@ import { db } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
-// import { Resend } from "resend";
+import { Resend } from "resend";
+import MailConfirmationEmail from "@/emails/email-confirmation";
 // import EmailConfirmation from "@/emails/email-confirmation";
 
-// const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: NextRequest) {
   try {
@@ -48,17 +49,14 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // const data = await resend.emails.send({
-    //   from: "grief@devmilek.pl",
-    //   to: profile.email,
-    //   subject: "Confirm your email address",
-    //   react: (
-    //     <EmailConfirmation
-    //       baseUrl="http://localhost:3000"
-    //       token={emailVerificationToken}
-    //     />
-    //   ),
-    // });
+    //TODO: protect from too many requests by setting a limit on how many times a user can request a password reset
+
+    const data = await resend.emails.send({
+      from: "grief@devmilek.pl",
+      to: profile.email,
+      subject: "Jeszcze tylko jeden krok - Potwierdź swój adres email",
+      react: <MailConfirmationEmail token={emailVerificationToken} />,
+    });
 
     return NextResponse.json({ profile });
   } catch (e) {

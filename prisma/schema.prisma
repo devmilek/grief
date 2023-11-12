@@ -24,6 +24,9 @@ model Profile {
   emailVerified          Boolean @default(false)
   emailVerificationToken String? @unique
 
+  resetPasswordToken       String?   @unique
+  resetPasswordTokenExpiry DateTime?
+
   recipes Recipe[]
 
   createdAt DateTime @default(now())

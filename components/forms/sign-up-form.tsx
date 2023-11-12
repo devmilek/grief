@@ -51,6 +51,7 @@ const SignUpForm = () => {
       router.push("/sign-in");
     } catch (err: any) {
       console.log(err);
+      //TODO: handle and show errors
     }
   };
 

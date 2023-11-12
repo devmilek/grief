@@ -6,6 +6,8 @@ import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
+import CreateRecipeCard from "./_components/create-recipe-card";
+import RecipeCard from "./_components/recipe-card";
 
 const YourRecipesPage = async () => {
   const session = await getServerSession(authOptions);
@@ -20,13 +22,19 @@ const YourRecipesPage = async () => {
     },
   });
 
+  const unpublishedRecipesCount = await db.recipe.count({
+    where: {
+      profileId: session.user.id,
+      published: false,
+    },
+  });
+
   const recipes = await db.recipe.findMany({
     where: {
       profileId: session.user.id,
     },
-    select: {
-      name: true,
-      id: true,
+    include: {
+      images: true,
     },
   });
 
@@ -43,27 +51,17 @@ const YourRecipesPage = async () => {
 
         <div className="p-6 rounded-xl bg-white border">
           <p className="text-sm font-medium text-neutral-600">Wersje robocze</p>
-          <h1 className="font-display text-3xl mt-1">{recipesCount}</h1>
+          <h1 className="font-display text-3xl mt-1">
+            {unpublishedRecipesCount}
+          </h1>
         </div>
 
-        <div className="p-6 rounded-xl bg-white border flex items-center col-span-2">
-          <div className="p-3 rounded-lg bg-emerald-500/20 text-emerald-700 mr-3">
-            <PlusIcon className="w-4 h-4" />
-          </div>
-          <div>
-            <h2 className="font-display text-lg">Stwórz nowy przepis</h2>
-            <p className="text-sm text-neutral-500">
-              Podziel się z innymi twoim talentem.
-            </p>
-          </div>
-        </div>
+        <CreateRecipeCard />
       </div>
-      <h1 className="font-display text-3xl mt-6 mb-6">Zarządzaj przepisami</h1>
+      <h1 className="font-display text-3xl mt-16 mb-6">Zarządzaj przepisami</h1>
       <div className="flex flex-col space-y-3">
         {recipes.map((recipe) => (
-          <Link href={"/create-recipe/" + recipe.id} key={recipe.id}>
-            {recipe.name}
-          </Link>
+          <RecipeCard key={recipe.id} recipe={recipe} />
         ))}
       </div>
     </section>

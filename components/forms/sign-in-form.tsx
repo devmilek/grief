@@ -48,7 +48,7 @@ const SignInForm = () => {
         redirect: false,
       });
       if (!signInResponse || signInResponse.ok !== true) {
-        toast.error("Invalid credentials");
+        toast.error("Niepoprawny email lub hasło");
       } else {
         router.refresh();
       }
