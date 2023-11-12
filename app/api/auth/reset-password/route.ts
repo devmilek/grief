@@ -44,11 +44,11 @@ export async function POST(req: NextRequest) {
 
     //TODO: make an info that this token is valid for 24h
 
-    resend.emails.send({
+    await resend.emails.send({
       from: "grief@devmilek.pl",
-      to: profile.email,
+      to: [profile.email],
       subject: "Zresetuj swoje hasło - Grief",
-      react: <ResetPasswordEmail token={resetPasswordToken} />,
+      react: ResetPasswordEmail({ token: resetPasswordToken }),
     });
 
     return NextResponse.json({ message: "Email wysłany" });

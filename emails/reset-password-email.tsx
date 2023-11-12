@@ -8,8 +8,8 @@ import { Link } from "@react-email/link";
 import { Heading } from "@react-email/heading";
 import { Text } from "@react-email/text";
 
-const baseUrl = process.env.VERCEL_URL
-  ? process.env.VERCEL_URL
+const baseUrl = process.env.BASE_URL
+  ? process.env.BASE_URL
   : "http://localhost:3000/";
 
 interface ResetPasswordEmailProps {
