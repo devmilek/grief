@@ -6,7 +6,6 @@ import { db } from "@/lib/db";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import UserDropdown from "./user-dropdown";
-import { currentProfile } from "@/lib/current-profile";
 import { getServerSession } from "next-auth";
 
 const Navbar = async () => {
