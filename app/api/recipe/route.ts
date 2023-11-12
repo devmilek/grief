@@ -1,7 +1,5 @@
 import { authOptions } from "@/lib/auth-options";
-import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
-import { auth, currentUser } from "@clerk/nextjs";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 

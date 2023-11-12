@@ -29,25 +29,28 @@ const StepDropzone = ({
 }: StepDropzoneProps) => {
   const [isUploading, setIsUploading] = useState(false);
 
-  const uploadImage = async (file: File) => {
-    const storageRef = ref(
-      storage,
-      `images/recipe-${recipeId}/steps/${file.name}`,
-    );
-    const snapshot = await uploadBytes(storageRef, file);
-    const url = await getDownloadURL(storageRef);
+  const onDrop = useCallback(
+    async (acceptFiled: File[]) => {
+      const uploadImage = async (file: File) => {
+        const storageRef = ref(
+          storage,
+          `images/recipe-${recipeId}/steps/${file.name}`,
+        );
+        const snapshot = await uploadBytes(storageRef, file);
+        const url = await getDownloadURL(storageRef);
 
-    return { url, name: file.name, size: file.size };
-  };
+        return { url, name: file.name, size: file.size };
+      };
 
-  const onDrop = useCallback(async (acceptFiled: File[]) => {
-    setIsUploading(true);
+      setIsUploading(true);
 
-    const fbFile = await uploadImage(acceptFiled[0]);
-    setValue(fbFile.url);
+      const fbFile = await uploadImage(acceptFiled[0]);
+      setValue(fbFile.url);
 
-    setIsUploading(false);
-  }, []);
+      setIsUploading(false);
+    },
+    [setValue, recipeId],
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,

@@ -29,47 +29,52 @@ const RecipeDropzone = ({
 }: RecipeDropzoneProps) => {
   const [files, setFiles] = useState<any[]>(images);
   const [isUploading, setIsUploading] = useState(false);
-  const router = useRouter();
 
-  const uploadImage = async (file: File) => {
-    const storageRef = ref(storage, `images/recipe-${recipeId}/${file.name}`);
-    const snapshot = await uploadBytes(storageRef, file);
-    const url = await getDownloadURL(storageRef);
+  const onDrop = useCallback(
+    async (acceptedFiles: File[]) => {
+      const uploadImage = async (file: File) => {
+        const storageRef = ref(
+          storage,
+          `images/recipe-${recipeId}/${file.name}`,
+        );
+        const snapshot = await uploadBytes(storageRef, file);
+        const url = await getDownloadURL(storageRef);
 
-    return { url, name: file.name, size: file.size };
-  };
+        return { url, name: file.name, size: file.size };
+      };
 
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    setIsUploading(true);
+      setIsUploading(true);
 
-    for (const file of acceptedFiles) {
-      // const retFile = await uploadImage(file);
-      // setFiles((prev) => [...prev, retFile]);
-      console.log(file);
-      const fbFile = await uploadImage(file);
-      const image: AxiosResponse = await axios.post(
-        `/api/recipe/${recipeId}/image`,
-        {
-          url: fbFile.url,
-          size: fbFile.size,
-          name: fbFile.name,
-        },
-      );
-      console.log(image.data);
-      // onImagesChange(image.data);
-      setFiles((prev) => [
-        ...prev,
-        {
-          url: fbFile.url,
-          size: fbFile.size,
-          name: fbFile.name,
-        },
-      ]);
-      console.log(files);
-    }
+      for (const file of acceptedFiles) {
+        // const retFile = await uploadImage(file);
+        // setFiles((prev) => [...prev, retFile]);
+        console.log(file);
+        const fbFile = await uploadImage(file);
+        const image: AxiosResponse = await axios.post(
+          `/api/recipe/${recipeId}/image`,
+          {
+            url: fbFile.url,
+            size: fbFile.size,
+            name: fbFile.name,
+          },
+        );
+        console.log(image.data);
+        // onImagesChange(image.data);
+        setFiles((prev) => [
+          ...prev,
+          {
+            url: fbFile.url,
+            size: fbFile.size,
+            name: fbFile.name,
+          },
+        ]);
+        console.log(files);
+      }
 
-    setIsUploading(false);
-  }, []);
+      setIsUploading(false);
+    },
+    [files, recipeId],
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
