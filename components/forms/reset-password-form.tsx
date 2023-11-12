@@ -37,7 +37,9 @@ const ResetPasswordForm = () => {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
-      await axios.post("/api/auth/reset-password", data);
+      await axios.post("/api/auth/reset-password", data, {
+        timeout: 20000,
+      });
       setIsSent(true);
       emailForm.reset();
     } catch (e: any) {
