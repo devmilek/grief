@@ -36,15 +36,18 @@ const SignUpForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "test@test.pl",
-      password: "12345678",
-      name: "milosz",
+      email: "",
+      password: "",
+      name: "",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const profile = await axios.post("/api/auth/sign-up", values);
+      const profile = await axios.post("/api/auth/sign-up", values, {
+        //FIXME: make request faster to remove timeout
+        timeout: 20000,
+      });
       toast.success("Konto zostało utworzone.", {
         description: "Możesz się teraz zalogować.",
       });

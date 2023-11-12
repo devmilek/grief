@@ -17,7 +17,7 @@ interface ResetPasswordEmailProps {
 }
 
 export default function ResetPasswordEmail({ token }: ResetPasswordEmailProps) {
-  const confirmationLink = baseUrl + "/forgot-password?token=" + token;
+  const confirmationLink = baseUrl + "forgot-password?token=" + token;
   return (
     <Tailwind>
       <Html className="bg-neutral-100 font-sans">

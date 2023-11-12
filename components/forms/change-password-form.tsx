@@ -42,10 +42,17 @@ const ChangePasswordForm = ({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.post("/api/auth/change-password", {
-        ...values,
-        token: resetPasswordToken,
-      });
+      await axios.post(
+        "/api/auth/change-password",
+        {
+          ...values,
+          token: resetPasswordToken,
+        },
+        {
+          //FIXME: make request faster to remove timeout
+          timeout: 20000,
+        },
+      );
       toast.success("Hasło zostało zmienione.", {
         description: "Możesz się teraz zalogować.",
       });

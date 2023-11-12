@@ -19,7 +19,7 @@ interface MailConfirmationEmailProps {
 export default function MailConfirmationEmail({
   token,
 }: MailConfirmationEmailProps) {
-  const confirmationLink = baseUrl + "/confirm-email?token=" + token;
+  const confirmationLink = baseUrl + "confirm-email?token=" + token;
   return (
     <Tailwind>
       <Html className="bg-neutral-100 font-sans">
