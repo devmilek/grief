@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
 
     //TODO: make an info that this token is valid for 24h
 
-    const data = await resend.emails.send({
+    resend.emails.send({
       from: "grief@devmilek.pl",
       to: profile.email,
       subject: "Zresetuj swoje hasło - Grief",
