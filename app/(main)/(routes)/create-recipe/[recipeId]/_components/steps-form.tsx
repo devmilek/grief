@@ -56,9 +56,10 @@ const StepsForm = ({ recipeId, steps }: StepsFormProps) => {
     }
   };
 
+  //TODO: reorder steps
+
   return (
     <div>
-      <h1 className="font-display text-3xl mb-4">Dodaj krok</h1>
       <div className="p-8 bg-white rounded-xl">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
@@ -98,12 +99,16 @@ const StepsForm = ({ recipeId, steps }: StepsFormProps) => {
           </form>
         </Form>
       </div>
-      <h1 className="font-display text-3xl mb-8 mt-16">Lista kroków</h1>
-      <div className="space-y-4">
-        {steps.map((step) => (
-          <StepCard key={step.id} step={step} />
-        ))}
-      </div>
+      {steps.length > 0 && (
+        <>
+          <h1 className="font-display text-3xl mb-8 mt-16">Lista kroków</h1>
+          <div className="space-y-4">
+            {steps.map((step) => (
+              <StepCard key={step.id} step={step} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };

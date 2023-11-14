@@ -1,6 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Select,
   SelectContent,
@@ -67,11 +68,13 @@ const CuisinesSelect = ({
           <SelectValue placeholder="Wybierz kuchnie" />
         </SelectTrigger>
         <SelectContent>
-          {cuisines.map((item) => (
-            <SelectItem key={item.id} value={item.id}>
-              {item.name}
-            </SelectItem>
-          ))}
+          <ScrollArea className="h-48">
+            {cuisines.map((item) => (
+              <SelectItem key={item.id} value={item.id}>
+                {item.name}
+              </SelectItem>
+            ))}
+          </ScrollArea>
         </SelectContent>
       </Select>
       <div className="flex flex-wrap gap-2 mt-4">

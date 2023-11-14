@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 
 interface RecipeDropzoneProps {
   disabled: boolean;
-  recipeId: String;
+  recipeId: string;
   images: Image[];
   // onImagesChange: (files: any) => void;
 }
@@ -119,7 +119,12 @@ const RecipeDropzone = ({
         </p>
       </div>
       {files.map((file) => (
-        <DropzoneItem key={file.id} id={recipeId} file={file} />
+        <DropzoneItem
+          key={file.id}
+          recipeId={recipeId}
+          file={file}
+          fbRef={`images/recipe-${recipeId}/${file.name}`}
+        />
       ))}
     </div>
   );

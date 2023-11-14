@@ -1,20 +1,39 @@
 "use client";
 
-import { ImageIcon, Trash } from "lucide-react";
-import React, { useRef } from "react";
+import { ImageIcon, Loader2, Trash } from "lucide-react";
+import React, { useRef, useState } from "react";
 import byteSize from "byte-size";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { Image as PrismaImage } from "@prisma/client";
+import { deleteObject, ref } from "firebase/storage";
+import { storage } from "@/lib/firebase";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface DropzoneItemProps {
   file: PrismaImage;
-  id: String;
+  recipeId: string;
+  fbRef: string;
 }
 
-const DropzoneItem = ({ file, id }: DropzoneItemProps) => {
+const DropzoneItem = ({ file, recipeId, fbRef }: DropzoneItemProps) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const size = byteSize(file.size);
   const imageRef = useRef<HTMLImageElement>(null);
+
+  const onDelete = async () => {
+    setIsLoading(true);
+    try {
+      await axios.delete(`/api/recipe/${recipeId}/image/${file.id}`);
+      router.refresh();
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="border rounded-xl p-4 flex space-x-4 items-center">
@@ -39,9 +58,14 @@ const DropzoneItem = ({ file, id }: DropzoneItemProps) => {
         className="shrink-0"
         onClick={(e) => {
           e.preventDefault();
+          onDelete();
         }}
       >
-        <Trash className="h-4 w-4" />
+        {isLoading ? (
+          <Loader2 className="h-4 w-4 animate-spin" />
+        ) : (
+          <Trash className="h-4 w-4" />
+        )}
       </Button>
     </div>
   );

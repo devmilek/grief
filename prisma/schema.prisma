@@ -16,7 +16,7 @@ model Profile {
 
   name  String  @db.TinyText
   image String? @db.Text
-  bio   String? @db.TinyText
+  bio   String? @db.Text
 
   email          String @unique
   hashedPassword String
@@ -49,7 +49,7 @@ model Recipe {
   // slug            String     @unique
   name            String
   description     String?    @db.Text
-  images          Image[]
+  image           String?    @db.MediumText
   difficulty      Difficulty @default(EASY)
   preparationTime Int?
   published       Boolean    @default(false)
@@ -72,6 +72,7 @@ model Recipe {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Image     Image[]
 
   @@index([categoryId])
   @@index([profileId])

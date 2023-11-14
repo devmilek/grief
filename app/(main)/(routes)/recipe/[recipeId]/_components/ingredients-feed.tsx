@@ -19,9 +19,9 @@ const IngredientsFeed = ({ ingredients }: IngredientsFeedProps) => {
           >
             <Checkbox id={ingredient.id} />
             <Label className="font-medium" htmlFor={ingredient.id}>
-              {ingredient.name}{" "}
+              {ingredient.quantity} {ingredient.unit}{" "}
               <span className="font-normal text-neutral-600">
-                ({ingredient.quantity} {ingredient.unit})
+                ({ingredient.name})
               </span>
             </Label>
           </div>

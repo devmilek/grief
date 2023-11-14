@@ -10,7 +10,7 @@ interface StepCardProps {
 
 const StepCard = ({ step }: StepCardProps) => {
   return (
-    <article className="p-5 bg-white rounded-xl">
+    <article className="p-5 bg-white rounded-xl border">
       <div className="flex items-center justify-between mb-3">
         <h1 className="font-display text-2xl">Krok {step.order}</h1>
         <Button size="icon" variant="ghost">

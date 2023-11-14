@@ -7,16 +7,22 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import UserDropdown from "./user-dropdown";
 import { getServerSession } from "next-auth";
+import { Category, Cuisine, Diet, Occasion } from "@prisma/client";
 
-const Navbar = async () => {
+interface NavbarProps {
+  categories: Category[];
+  occasions: Occasion[];
+  cuisines: Cuisine[];
+  diets: Diet[];
+}
+
+const Navbar = async ({
+  categories,
+  occasions,
+  cuisines,
+  diets,
+}: NavbarProps) => {
   const session = await getServerSession();
-
-  const [categories, occasions, cuisines, diets] = await db.$transaction([
-    db.category.findMany(),
-    db.occasion.findMany(),
-    db.cuisine.findMany(),
-    db.diet.findMany(),
-  ]);
 
   return (
     <header className="bg-white border-b">

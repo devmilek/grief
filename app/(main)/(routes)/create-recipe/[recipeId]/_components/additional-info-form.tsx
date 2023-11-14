@@ -16,8 +16,6 @@ interface AdditionalInfoFormProps {
   occasions: Occasion[];
   cuisines: Cuisine[];
   diets: Diet[];
-  isComplete: boolean;
-  isPublished: boolean;
   selectedOccasions: {
     recipeId: string;
     occassionId: string;
@@ -43,29 +41,12 @@ const AdditionalInfoForm = ({
   occasions,
   cuisines,
   diets,
-  isComplete,
   selectedOccasions,
   selectedCuisines,
-  isPublished,
   selectedDiets,
 }: AdditionalInfoFormProps) => {
-  const router = useRouter();
-  const togglePublish = async () => {
-    try {
-      if (!isPublished) {
-        await axios.post(`/api/recipe/${recipeId}/publish`);
-      } else {
-        await axios.post(`/api/recipe/${recipeId}/unpublish`);
-      }
-      router.refresh();
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   return (
     <div>
-      <h1 className="font-display text-3xl mb-4">Dodatkowe informajce</h1>
       <div className="p-8 rounded-xl bg-white space-y-12">
         <div>
           <h2 className="text-xl font-semibold mb-4">Okazje</h2>
@@ -91,14 +72,6 @@ const AdditionalInfoForm = ({
             selectedDiets={selectedDiets}
           />
         </div>
-        <Button
-          disabled={!isComplete}
-          className="w-full"
-          onClick={togglePublish}
-          variant={isPublished ? "outline" : "default"}
-        >
-          {isPublished ? "Cofnij publikacje" : "Opublikuj"}
-        </Button>
       </div>
     </div>
   );

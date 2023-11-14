@@ -14,9 +14,9 @@ const page = async ({ params }: { params: { recipeId: string } }) => {
   const recipe = await db.recipe.findUnique({
     where: {
       id: params.recipeId,
+      published: true,
     },
     include: {
-      images: true,
       profile: true,
       category: true,
       ingredients: true,
@@ -27,14 +27,14 @@ const page = async ({ params }: { params: { recipeId: string } }) => {
       },
     },
   });
-  if (!recipe) {
+  if (!recipe || !recipe.image) {
     return null;
   }
   return (
     <section className="container pt-8">
       <div className="bg-white flex p-7 rounded-xl space-x-8">
         <Image
-          src={recipe.images[0].url}
+          src={recipe.image}
           alt={recipe?.name}
           width={660}
           height={440}
@@ -45,19 +45,20 @@ const page = async ({ params }: { params: { recipeId: string } }) => {
           <div className="flex items-center space-x-3 mt-4">
             <Link
               href={""}
-              className="flex items-center space-x-2 font-semibold text-sm text-emerald-700"
+              className="flex items-center space-x-2 font-semibold text-sm "
             >
               <Avatar className="h-7 w-7">
-                <AvatarFallback className="uppercase">
+                <AvatarFallback className="uppercase text-[10px]">
                   {recipe.profile.name?.slice(0, 2)}
                 </AvatarFallback>
                 {recipe.profile.image && (
                   <AvatarImage src={recipe.profile.image} />
                 )}
               </Avatar>
-              <p>{recipe.profile.name}</p>
+              <p className="text-emerald-700">{recipe.profile.name}</p>
             </Link>
-            <p className="text-sm text-gray-500">
+            <span className="text-neutral-500">•</span>
+            <p className="text-xs text-gray-500">
               {recipe.createdAt.toLocaleDateString()}
             </p>
           </div>
@@ -90,11 +91,11 @@ const page = async ({ params }: { params: { recipeId: string } }) => {
       </div>
       {/* Layout */}
       <div className="flex space-x-8 mt-10">
-        <div className="space-y-10">
+        <div className="space-y-10 flex-1">
           <StepsFeed steps={recipe.steps} />
           <AuthorCard profile={recipe.profile} />
         </div>
-        <div className="w-[600px]">
+        <div className="w-[400px]">
           <IngredientsFeed ingredients={recipe.ingredients} />
         </div>
       </div>

@@ -1,11 +1,30 @@
+import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
+import { db } from "@/lib/db";
 import React, { ReactNode } from "react";
 
-const MainLayout = ({ children }: { children: ReactNode }) => {
+const MainLayout = async ({ children }: { children: ReactNode }) => {
+  const [categories, occasions, cuisines, diets] = await db.$transaction([
+    db.category.findMany(),
+    db.occasion.findMany(),
+    db.cuisine.findMany(),
+    db.diet.findMany(),
+  ]);
   return (
     <>
-      <Navbar />
+      <Navbar
+        categories={categories}
+        cuisines={cuisines}
+        diets={diets}
+        occasions={occasions}
+      />
       <main>{children}</main>
+      <Footer
+        categories={categories}
+        cuisines={cuisines}
+        diets={diets}
+        occasions={occasions}
+      />
     </>
   );
 };

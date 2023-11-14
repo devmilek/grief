@@ -5,3 +5,7 @@ export type ClerkErrors =
   | "form_identifier_not_found"
   | "form_param_nil"
   | "form_code_incorrect";
+
+export interface AcceptFilesType {
+  [key: string]: string[];
+}
