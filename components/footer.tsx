@@ -18,8 +18,8 @@ const Footer = async ({
 }: FooterProps) => {
   return (
     <footer className="py-16 container">
-      <div className="rounded-xl p-10 bg-white flex space-x-16">
-        <div className="max-w-sm">
+      <div className="rounded-xl p-10 bg-white flex space-x-8">
+        <div className="max-w-xs">
           <Link href="/" className="flex items-center">
             <ChefHat className="h-6 w-6 mr-2 text-emerald-600" />
             <p className="font-display text-2xl">Grief</p>
@@ -56,7 +56,7 @@ const Footer = async ({
             <h2 className="font-display text-emerald-600 text-2xl">
               Kuchnie świata
             </h2>
-            <div className="space-y-2 flex-col mt-4 grid grid-cols-2">
+            <div className="gap-2 flex-col mt-4 grid grid-cols-2">
               {cuisines.map((cuisine) => (
                 <Link key={cuisine.id} href="/" className="text-sm">
                   {cuisine.name}

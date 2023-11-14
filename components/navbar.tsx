@@ -25,8 +25,8 @@ const Navbar = async ({
   const session = await getServerSession();
 
   return (
-    <header className="bg-white border-b">
-      <div className="container flex justify-between items-center">
+    <header className="bg-white border-b fixed inset-x-0 z-50">
+      <div className="container flex justify-between items-center h-16">
         <div className="flex space-x-4">
           <Link href="/" className="text-2xl font-display flex items-center">
             <ChefHat className="h-6 w-6 mr-2 text-emerald-600" />

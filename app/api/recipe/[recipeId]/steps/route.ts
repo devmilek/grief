@@ -14,9 +14,9 @@ export async function POST(
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const { image, content, order } = await req.json();
+    const { image, content } = await req.json();
 
-    if (!content || !order) {
+    if (!content) {
       return new NextResponse("Missing fields", { status: 400 });
     }
 
@@ -30,7 +30,6 @@ export async function POST(
           create: {
             image,
             description: content,
-            order,
           },
         },
       },

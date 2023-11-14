@@ -18,7 +18,7 @@ const MainLayout = async ({ children }: { children: ReactNode }) => {
         diets={diets}
         occasions={occasions}
       />
-      <main>{children}</main>
+      <main className="pt-16 min-h-screen">{children}</main>
       <Footer
         categories={categories}
         cuisines={cuisines}

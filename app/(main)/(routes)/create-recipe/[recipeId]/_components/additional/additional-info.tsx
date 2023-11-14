@@ -1,42 +1,38 @@
 "use client";
 
-import { Cuisine, Diet, Occasion, OccasionsOnRecipes } from "@prisma/client";
+import {
+  Cuisine,
+  CuisinesOnRecipes,
+  Diet,
+  DietsOnRecipes,
+  Occasion,
+  OccasionsOnRecipes,
+} from "@prisma/client";
 import React from "react";
-import CheckboxContainer from "./checkbox-container";
-import { Button } from "@/components/ui/button";
-import AdditionalSelect from "./occasions-select";
 import OccasionsSelect from "./occasions-select";
 import CuisinesSelect from "./cuisines-select";
 import DietsSelect from "./diets-select";
-import axios from "axios";
-import { useRouter } from "next/navigation";
 
 interface AdditionalInfoFormProps {
   recipeId: string;
   occasions: Occasion[];
   cuisines: Cuisine[];
   diets: Diet[];
-  selectedOccasions: {
-    recipeId: string;
-    occassionId: string;
-    assignedAt: Date;
+
+  selectedOccasions: ({
     occassion: Occasion;
-  }[];
-  selectedCuisines: {
-    recipeId: string;
-    cuisineId: string;
-    assignedAt: Date;
+  } & OccasionsOnRecipes)[];
+
+  selectedCuisines: ({
     cuisines: Cuisine;
-  }[];
-  selectedDiets: {
-    recipeId: string;
-    dietId: string;
-    assignedAt: Date;
+  } & CuisinesOnRecipes)[];
+
+  selectedDiets: ({
     diet: Diet;
-  }[];
+  } & DietsOnRecipes)[];
 }
 
-const AdditionalInfoForm = ({
+const AdditionalInfo = ({
   recipeId,
   occasions,
   cuisines,
@@ -77,4 +73,4 @@ const AdditionalInfoForm = ({
   );
 };
 
-export default AdditionalInfoForm;
+export default AdditionalInfo;

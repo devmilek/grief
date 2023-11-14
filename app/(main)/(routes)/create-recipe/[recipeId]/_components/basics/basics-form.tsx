@@ -30,13 +30,12 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { difficultyMap, servingMap } from "@/maps";
-import RecipeDropzone from "@/components/recipe-dropzone";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import BasicsDropzone from "./basics-dropzone";
+import BasicsDropzone from "../basics/basics-dropzone";
 
 interface BasicsFormProps {
   recipe: Recipe;

@@ -1,10 +1,7 @@
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
-import CreateRecipeTabs from "./_components/create-recipe-tabs";
-import BasicsForm from "./_components/basics-form";
-import IngredientForm from "./_components/ingredient-form";
-import StepsForm from "./_components/steps-form";
-import AdditionalInfoForm from "./_components/additional-info-form";
+import BasicsForm from "./_components/basics/basics-form";
+import AdditionalInfo from "./_components/additional/additional-info";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth-options";
 import {
@@ -13,7 +10,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import ImageUploadDropzone from "@/components/image-upload-dropzone";
+import Ingredient from "./_components/ingredients/ingredients";
+import Steps from "./_components/steps/steps";
 
 interface CreateRecipePageProps {
   params: {
@@ -61,7 +59,7 @@ const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
         recipeId: params.recipeId,
       },
       orderBy: {
-        order: "asc",
+        createdAt: "asc",
       },
     }),
     db.category.findMany(),
@@ -123,7 +121,7 @@ const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
             Składniki
           </AccordionTrigger>
           <AccordionContent>
-            <IngredientForm ingredients={ingredients} recipeId={recipe.id} />
+            <Ingredient ingredients={ingredients} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="steps">
@@ -131,7 +129,7 @@ const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
             Kroki przygotowania
           </AccordionTrigger>
           <AccordionContent>
-            <StepsForm recipeId={recipe.id} steps={steps} />
+            <Steps steps={steps} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="additional">
@@ -139,7 +137,7 @@ const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
             Dodatkowe informacje
           </AccordionTrigger>
           <AccordionContent>
-            <AdditionalInfoForm
+            <AdditionalInfo
               recipeId={recipe.id}
               occasions={occasions}
               cuisines={cuisines}
