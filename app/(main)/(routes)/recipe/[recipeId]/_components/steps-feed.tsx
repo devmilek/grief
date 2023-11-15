@@ -15,7 +15,7 @@ const StepsFeed = ({ steps }: StepsFeedProps) => {
           className="flex items-center space-x-6 py-10 border-b"
         >
           <div className="w-full">
-            <h2 className="font-display text-2xl">Krok {step.order}</h2>
+            <h2 className="font-display text-2xl">Krok</h2>
             <p className="mt-2">{step.description}</p>
           </div>
           <div>

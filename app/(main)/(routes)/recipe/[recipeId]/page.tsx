@@ -22,7 +22,7 @@ const page = async ({ params }: { params: { recipeId: string } }) => {
       ingredients: true,
       steps: {
         orderBy: {
-          order: "asc",
+          position: "asc",
         },
       },
     },
