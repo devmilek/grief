@@ -33,9 +33,6 @@ const YourRecipesPage = async () => {
     where: {
       profileId: session.user.id,
     },
-    include: {
-      images: true,
-    },
   });
 
   return (

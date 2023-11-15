@@ -10,6 +10,7 @@ const MainLayout = async ({ children }: { children: ReactNode }) => {
     db.cuisine.findMany(),
     db.diet.findMany(),
   ]);
+  console.log(diets);
   return (
     <>
       <Navbar

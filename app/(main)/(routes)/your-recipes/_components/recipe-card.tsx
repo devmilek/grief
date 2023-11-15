@@ -7,19 +7,19 @@ import Link from "next/link";
 import React from "react";
 
 interface RecipeCardProps {
-  recipe: Recipe & { images: PrismaImage[] };
+  recipe: Recipe;
 }
 
 const RecipeCard = ({ recipe }: RecipeCardProps) => {
   return (
     <div className="p-6 rounded-xl bg-white border flex items-center">
-      {recipe.images.length > 0 ? (
+      {recipe.image ? (
         <div>
           <Image
             alt="Recipe image"
             width={200}
             height={200}
-            src={recipe.images[0].url}
+            src={recipe.image}
           />
         </div>
       ) : (
