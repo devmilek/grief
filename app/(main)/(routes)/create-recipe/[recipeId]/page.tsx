@@ -59,7 +59,7 @@ const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
         recipeId: params.recipeId,
       },
       orderBy: {
-        createdAt: "asc",
+        position: "asc",
       },
     }),
     db.category.findMany(),

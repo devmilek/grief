@@ -20,20 +20,51 @@ export async function POST(
       return new NextResponse("Missing fields", { status: 400 });
     }
 
-    const step = await db.recipe.update({
+    const recipeOwner = await db.recipe.findUnique({
       where: {
         id: params.recipeId,
         profileId: session.user.id,
       },
-      data: {
-        steps: {
-          create: {
-            image,
-            description: content,
-          },
-        },
+    });
+
+    if (!recipeOwner) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    const lastStep = await db.preparationStep.findFirst({
+      where: {
+        recipeId: params.recipeId,
+      },
+      orderBy: {
+        position: "desc",
       },
     });
+
+    const newPosition = lastStep ? lastStep.position + 1 : 1;
+
+    const step = await db.preparationStep.create({
+      data: {
+        description: content,
+        image,
+        recipeId: params.recipeId,
+        position: newPosition,
+      },
+    });
+
+    // const step = await db.recipe.update({
+    //   where: {
+    //     id: params.recipeId,
+    //     profileId: session.user.id,
+    //   },
+    //   data: {
+    //     steps: {
+    //       create: {
+    //         image,
+    //         description: content,
+    //       },
+    //     },
+    //   },
+    // });
 
     return NextResponse.json(step);
   } catch (e) {
