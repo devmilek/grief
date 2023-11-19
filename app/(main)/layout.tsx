@@ -4,13 +4,13 @@ import { db } from "@/lib/db";
 import React, { ReactNode } from "react";
 
 const MainLayout = async ({ children }: { children: ReactNode }) => {
+  // TODO: Create store to dont fetch data every time
   const [categories, occasions, cuisines, diets] = await db.$transaction([
     db.category.findMany(),
     db.occasion.findMany(),
     db.cuisine.findMany(),
     db.diet.findMany(),
   ]);
-  console.log(diets);
   return (
     <>
       <Navbar

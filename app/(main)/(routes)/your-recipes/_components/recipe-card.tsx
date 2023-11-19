@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Image as PrismaImage, Recipe } from "@prisma/client";
-import { EyeIcon, PenBox, Trash } from "lucide-react";
+import { EyeIcon, ImageIcon, PenBox, Trash } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -20,10 +20,13 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
             width={200}
             height={200}
             src={recipe.image}
+            className="aspect-square w-52 rounded-xl object-cover"
           />
         </div>
       ) : (
-        <div className="aspect-square w-20 rounded-xl bg-gray-50 border"></div>
+        <div className="aspect-square w-52 rounded-xl bg-gray-50 border flex items-center justify-center">
+          <ImageIcon className="w-8 h-8 text-neutral-500" />
+        </div>
       )}
       <div className="w-full ml-4">
         <h1 className="font-display text-xl">{recipe.name}</h1>
