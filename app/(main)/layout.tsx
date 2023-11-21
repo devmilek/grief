@@ -8,6 +8,11 @@ const MainLayout = async ({ children }: { children: ReactNode }) => {
   // TODO: Create store to dont fetch data every time
   const [categories, occasions, cuisines, diets] = await db.$transaction([
     db.category.findMany({
+      orderBy: {
+        recipes: {
+          _count: "desc",
+        },
+      },
       include: {
         _count: {
           select: {

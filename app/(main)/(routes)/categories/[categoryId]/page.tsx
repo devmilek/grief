@@ -3,14 +3,26 @@ import React from "react";
 import bgImage from "@/assets/auth-bg.jpg";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import HomeSidebar from "../../(home-page)/_components/sidebar/home-sidebar";
+import { Button } from "@/components/ui/button";
+import { Filter } from "lucide-react";
+import SortButton from "./_components/sort-button";
+import HorizontalCard from "../../(home-page)/_components/horizontal-card";
+import RecipesFeed from "./_components/recipes-feed";
 
 const Page = async ({
   params,
+  searchParams,
 }: {
   params: {
     categoryId: string;
   };
+  searchParams: {
+    sortOrder?: "asc" | "desc";
+  };
 }) => {
+  const query = searchParams.sortOrder || "asc";
+
   const category = await db.category.findUnique({
     where: {
       id: params.categoryId,
@@ -26,20 +38,15 @@ const Page = async ({
     return notFound();
   }
 
-  const recipes = await db.recipe.findMany({
-    where: {
-      categoryId: category.id,
-      published: true,
-    },
-    take: 6,
-  });
   return (
     <div className="container">
-      <section className="rounded-xl overflow-hidden relative h-96">
-        <div className="h-full w-full absolute inset-0 bg-black/60 text-white">
-          <p className="">Przepisy z kategorią</p>
-          <h1>{category.name}</h1>
-          <p>{category._count.recipes}</p>
+      <section className="rounded-xl overflow-hidden relative h-96 my-10">
+        <div className="h-full w-full absolute inset-0 bg-black/60 text-white flex items-center justify-center flex-col">
+          <p className="text-lg font-medium">Przepisy z kategorią</p>
+          <h1 className="font-display text-5xl">{category.name}</h1>
+          <p className="text-medium text-sm opacity-70 mt-2">
+            {category._count.recipes} przepisów
+          </p>
         </div>
         <Image
           src={category.image}
@@ -49,6 +56,16 @@ const Page = async ({
           className="w-full h-full object-cover absolute inset-0 -z-10 group-hover:scale-105 transition"
         />
       </section>
+      <div className="flex gap-x-4">
+        <section className="bg-white p-8 rounded-xl flex-1">
+          <header className="flex items-center justify-between mb-8">
+            <h1 className="font-display text-4xl">Wyniki</h1>
+            <SortButton />
+          </header>
+          <RecipesFeed categoryId={category.id} sortOrder={query} />
+        </section>
+        <HomeSidebar />
+      </div>
     </div>
   );
 };

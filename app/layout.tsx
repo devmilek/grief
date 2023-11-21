@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
-import {
-  DM_Serif_Display,
-  Inter,
-  Poppins,
-  Roboto_Mono,
-} from "next/font/google";
+import { DM_Serif_Display, Poppins } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { ClerkProvider } from "@clerk/nextjs";
 import ModalProvider from "@/components/providers/modal-provider";
 import { Toaster } from "sonner";
 import SessionProvider from "@/components/providers/session-provider";
