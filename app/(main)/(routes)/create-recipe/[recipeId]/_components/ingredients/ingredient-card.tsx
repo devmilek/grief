@@ -10,9 +10,13 @@ import { toast } from "sonner";
 
 interface IngredientCardProps {
   ingredient: Ingredient;
+  deleteIngredient: (ingredientId: string) => void;
 }
 
-const IngredientCard = ({ ingredient }: IngredientCardProps) => {
+const IngredientCard = ({
+  ingredient,
+  deleteIngredient,
+}: IngredientCardProps) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
   const params = useParams();
@@ -22,8 +26,8 @@ const IngredientCard = ({ ingredient }: IngredientCardProps) => {
       await axios.delete(
         `/api/recipe/${params.recipeId}/ingredient/${ingredient.id}`,
       );
+      deleteIngredient(ingredient.id);
       toast.success("Składnik został usunięty");
-      router.refresh();
     } catch (e) {
       toast.error("Nie udało się usunąć składnika");
     } finally {

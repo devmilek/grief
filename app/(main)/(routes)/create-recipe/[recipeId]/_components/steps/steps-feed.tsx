@@ -19,9 +19,11 @@ import { useParams, useRouter } from "next/navigation";
 
 interface StepsFeedProps {
   steps: PreparationStep[];
+  deleteStep: (stepId: string) => void;
+  onReorder: () => void;
 }
 
-const StepsFeed = ({ steps }: StepsFeedProps) => {
+const StepsFeed = ({ steps, deleteStep, onReorder }: StepsFeedProps) => {
   const router = useRouter();
   const params = useParams();
   const [localSteps, setLocalSteps] = useState(steps);
@@ -49,16 +51,19 @@ const StepsFeed = ({ steps }: StepsFeedProps) => {
       position: items.findIndex((item) => item.id === step.id),
     }));
 
-    onReorder(bulkUpdateData);
+    handleReorder(bulkUpdateData);
   };
 
-  const onReorder = async (updateData: { id: string; position: number }[]) => {
+  const handleReorder = async (
+    updateData: { id: string; position: number }[],
+  ) => {
     try {
+      console.log(updateData);
       await axios.put(`/api/recipe/${params.recipeId}/steps/reorder`, {
         list: updateData,
       });
+      onReorder();
       toast.success("Zmieniono kolejność kroków");
-      router.refresh();
     } catch {
       toast.error("Nie udało się zmienić kolejności kroków");
     }
@@ -68,38 +73,7 @@ const StepsFeed = ({ steps }: StepsFeedProps) => {
     return (
       <>
         <h1 className="font-display text-3xl mb-8 mt-10">Lista kroków</h1>
-        <div className="space-y-4">
-          {/* {steps.map((step, index) => (
-            <article key={step.id} className="p-5 bg-white rounded-xl border">
-              <div className="flex items-center justify-between mb-3">
-                <h1 className="font-display text-2xl">Krok {index + 1}</h1>
-                <div className="flex space-x-2">
-                  <Button size="icon" variant="ghost">
-                    <GripVerticalIcon className="h-4 w-4" />
-                  </Button>
-                  <Button size="icon" variant="ghost">
-                    <XIcon className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-              <div className="flex space-x-4 items-center">
-                <div className="aspect-[4/3] flex-shrink-0 object-cover rounded-lg overflow-hidden relative w-64">
-                  {step.image ? (
-                    <Image
-                      alt="Step image"
-                      src={step.image}
-                      fill
-                      className="object-cover"
-                    />
-                  ) : (
-                    <div className="bg-neutral-50 rounded-lg border h-full w-full"></div>
-                  )}
-                </div>
-                <p>{step.description}</p>
-              </div>
-            </article>
-          ))} */}
-        </div>
+        <div className="space-y-4"></div>
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="steps">
             {(provided) => (
@@ -111,7 +85,12 @@ const StepsFeed = ({ steps }: StepsFeedProps) => {
                 className="space-y-4"
               >
                 {steps.map((step, index) => (
-                  <StepCard key={step.id} step={step} index={index} />
+                  <StepCard
+                    deleteStep={deleteStep}
+                    key={step.id}
+                    step={step}
+                    index={index}
+                  />
                 ))}
                 {provided.placeholder}
               </div>

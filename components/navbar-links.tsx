@@ -11,7 +11,6 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Category, Occasion, Cuisine, Diet } from "@prisma/client";
 
@@ -20,6 +19,7 @@ interface NavbarLinksProps {
   occasions: Occasion[];
   cuisines: Cuisine[];
   diets: Diet[];
+  className?: string;
 }
 
 const NavbarLinks = ({
@@ -27,27 +27,32 @@ const NavbarLinks = ({
   occasions,
   cuisines,
   diets,
+  className,
 }: NavbarLinksProps) => {
   const components = [
     {
       name: "Kategorie",
       data: categories,
+      href: "/categories/",
     },
     {
       name: "Okazje",
       data: occasions,
+      href: "/search?occasion=",
     },
     {
       name: "Kuchnie świata",
       data: cuisines,
+      href: "/search?occasion=",
     },
     {
       name: "Dieta",
       data: diets,
+      href: "/search?occasion=",
     },
   ];
   return (
-    <NavigationMenu>
+    <NavigationMenu className={cn(className)}>
       <NavigationMenuList>
         {components.map((component) => (
           <NavigationMenuItem key={component.name}>
@@ -60,7 +65,7 @@ const NavbarLinks = ({
                 {component.data.map((item) => (
                   <Link
                     className="text-sm hover:translate-x-2 transition-all"
-                    href=""
+                    href={`${component.href}${item.id}`}
                     key={item.id}
                   >
                     {item.name}

@@ -18,13 +18,17 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
+interface IngredientFormProps {
+  pushIngredient: (ingredient: Ingredient) => void;
+}
+
 const formSchema = z.object({
   quantity: z.coerce.number().min(0).optional(),
   unit: z.string(),
   name: z.string().min(1),
 });
 
-const IngredientForm = () => {
+const IngredientForm = ({ pushIngredient }: IngredientFormProps) => {
   const router = useRouter();
   const params = useParams();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -44,8 +48,8 @@ const IngredientForm = () => {
         values,
       );
       form.reset();
-      form.setValue("quantity", undefined);
-      router.refresh();
+      console.log(ingredient.data);
+      pushIngredient(ingredient.data);
     } catch (e) {
       console.log(e);
     }

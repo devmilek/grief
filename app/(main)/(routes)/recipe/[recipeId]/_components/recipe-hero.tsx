@@ -17,8 +17,6 @@ interface RecipeHeroProps {
   recipe: Recipe & {
     profile: Profile;
     category: Category | null;
-    steps: PreparationStep[];
-    ingredients: Ingredient[];
   };
 }
 

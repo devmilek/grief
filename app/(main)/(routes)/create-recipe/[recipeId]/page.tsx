@@ -10,8 +10,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import Ingredient from "./_components/ingredients/ingredients";
 import Steps from "./_components/steps/steps";
+import Ingredients from "./_components/ingredients/ingredients";
 
 interface CreateRecipePageProps {
   params: {
@@ -37,60 +37,7 @@ const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
     return redirect("/");
   }
 
-  const [
-    ingredients,
-    steps,
-    categories,
-    occasions,
-    cuisines,
-    diets,
-    selectedOccasions,
-    selectedCuisines,
-    selectedDiets,
-  ] = await db.$transaction([
-    db.ingredient.findMany({
-      where: {
-        recipeId: params.recipeId,
-      },
-      orderBy: {},
-    }),
-    db.preparationStep.findMany({
-      where: {
-        recipeId: params.recipeId,
-      },
-      orderBy: {
-        position: "asc",
-      },
-    }),
-    db.category.findMany(),
-    db.occasion.findMany(),
-    db.cuisine.findMany(),
-    db.diet.findMany(),
-    db.occasionsOnRecipes.findMany({
-      where: {
-        recipeId: params.recipeId,
-      },
-      include: {
-        occassion: true,
-      },
-    }),
-    db.cuisinesOnRecipes.findMany({
-      where: {
-        recipeId: params.recipeId,
-      },
-      include: {
-        cuisines: true,
-      },
-    }),
-    db.dietsOnRecipes.findMany({
-      where: {
-        recipeId: params.recipeId,
-      },
-      include: {
-        diet: true,
-      },
-    }),
-  ]);
+  console.log("REVALIDATE ALL THE THINGS");
 
   const requiredFields = [
     recipe.name,
@@ -103,15 +50,14 @@ const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
     recipe.preparationTime,
   ];
 
-  const isComplete =
-    requiredFields.every(Boolean) && ingredients.length > 0 && steps.length > 0;
+  //TODO: make sure that ingredients are added becuase i already delete this functionality
+
+  const isComplete = requiredFields.every(Boolean);
 
   return (
     <div className="container mt-8 max-w-4xl bg-white rounded-xl p-12 mb-16">
       <BasicsForm
         recipe={recipe}
-        recipeId={recipe.id}
-        categories={categories}
         isComplete={isComplete}
         isPublished={recipe.published}
       />
@@ -121,7 +67,7 @@ const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
             Składniki
           </AccordionTrigger>
           <AccordionContent>
-            <Ingredient ingredients={ingredients} />
+            <Ingredients recipeId={params.recipeId} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="steps">
@@ -129,7 +75,7 @@ const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
             Kroki przygotowania
           </AccordionTrigger>
           <AccordionContent>
-            <Steps steps={steps} />
+            <Steps recipeId={params.recipeId} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="additional">
@@ -137,15 +83,7 @@ const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
             Dodatkowe informacje
           </AccordionTrigger>
           <AccordionContent>
-            <AdditionalInfo
-              recipeId={recipe.id}
-              occasions={occasions}
-              cuisines={cuisines}
-              diets={diets}
-              selectedOccasions={selectedOccasions}
-              selectedCuisines={selectedCuisines}
-              selectedDiets={selectedDiets}
-            />
+            <AdditionalInfo recipeId={recipe.id} />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

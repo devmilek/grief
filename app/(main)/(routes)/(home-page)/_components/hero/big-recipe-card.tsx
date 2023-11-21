@@ -25,10 +25,10 @@ moment.locale("pl");
 const BigRecipeCard = ({ recipe }: BigRecipeCardProps) => {
   const dt = DateTime.fromJSDate(recipe.createdAt);
   return (
-    <article className="w-full col-span-2">
+    <article className="w-full lg:col-span-2">
       <div className="group flex flex-col items-center">
         {recipe.image && (
-          <div className="rounded-xl aspect-[4/3] w-full relative overflow-hidden">
+          <div className="rounded-xl aspect-video lg:aspect-[4/3] w-full relative overflow-hidden">
             <Image
               src={recipe.image}
               width={500}

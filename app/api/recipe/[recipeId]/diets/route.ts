@@ -3,6 +3,45 @@ import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { recipeId: string } },
+) {
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    const recipe = await db.recipe.findUnique({
+      where: {
+        id: params.recipeId,
+        profileId: session.user.id,
+      },
+    });
+
+    if (!recipe) {
+      return new NextResponse("Not Found", { status: 404 });
+    }
+
+    const diets = await db.diet.findMany({
+      where: {
+        recipes: {
+          some: {
+            recipeId: recipe.id,
+          },
+        },
+      },
+    });
+
+    return NextResponse.json(diets);
+  } catch (e) {
+    console.log("[OCCASIONS GET]", e);
+    return new NextResponse("Internal Server Error", { status: 500 });
+  }
+}
+
 export async function POST(
   req: NextRequest,
   { params }: { params: { recipeId: string } },
@@ -14,29 +53,37 @@ export async function POST(
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const { value } = await req.json();
+    const { id } = await req.json();
 
-    if (!value) {
+    if (!id) {
       return new NextResponse("Missing fields", { status: 400 });
     }
 
-    const diet = await db.recipe.update({
+    const recipe = await db.recipe.findUnique({
       where: {
         id: params.recipeId,
         profileId: session.user.id,
       },
+    });
+
+    if (!recipe) {
+      return new NextResponse("Not Found", { status: 404 });
+    }
+
+    const diet = await db.diet.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!diet) {
+      return new NextResponse("Not Found", { status: 404 });
+    }
+
+    await db.dietsOnRecipes.create({
       data: {
-        diets: {
-          create: [
-            {
-              diet: {
-                connect: {
-                  id: value,
-                },
-              },
-            },
-          ],
-        },
+        dietId: diet.id,
+        recipeId: recipe.id,
       },
     });
 

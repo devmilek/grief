@@ -17,7 +17,7 @@ const Footer = async ({
   diets,
 }: FooterProps) => {
   return (
-    <footer className="py-16 container">
+    <footer className="pt-10 container">
       <div className="rounded-xl p-10 bg-white flex space-x-8">
         <div className="max-w-xs">
           <Link href="/" className="flex items-center">
@@ -29,7 +29,7 @@ const Footer = async ({
             jednym miejscu
           </p>
         </div>
-        <div className="space-x-4 flex justify-between flex-1">
+        <div className="space-x-4 justify-between grid grid-cols-5 w-full">
           <div>
             <h2 className="font-display text-emerald-600 text-2xl">
               Kategorie
@@ -52,7 +52,7 @@ const Footer = async ({
               ))}
             </div>
           </div>
-          <div>
+          <div className="col-span-2">
             <h2 className="font-display text-emerald-600 text-2xl">
               Kuchnie świata
             </h2>
@@ -75,6 +75,10 @@ const Footer = async ({
             </div>
           </div>
         </div>
+      </div>
+      <div className="text-sm text-neutral-500 flex items-center justify-between py-8 ">
+        <p>Copyright © 2023 grien</p>
+        <p>by: @devmilek</p>
       </div>
     </footer>
   );

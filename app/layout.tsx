@@ -11,6 +11,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import ModalProvider from "@/components/providers/modal-provider";
 import { Toaster } from "sonner";
 import SessionProvider from "@/components/providers/session-provider";
+import QueryProvider from "@/components/providers/query-provider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -44,9 +45,11 @@ export default function RootLayout({
     >
       <body className={cn(poppins.className, "bg-neutral-50")}>
         <SessionProvider>
-          {children}
-          <ModalProvider />
-          <Toaster closeButton richColors />
+          <QueryProvider>
+            {children}
+            <ModalProvider />
+            <Toaster richColors closeButton />
+          </QueryProvider>
         </SessionProvider>
       </body>
     </html>

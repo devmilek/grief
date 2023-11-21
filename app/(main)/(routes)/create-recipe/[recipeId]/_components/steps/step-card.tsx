@@ -1,17 +1,39 @@
+"use client";
+
 import { PreparationStep } from "@prisma/client";
 import Image from "next/image";
-import React from "react";
-import { GripVerticalIcon, XIcon } from "lucide-react";
+import React, { useState } from "react";
+import { GripVerticalIcon, Loader2, XIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Draggable } from "@hello-pangea/dnd";
+import { toast } from "sonner";
+import axios from "axios";
+import { useParams } from "next/navigation";
 
 interface StepCardProps {
   step: PreparationStep;
   index: number;
+  deleteStep: (stepId: string) => void;
 }
 
-const StepCard = ({ step, index }: StepCardProps) => {
+const StepCard = ({ step, index, deleteStep }: StepCardProps) => {
+  const [isDeleting, setIsDeleting] = useState(false);
+  const params = useParams();
   //TODO: add remove step functionality
+
+  const onDelete = async () => {
+    setIsDeleting(true);
+    try {
+      await axios.delete(`/api/recipe/${params.recipeId}/steps/${step.id}`);
+      deleteStep(step.id);
+      toast.success("Krok został usunięty");
+    } catch (e) {
+      toast.error("Nie udało się usunąć kroku");
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   return (
     <Draggable key={step.id} draggableId={step.id} index={index}>
       {(provided) => (
@@ -26,8 +48,17 @@ const StepCard = ({ step, index }: StepCardProps) => {
               <Button size="icon" variant="ghost" {...provided.dragHandleProps}>
                 <GripVerticalIcon className="h-4 w-4" />
               </Button>
-              <Button size="icon" variant="ghost">
-                <XIcon className="h-4 w-4" />
+              <Button
+                size="icon"
+                variant="ghost"
+                onClick={onDelete}
+                disabled={isDeleting}
+              >
+                {isDeleting ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <XIcon className="h-4 w-4" />
+                )}
               </Button>
             </div>
           </div>

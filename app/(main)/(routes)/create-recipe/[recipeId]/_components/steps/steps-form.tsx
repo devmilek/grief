@@ -23,6 +23,7 @@ import StepsFeed from "./steps-feed";
 
 interface StepsFormProps {
   steps: PreparationStep[];
+  pushStep: (step: PreparationStep) => void;
 }
 
 const formSchema = z.object({
@@ -30,7 +31,7 @@ const formSchema = z.object({
   content: z.string().min(1),
 });
 
-const StepsForm = ({ steps }: StepsFormProps) => {
+const StepsForm = ({ steps, pushStep }: StepsFormProps) => {
   const router = useRouter();
   const params: { recipeId: string } = useParams();
 
@@ -50,7 +51,7 @@ const StepsForm = ({ steps }: StepsFormProps) => {
       const step = await axios.post(`/api/recipe/${params.recipeId}/steps`, {
         ...values,
       });
-      router.refresh();
+      pushStep(step.data);
       form.reset();
     } catch (e) {
       console.log(e);

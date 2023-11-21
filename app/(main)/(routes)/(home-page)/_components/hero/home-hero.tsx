@@ -20,13 +20,13 @@ const HomeHero = ({ recipes }: HomeHeroProps) => {
   const mostPopular = recipes[0];
   const others = recipes.slice(1, 5);
   return (
-    <section className="container grid grid-cols-4 py-16 gap-x-8">
-      <div className="space-y-6">
+    <section className="container grid grid-cols-1 lg:grid-cols-4 py-16 gap-x-8">
+      <div className="space-y-6 hidden lg:inline-block">
         <SmallRecipeCard recipe={others[0]} />
         <SmallRecipeCard recipe={others[1]} />
       </div>
       <BigRecipeCard recipe={mostPopular} />
-      <div className="space-y-6">
+      <div className="grid grid-cols-2 lg:grid-cols-1 gap-6 mt-10 lg:mt-0">
         <SmallRecipeCard recipe={others[2]} />
         <SmallRecipeCard recipe={others[3]} />
       </div>

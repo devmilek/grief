@@ -1,5 +1,6 @@
 "use client";
 
+import { useUtilityData } from "@/components/providers/utility-data-provider";
 import { Badge } from "@/components/ui/badge";
 import {
   Select,
@@ -8,57 +9,81 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { db } from "@/lib/db";
-import { Cuisine, Occasion, Diet } from "@prisma/client";
+import { Cuisine, Diet, Occasion } from "@prisma/client";
 import axios from "axios";
 import { XIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import { toast } from "sonner";
 
 interface DietsSelectProps {
   recipeId: string;
-  diets: Diet[];
-  selectedDiets: {
-    recipeId: string;
-    assignedAt: Date;
-    diet: Diet;
-    dietId: string;
-  }[];
 }
 
-const DietsSelect = ({ recipeId, selectedDiets, diets }: DietsSelectProps) => {
-  const [isLoading, setIsLoading] = React.useState(false);
-  const router = useRouter();
+const DietsSelect = ({ recipeId }: DietsSelectProps) => {
+  const { diets } = useUtilityData();
+  const [selectedDiets, setSelectedDiets] = useState<Occasion[]>([]);
 
-  const handleValueChange = async (value: string) => {
-    setIsLoading(true);
+  useEffect(() => {
+    const fetch = async () => {
+      const res = await axios.get(`/api/recipe/${recipeId}/diets`);
+      console.log("SELECTED CUISINES", res.data);
+      setSelectedDiets(res.data);
+    };
+
+    fetch();
+  }, [recipeId]);
+
+  const handleValueChange = async (id: string) => {
+    const exists = selectedDiets.find((item) => item.id === id);
+
+    if (exists) {
+      return toast.error("Ta dieta już została dodana");
+    }
+
+    const addPromise = axios.post(`/api/recipe/${recipeId}/diets`, {
+      id,
+    });
+
+    toast.promise(addPromise, {
+      loading: "Dodawanie diety...",
+      success: (data) => {
+        setSelectedDiets([...selectedDiets, data.data]);
+        return "Dieta została dodana";
+      },
+      error: "Wystąpił błąd",
+    });
+
     try {
-      const occasion = await axios.post(`/api/recipe/${recipeId}/diets`, {
-        value,
-      });
-      router.refresh();
+      await addPromise;
     } catch (e) {
       console.log(e);
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  const handleDelete = async (id?: string) => {
-    setIsLoading(true);
+  const handleDelete = async (id: string) => {
+    const deletePromise = axios.delete(`/api/recipe/${recipeId}/diets/${id}`);
+
+    toast.promise(deletePromise, {
+      loading: "Usuwanie diety...",
+      success: () => {
+        setSelectedDiets(selectedDiets.filter((item) => item.id !== id));
+        return "Dieta została usunięta";
+      },
+      error: "Wystąpił błąd",
+    });
+
     try {
-      await axios.delete(`/api/recipe/${recipeId}/diets/${id}`);
-      router.refresh();
+      await deletePromise;
     } catch (e) {
       console.log(e);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   return (
     <div>
-      <Select disabled={isLoading} value="" onValueChange={handleValueChange}>
+      <Select value="" onValueChange={handleValueChange}>
         <SelectTrigger>
           <SelectValue placeholder="Wybierz diete" />
         </SelectTrigger>
@@ -75,12 +100,12 @@ const DietsSelect = ({ recipeId, selectedDiets, diets }: DietsSelectProps) => {
           <Badge
             variant="secondary"
             className="cursor-pointer hover:bg-neutral-200"
-            key={data.dietId}
+            key={data.id}
             onClick={() => {
-              handleDelete(data.dietId);
+              handleDelete(data.id);
             }}
           >
-            {data.diet.name}
+            {data.name}
             <XIcon className="ml-2 h-2 w-2" />
           </Badge>
         ))}

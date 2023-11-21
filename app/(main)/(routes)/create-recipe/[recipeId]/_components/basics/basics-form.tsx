@@ -36,11 +36,10 @@ import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import BasicsDropzone from "../basics/basics-dropzone";
+import { useUtilityData } from "@/components/providers/utility-data-provider";
 
 interface BasicsFormProps {
   recipe: Recipe;
-  recipeId: string;
-  categories: Category[];
   isPublished: boolean;
   isComplete: boolean;
 }
@@ -65,14 +64,9 @@ const formSchema = z.object({
   }),
 });
 
-const BasicsForm = ({
-  recipe,
-  recipeId,
-  categories,
-  isComplete,
-  isPublished,
-}: BasicsFormProps) => {
+const BasicsForm = ({ recipe, isComplete, isPublished }: BasicsFormProps) => {
   const router = useRouter();
+  const { categories } = useUtilityData();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -92,10 +86,7 @@ const BasicsForm = ({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const recipe = await axios.patch(
-        `/api/recipe/${recipeId}/basics`,
-        values,
-      );
+      const res = await axios.patch(`/api/recipe/${recipe.id}/basics`, values);
       toast.success("Przepis został zapisany");
       router.refresh();
     } catch (e) {
@@ -107,11 +98,11 @@ const BasicsForm = ({
     if (isComplete) {
       try {
         if (!isPublished) {
-          await axios.post(`/api/recipe/${recipeId}/publish`);
+          await axios.post(`/api/recipe/${recipe.id}/publish`);
           toast.success("Przepis został opublikowany");
           //TODO: modal with link to recipe
         } else {
-          await axios.post(`/api/recipe/${recipeId}/unpublish`);
+          await axios.post(`/api/recipe/${recipe.id}/unpublish`);
           toast.success("Przepis został ukryty");
         }
         router.refresh();
@@ -198,14 +189,9 @@ const BasicsForm = ({
                 <FormItem>
                   <FormLabel>Zdjęcie</FormLabel>
                   <FormControl>
-                    {/* <RecipeDropzone
-                      disabled={isLoading}
-                      recipeId={recipeId}
-                      images={field.value}
-                    /> */}
                     <BasicsDropzone
                       disabled={isLoading}
-                      recipeId={recipeId}
+                      recipeId={recipe.id}
                       setValue={field.onChange}
                       value={field.value}
                     />

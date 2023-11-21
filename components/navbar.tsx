@@ -1,4 +1,4 @@
-import { ChefHat } from "lucide-react";
+import { ChefHat, Search, SearchIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import NavbarLinks from "./navbar-links";
@@ -33,14 +33,21 @@ const Navbar = async ({
             grien
           </Link>
           <NavbarLinks
+            className="hidden md:flex"
             categories={categories}
             occasions={occasions}
             cuisines={cuisines}
             diets={diets}
           />
         </div>
-        <div className="flex space-x-5">
-          <Input className="ml-auto w-72" placeholder="Szukaj przepisu..." />
+        <div className="flex space-x-3 flex-1 justify-end">
+          <Input
+            className="max-w-xs w-full hidden xl:inline-block"
+            placeholder="Szukaj przepisu..."
+          />
+          <Button size="icon" variant="ghost">
+            <SearchIcon className="w-4 h-4" />
+          </Button>
           {session ? (
             <UserDropdown profile={session.user} />
           ) : (

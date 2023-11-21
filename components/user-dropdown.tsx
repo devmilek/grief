@@ -28,7 +28,7 @@ const UserDropdown = ({ profile }: UserButtonProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="py-2">
+        <Button variant="ghost" className="py-2 hover:bg-white px-0">
           <div className="flex items-center space-x-3">
             <Avatar>
               {profile.image && <AvatarImage src={profile.image} />}
@@ -36,7 +36,7 @@ const UserDropdown = ({ profile }: UserButtonProps) => {
                 {profile.name?.slice(0, 2)}
               </AvatarFallback>
             </Avatar>
-            <p className="text-sm">{profile.name}</p>
+            <p className="text-sm hidden lg:inline-block">{profile.name}</p>
           </div>
         </Button>
       </DropdownMenuTrigger>

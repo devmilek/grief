@@ -1,5 +1,6 @@
 "use client";
 
+import { useUtilityData } from "@/components/providers/utility-data-provider";
 import { Badge } from "@/components/ui/badge";
 import {
   Select,
@@ -8,61 +9,93 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { db } from "@/lib/db";
-import { Cuisine, Occasion } from "@prisma/client";
+import { Occasion } from "@prisma/client";
 import axios from "axios";
 import { XIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import { toast } from "sonner";
 
 interface OccasionsSelectProps {
   recipeId: string;
-  occasions: Occasion[];
-  selectedOccasions: {
-    recipeId: string;
-    assignedAt: Date;
-    occassion: Occasion;
-    occassionId: string;
-  }[];
 }
 
-const OccasionsSelect = ({
-  recipeId,
-  selectedOccasions,
-  occasions,
-}: OccasionsSelectProps) => {
-  const [isLoading, setIsLoading] = React.useState(false);
-  const router = useRouter();
+const OccasionsSelect = ({ recipeId }: OccasionsSelectProps) => {
+  const { occasions } = useUtilityData();
+  const [selectedOccasions, setSelectedOccasions] = useState<Occasion[]>([]);
 
-  const handleValueChange = async (value: string) => {
-    setIsLoading(true);
+  useEffect(() => {
+    const fetch = async () => {
+      const res = await axios.get(`/api/recipe/${recipeId}/occasions`);
+      console.log("SELECTED OCCASIONS", res.data);
+      setSelectedOccasions(res.data);
+    };
+
+    fetch();
+  }, [recipeId]);
+
+  // const { isLoading } = useQuery({
+  //   queryFn: async () => {
+  //     const res = await axios.get(`/api/recipe/${recipeId}/occasions`);
+  //     setSelectedOccasions(res.data);
+  //     console.log("SELECTED OCCASIONS", res.data);
+  //     return res.data;
+  //   },
+  // });
+
+  const handleValueChange = async (id: string) => {
+    const exists = selectedOccasions.find((item) => item.id === id);
+    if (exists) {
+      return toast.error("Ta okazja już została dodana");
+    }
+
+    const addPromise = axios.post(`/api/recipe/${recipeId}/occasions`, {
+      id,
+    });
+
+    toast.promise(addPromise, {
+      loading: "Dodawanie okazji...",
+      success: (data) => {
+        setSelectedOccasions([...selectedOccasions, data.data]);
+        return "Okazja została dodana";
+      },
+      error: "Wystąpił błąd",
+    });
+
     try {
-      const occasion = await axios.post(`/api/recipe/${recipeId}/occasions`, {
-        value,
-      });
-      router.refresh();
+      await addPromise;
     } catch (e) {
       console.log(e);
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  const handleDelete = async (id?: string) => {
-    setIsLoading(true);
+  const handleDelete = async (id: string) => {
+    const deletePromise = axios.delete(
+      `/api/recipe/${recipeId}/occasions/${id}`,
+    );
+
+    toast.promise(deletePromise, {
+      loading: "Usuwanie okazji...",
+      success: () => {
+        setSelectedOccasions(
+          selectedOccasions.filter((item) => item.id !== id),
+        );
+        return "Okazja została usunięta";
+      },
+      error: "Wystąpił błąd",
+    });
+
     try {
-      await axios.delete(`/api/recipe/${recipeId}/occasions/${id}`);
-      router.refresh();
+      await deletePromise;
     } catch (e) {
       console.log(e);
-    } finally {
-      setIsLoading(false);
+      toast.error("Wystąpił błąd");
     }
   };
 
   return (
     <div>
-      <Select disabled={isLoading} value="" onValueChange={handleValueChange}>
+      <Select value="" onValueChange={handleValueChange}>
         <SelectTrigger>
           <SelectValue placeholder="Wybierz okazje" />
         </SelectTrigger>
@@ -79,12 +112,12 @@ const OccasionsSelect = ({
           <Badge
             variant="secondary"
             className="cursor-pointer hover:bg-neutral-200"
-            key={data.occassionId}
+            key={data.id}
             onClick={() => {
-              handleDelete(data.occassionId);
+              handleDelete(data.id);
             }}
           >
-            {data.occassion?.name}
+            {data.name}
             <XIcon className="ml-2 h-2 w-2" />
           </Badge>
         ))}

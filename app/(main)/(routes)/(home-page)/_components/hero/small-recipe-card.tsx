@@ -5,6 +5,7 @@ import Link from "next/link";
 import React from "react";
 import moment from "moment";
 import "moment/min/locales";
+import { cn } from "@/lib/utils";
 
 interface SmallRecipeCardProps {
   recipe: Recipe & {
@@ -17,13 +18,19 @@ interface SmallRecipeCardProps {
       name: string;
     } | null;
   };
+  className?: string;
 }
 
 moment.locale("pl");
 
-const SmallRecipeCard = ({ recipe }: SmallRecipeCardProps) => {
+const SmallRecipeCard = ({ recipe, className }: SmallRecipeCardProps) => {
   return (
-    <article className="group w-full col-span-2 flex flex-col items-center text-center">
+    <article
+      className={cn(
+        "group w-full flex flex-col items-center text-center",
+        className,
+      )}
+    >
       {recipe.image && (
         <div className="rounded-xl aspect-[4/3] w-full overflow-hidden">
           <Image

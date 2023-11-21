@@ -26,7 +26,7 @@ const NewestFeed = async () => {
         },
       },
     },
-    take: 10,
+    take: 4,
   });
   return (
     <section className="p-9 bg-white rounded-xl my-10">

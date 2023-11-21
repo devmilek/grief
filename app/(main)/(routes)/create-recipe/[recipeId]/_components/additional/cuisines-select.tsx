@@ -1,5 +1,6 @@
 "use client";
 
+import { useUtilityData } from "@/components/providers/utility-data-provider";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
@@ -9,66 +10,86 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { db } from "@/lib/db";
 import { Cuisine, Occasion } from "@prisma/client";
 import axios from "axios";
 import { XIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import { toast } from "sonner";
 
 interface CuisinesSelectProps {
   recipeId: string;
-  cuisines: Cuisine[];
-  selectedCuisines: {
-    recipeId: string;
-    assignedAt: Date;
-    cuisines: Cuisine;
-    cuisineId: string;
-  }[];
 }
 
-const CuisinesSelect = ({
-  recipeId,
-  selectedCuisines,
-  cuisines,
-}: CuisinesSelectProps) => {
-  const [isLoading, setIsLoading] = React.useState(false);
-  const router = useRouter();
+const CuisinesSelect = ({ recipeId }: CuisinesSelectProps) => {
+  const { cuisines } = useUtilityData();
+  const [selectedCuisines, setSelectedCuisines] = useState<Cuisine[]>([]);
 
-  const handleValueChange = async (value: string) => {
-    setIsLoading(true);
+  useEffect(() => {
+    const fetch = async () => {
+      const res = await axios.get(`/api/recipe/${recipeId}/cuisines`);
+      console.log("SELECTED CUISINES", res.data);
+      setSelectedCuisines(res.data);
+    };
+
+    fetch();
+  }, [recipeId]);
+
+  const handleValueChange = async (id: string) => {
+    const exists = selectedCuisines.find((item) => item.id === id);
+    if (exists) {
+      return toast.error("Ta kuchnia już została dodana");
+    }
+    const addPromise = axios.post(`/api/recipe/${recipeId}/cuisines`, {
+      id,
+    });
+
+    toast.promise(addPromise, {
+      loading: "Dodawanie kuchni...",
+      success: (data) => {
+        setSelectedCuisines([...selectedCuisines, data.data]);
+        return "Kuchnia została dodana";
+      },
+      error: "Wystąpił błąd",
+    });
+
     try {
-      const occasion = await axios.post(`/api/recipe/${recipeId}/cuisines`, {
-        value,
-      });
-      router.refresh();
+      await addPromise;
     } catch (e) {
       console.log(e);
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  const handleDelete = async (id?: string) => {
-    setIsLoading(true);
+  const handleDelete = async (id: string) => {
+    const deletePromise = axios.delete(
+      `/api/recipe/${recipeId}/cuisines/${id}`,
+    );
+
+    toast.promise(deletePromise, {
+      loading: "Usuwanie kuchni...",
+      success: () => {
+        setSelectedCuisines(selectedCuisines.filter((item) => item.id !== id));
+        return "Kuchnia została usunięta";
+      },
+      error: "Wystąpił błąd",
+    });
+
     try {
-      await axios.delete(`/api/recipe/${recipeId}/cuisines/${id}`);
-      router.refresh();
+      await deletePromise;
     } catch (e) {
       console.log(e);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   return (
     <div>
-      <Select disabled={isLoading} value="" onValueChange={handleValueChange}>
+      <Select value="" onValueChange={handleValueChange}>
         <SelectTrigger>
           <SelectValue placeholder="Wybierz kuchnie" />
         </SelectTrigger>
         <SelectContent>
-          <ScrollArea className="h-48">
+          <ScrollArea className="h-60">
             {cuisines.map((item) => (
               <SelectItem key={item.id} value={item.id}>
                 {item.name}
@@ -82,12 +103,12 @@ const CuisinesSelect = ({
           <Badge
             variant="secondary"
             className="cursor-pointer hover:bg-neutral-200"
-            key={data.cuisineId}
+            key={data.id}
             onClick={() => {
-              handleDelete(data.cuisineId);
+              handleDelete(data.id);
             }}
           >
-            {data.cuisines.name}
+            {data.name}
             <XIcon className="ml-2 h-2 w-2" />
           </Badge>
         ))}
