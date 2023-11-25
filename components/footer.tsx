@@ -18,8 +18,8 @@ const Footer = async ({
 }: FooterProps) => {
   return (
     <footer className="pt-10 container">
-      <div className="rounded-xl p-10 bg-white flex space-x-8">
-        <div className="max-w-xs">
+      <div className="rounded-xl p-10 bg-white flex xl:space-x-8 flex-col xl:flex-row">
+        <div className="xl:max-w-xs mb-10 xl:mb-0">
           <Link href="/" className="flex items-center">
             <ChefHat className="h-6 w-6 mr-2 text-emerald-600" />
             <p className="font-display text-2xl">Grief</p>
@@ -29,7 +29,7 @@ const Footer = async ({
             jednym miejscu
           </p>
         </div>
-        <div className="space-x-4 justify-between grid grid-cols-5 w-full">
+        <div className="lg:gap-x-4 gap-y-8 justify-between grid grid-cols-2 lg:grid-cols-5 w-full">
           <div>
             <h2 className="font-display text-emerald-600 text-2xl">
               Kategorie
@@ -52,7 +52,7 @@ const Footer = async ({
               ))}
             </div>
           </div>
-          <div className="col-span-2">
+          <div className="lg:col-span-2">
             <h2 className="font-display text-emerald-600 text-2xl">
               Kuchnie świata
             </h2>

@@ -5,9 +5,16 @@ import { db } from "@/lib/db";
 interface RecipesFeedProps {
   categoryId: string;
   sortOrder: "asc" | "desc";
+  currentPage: number;
+  postToShow: number;
 }
 
-const RecipesFeed = async ({ categoryId, sortOrder }: RecipesFeedProps) => {
+const RecipesFeed = async ({
+  categoryId,
+  sortOrder,
+  currentPage,
+  postToShow,
+}: RecipesFeedProps) => {
   const recipes = await db.recipe.findMany({
     where: {
       categoryId,
@@ -30,7 +37,8 @@ const RecipesFeed = async ({ categoryId, sortOrder }: RecipesFeedProps) => {
         },
       },
     },
-    take: 6,
+    take: postToShow,
+    skip: (currentPage - 1) * postToShow,
   });
   return (
     <div className="space-y-6">

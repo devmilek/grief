@@ -9,6 +9,7 @@ import { Filter } from "lucide-react";
 import SortButton from "./_components/sort-button";
 import HorizontalCard from "../../(home-page)/_components/horizontal-card";
 import RecipesFeed from "./_components/recipes-feed";
+import Pagination from "@/components/pagination";
 
 const Page = async ({
   params,
@@ -17,11 +18,13 @@ const Page = async ({
   params: {
     categoryId: string;
   };
-  searchParams: {
+  searchParams?: {
     sortOrder?: "asc" | "desc";
+    page?: string;
   };
 }) => {
-  const query = searchParams.sortOrder || "asc";
+  const query = searchParams?.sortOrder || "asc";
+  const currentPage = Number(searchParams?.page) || 1;
 
   const category = await db.category.findUnique({
     where: {
@@ -37,6 +40,10 @@ const Page = async ({
   if (!category) {
     return notFound();
   }
+
+  const postToShow = 6;
+
+  const totalPages = Math.ceil(category._count.recipes / postToShow);
 
   return (
     <div className="container">
@@ -62,7 +69,13 @@ const Page = async ({
             <h1 className="font-display text-4xl">Wyniki</h1>
             <SortButton />
           </header>
-          <RecipesFeed categoryId={category.id} sortOrder={query} />
+          <RecipesFeed
+            categoryId={category.id}
+            sortOrder={query}
+            currentPage={currentPage}
+            postToShow={postToShow}
+          />
+          <Pagination totalPages={totalPages} currentPage={currentPage} />
         </section>
         <HomeSidebar />
       </div>
