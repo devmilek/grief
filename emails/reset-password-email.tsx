@@ -20,8 +20,8 @@ export default function ResetPasswordEmail({ token }: ResetPasswordEmailProps) {
   const confirmationLink = baseUrl + "forgot-password?token=" + token;
   return (
     <Tailwind>
-      <Html className="bg-neutral-100 font-sans">
-        <Body className="max-w-lg mx-auto pt-10">
+      <Html className="bg-neutral-100 font-sans h-full w-full">
+        <Container className="max-w-lg mx-auto pt-10">
           <Container className="w-full bg-white rounded-xl p-6">
             <Link href={baseUrl}>
               <svg
@@ -93,7 +93,7 @@ export default function ResetPasswordEmail({ token }: ResetPasswordEmailProps) {
               </Text>
             </Container>
           </Container>
-        </Body>
+        </Container>
       </Html>
     </Tailwind>
   );

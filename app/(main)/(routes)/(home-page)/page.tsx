@@ -62,7 +62,9 @@ const Home = async () => {
 
   return (
     <div>
-      <HomeHero recipes={recipeFromLast30Days} />
+      {recipeFromLast30Days.length > 0 && (
+        <HomeHero recipes={recipeFromLast30Days} />
+      )}
       {/* LAYOUT */}
       <div className="flex space-x-12 container py-12">
         <div className="flex-1">

@@ -1,7 +1,5 @@
 import { db } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
-import crypto from "crypto";
-import ResetPasswordEmail from "@/emails/reset-password-email";
 import { Resend } from "resend";
 import bcrypt from "bcryptjs";
 
