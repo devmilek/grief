@@ -11,12 +11,18 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum Role {
+  admin
+  user
+}
+
 model Profile {
   id String @unique @default(uuid())
 
   name  String  @db.TinyText
   image String? @db.Text
   bio   String? @db.Text
+  role  Role    @default(user)
 
   email          String @unique
   hashedPassword String
@@ -87,9 +93,6 @@ model PreparationStep {
   recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   recipeId String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
   @@index([recipeId])
 }
 
@@ -112,9 +115,6 @@ model Ingredient {
   recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   recipeId String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
   @@index([recipeId])
 }
 
@@ -128,9 +128,6 @@ model Image {
   recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   recipeId String
 
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
-
   @@index([recipeId])
 }
 
@@ -141,9 +138,6 @@ model Category {
   image String @db.Text
 
   recipes Recipe[]
-
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
 }
 
 model Occasion {
@@ -161,8 +155,6 @@ model OccasionsOnRecipes {
   recipeId    String
   occassion   Occasion @relation(fields: [occassionId], references: [id], onDelete: Cascade)
   occassionId String
-
-  assignedAt DateTime @default(now())
 
   @@id([recipeId, occassionId])
   @@index([occassionId])
@@ -186,8 +178,6 @@ model CuisinesOnRecipes {
   cuisines  Cuisine @relation(fields: [cuisineId], references: [id], onDelete: Cascade)
   cuisineId String
 
-  assignedAt DateTime @default(now())
-
   @@id([recipeId, cuisineId])
   @@index([cuisineId])
   @@index([recipeId])
@@ -210,18 +200,7 @@ model DietsOnRecipes {
   diet   Diet   @relation(fields: [dietId], references: [id], onDelete: Cascade)
   dietId String
 
-  assignedAt DateTime @default(now())
-
   @@id([recipeId, dietId])
   @@index([dietId])
   @@index([recipeId])
-}
-
-model TestStep {
-  id       String @unique @default(uuid())
-  position Int
-  name     String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }

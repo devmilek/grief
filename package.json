@@ -9,6 +9,9 @@
     "lint": "next lint",
     "email-dev": "email dev --port 3002"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "dependencies": {
     "@clerk/nextjs": "^4.26.1",
     "@hello-pangea/dnd": "^16.3.0",
