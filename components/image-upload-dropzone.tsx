@@ -29,30 +29,36 @@ const ImageUploadDropzone = ({
     { name: string; progress: number; url?: string }[]
   >([]);
 
-  const onDrop = useCallback((droppedFiles: File[]) => {
-    console.log(droppedFiles);
-    droppedFiles.forEach((file) => {
-      setFiles((prevFiles) => [...prevFiles, { name: file.name, progress: 0 }]);
+  const onDrop = useCallback(
+    (droppedFiles: File[]) => {
+      console.log(droppedFiles);
+      droppedFiles.forEach((file) => {
+        setFiles((prevFiles) => [
+          ...prevFiles,
+          { name: file.name, progress: 0 },
+        ]);
 
-      const storageRef = ref(storage, "images/" + file.name);
-      const uploadTask = uploadBytesResumable(storageRef, file);
+        const storageRef = ref(storage, "images/" + file.name);
+        const uploadTask = uploadBytesResumable(storageRef, file);
 
-      uploadTask.on("state_changed", (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      });
+        uploadTask.on("state_changed", (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        });
 
-      uploadTask.then(() => {
-        getDownloadURL(storageRef).then((url) => {
-          const newValues = [...values, url];
-          // setValues(newValues);
-          // setFiles((prevFiles) =>
-          //   prevFiles.filter((f) => f.name !== file.name),
-          // );
+        uploadTask.then(() => {
+          getDownloadURL(storageRef).then((url) => {
+            const newValues = [...values, url];
+            // setValues(newValues);
+            // setFiles((prevFiles) =>
+            //   prevFiles.filter((f) => f.name !== file.name),
+            // );
+          });
         });
       });
-    });
-  }, []);
+    },
+    [values],
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
