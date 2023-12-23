@@ -1,20 +1,33 @@
 import { authOptions } from "@/lib/auth-options";
 import { db } from "@/lib/db";
-import { redirectToSignIn } from "@clerk/nextjs";
-import { PlusIcon } from "lucide-react";
 import { getServerSession } from "next-auth";
-import Link from "next/link";
 import { redirect } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 import CreateRecipeCard from "./_components/create-recipe-card";
-import RecipeCard from "./_components/recipe-card";
+import { Role } from "@prisma/client";
+import ImportRecipesCard from "./_components/import-recipes-card";
+import { RecipesFeed, RecipesFeedSkeleton } from "./_components/recipes-feed";
+import SortButton from "@/components/sort-button";
 
-const YourRecipesPage = async () => {
+interface YourRecipesPageProps {
+  searchParams?: {
+    sortOrder?: "asc" | "desc";
+    page?: string;
+  };
+}
+
+const YourRecipesPage = async ({ searchParams }: YourRecipesPageProps) => {
   const session = await getServerSession(authOptions);
 
   if (!session) {
     redirect("/");
   }
+
+  const profile = await db.profile.findUnique({
+    where: {
+      id: session.user.id,
+    },
+  });
 
   const recipesCount = await db.recipe.count({
     where: {
@@ -29,11 +42,12 @@ const YourRecipesPage = async () => {
     },
   });
 
-  const recipes = await db.recipe.findMany({
-    where: {
-      profileId: session.user.id,
-    },
-  });
+  //TODO: Sort by published and unpublished
+  //TODO: Create card suspence
+
+  const currentPage = Number(searchParams?.page) || 1;
+
+  const sortOrder = searchParams?.sortOrder || "asc";
 
   return (
     <section className="container">
@@ -54,13 +68,15 @@ const YourRecipesPage = async () => {
         </div>
 
         <CreateRecipeCard />
+        {profile?.role === Role.admin && <ImportRecipesCard />}
       </div>
-      <h1 className="font-display text-3xl mt-16 mb-6">Zarządzaj przepisami</h1>
-      <div className="flex flex-col space-y-3">
-        {recipes.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
-        ))}
-      </div>
+      <header className="flex items-center justify-between mt-16 mb-6">
+        <h1 className="font-display text-3xl">Zarządzaj przepisami</h1>
+        <SortButton />
+      </header>
+      <Suspense fallback={<RecipesFeedSkeleton />}>
+        <RecipesFeed currentPage={currentPage} sortOrder={sortOrder} />
+      </Suspense>
     </section>
   );
 };

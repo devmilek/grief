@@ -5,16 +5,14 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import HomeSidebar from "../../(home-page)/_components/sidebar/home-sidebar";
 import { Button } from "@/components/ui/button";
-import { Filter } from "lucide-react";
-import SortButton from "./_components/sort-button";
+import { DrumstickIcon, Filter, PocketKnife } from "lucide-react";
 import HorizontalCard from "../../(home-page)/_components/horizontal-card";
 import RecipesFeed from "./_components/recipes-feed";
 import Pagination from "@/components/pagination";
+import { PAGINATION_ITEMS_PER_PAGE } from "@/constants";
+import SortButton from "@/components/sort-button";
 
-const Page = async ({
-  params,
-  searchParams,
-}: {
+interface CategoryPageProps {
   params: {
     categoryId: string;
   };
@@ -22,7 +20,9 @@ const Page = async ({
     sortOrder?: "asc" | "desc";
     page?: string;
   };
-}) => {
+}
+
+const Page = async ({ params, searchParams }: CategoryPageProps) => {
   const query = searchParams?.sortOrder || "asc";
   const currentPage = Number(searchParams?.page) || 1;
 
@@ -41,9 +41,9 @@ const Page = async ({
     return notFound();
   }
 
-  const postToShow = 6;
-
-  const totalPages = Math.ceil(category._count.recipes / postToShow);
+  const totalPages = Math.ceil(
+    category._count.recipes / PAGINATION_ITEMS_PER_PAGE,
+  );
 
   return (
     <div className="container">
@@ -64,18 +64,32 @@ const Page = async ({
         />
       </section>
       <div className="flex gap-x-4">
-        <section className="bg-white p-8 rounded-xl flex-1">
+        <section className="bg-white p-8 rounded-xl flex-1 h-fit">
           <header className="flex items-center justify-between mb-8">
             <h1 className="font-display text-4xl">Wyniki</h1>
             <SortButton />
           </header>
-          <RecipesFeed
-            categoryId={category.id}
-            sortOrder={query}
-            currentPage={currentPage}
-            postToShow={postToShow}
-          />
-          <Pagination totalPages={totalPages} currentPage={currentPage} />
+          {category._count.recipes > 0 ? (
+            <>
+              <RecipesFeed
+                categoryId={category.id}
+                sortOrder={query}
+                currentPage={currentPage}
+              />
+              <Pagination totalPages={totalPages} />
+            </>
+          ) : (
+            <div className="flex flex-col items-center mt-10">
+              <DrumstickIcon className="text-emerald-600 h-10 w-10" />
+              <h1 className="mt-4">
+                Nikt jeszcze nie dodał przepisu z kategorią{" "}
+                <strong>{category.name}</strong>
+              </h1>
+              <p className="text-muted-foreground text-sm">
+                Może będziesz pierwszy?
+              </p>
+            </div>
+          )}
         </section>
         <HomeSidebar />
       </div>

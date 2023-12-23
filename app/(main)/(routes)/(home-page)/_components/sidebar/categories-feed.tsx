@@ -19,7 +19,7 @@ const CategoriesFeed = () => {
           Zobacz wszystkie
         </Link>
       </header>
-      <div className="space-y-3">
+      <div className="gap-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1">
         {displayedCategories.map((category) => (
           <CategoryCard key={category.id} category={category} />
         ))}
@@ -27,7 +27,7 @@ const CategoriesFeed = () => {
           onClick={() => {
             setShowAll((prev) => !prev);
           }}
-          className="w-full"
+          className="w-full sm:col-span-2 lg:col-span-1"
           variant="outline"
         >
           {showAll ? "Pokaż mniej" : "Pokaż wszystkie"}

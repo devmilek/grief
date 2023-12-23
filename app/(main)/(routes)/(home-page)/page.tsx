@@ -66,7 +66,7 @@ const Home = async () => {
         <HomeHero recipes={recipeFromLast30Days} />
       )}
       {/* LAYOUT */}
-      <div className="flex space-x-12 container py-12">
+      <div className="flex flex-col lg:flex-row lg:space-x-12 container py-8">
         <div className="flex-1">
           <MainDishesFeed recipes={mostPopularMainDishes} />
           <NewestFeed />

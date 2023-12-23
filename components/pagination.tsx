@@ -1,75 +1,77 @@
 "use client";
 
 import React from "react";
-import { Button } from "./ui/button";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-} from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { generatePagination } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
-}
-
-const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
-  const searchParams = useSearchParams();
+const Pagination = ({ totalPages }: { totalPages: number }) => {
   const pathname = usePathname();
-  const { replace } = useRouter();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const currentPage = Number(searchParams.get("page")) || 1;
 
-  const params = new URLSearchParams(searchParams);
-
-  const handleNextPage = () => {
-    params.set("page", String(currentPage + 1));
-    replace(`${pathname}?${params.toString()}`);
+  const createPageURL = (pageNumber: number | string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", pageNumber.toString());
+    return `${pathname}?${params.toString()}`;
   };
 
-  const handlePrevPage = () => {
-    params.set("page", String(currentPage - 1));
-    replace(`${pathname}?${params.toString()}`);
+  const goBack = () => {
+    router.push(createPageURL(currentPage - 1));
   };
 
+  const goNext = () => {
+    router.push(createPageURL(currentPage + 1));
+  };
+
+  const allPages = generatePagination(currentPage, totalPages);
   return (
-    <div className="flex items-center mt-8">
-      <Button
-        variant="outline"
-        size="icon"
-        className="mr-2"
-        disabled={currentPage == 1}
-      >
-        <ChevronsLeft className="h-4 w-4" />
+    <div className="flex">
+      <Button variant="ghost" disabled={currentPage <= 1} onClick={goBack}>
+        <ChevronLeft className="w-4 h-4 mr-2" />
+        Cofnij
       </Button>
-      <Button
-        variant="outline"
-        size="icon"
-        disabled={currentPage == 1}
-        onClick={handlePrevPage}
-      >
-        <ChevronLeft className="h-4 w-4" />
-      </Button>
-      <div className="flex-1 text-center font-medium text-sm">
-        Strona {currentPage} z {totalPages}
+      <div className="flex-1 flex items-center justify-center space-x-2">
+        {allPages.map((page) => {
+          return (
+            <PaginationNumber
+              key={page}
+              href={createPageURL(page)}
+              page={page}
+              isActive={currentPage === page}
+            />
+          );
+        })}
       </div>
       <Button
-        variant="outline"
-        size="icon"
-        className="mr-2"
-        disabled={currentPage == totalPages}
+        disabled={currentPage >= totalPages}
+        variant="ghost"
+        onClick={goNext}
       >
-        <ChevronRight className="h-4 w-4" onClick={handleNextPage} />
-      </Button>
-      <Button
-        variant="outline"
-        size="icon"
-        disabled={currentPage == totalPages}
-      >
-        <ChevronsRight className="h-4 w-4" />
+        Dalej
+        <ChevronRight className="w-4 h-4 ml-2" />
       </Button>
     </div>
   );
 };
+
+function PaginationNumber({
+  page,
+  href,
+  isActive,
+}: {
+  page: number | string;
+  href: string;
+  isActive: boolean;
+}) {
+  return (
+    <Button asChild variant={isActive ? "outline" : "ghost"} size="icon">
+      <Link href={href}>{page}</Link>
+    </Button>
+  );
+}
 
 export default Pagination;

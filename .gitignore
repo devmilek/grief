@@ -3,6 +3,10 @@
 .react-email
 .VSCodeCounter
 
+data/placeholder-data.ts
+/data/placeholder-data.ts
+/data/
+
 # dependencies
 /node_modules
 /.pnp

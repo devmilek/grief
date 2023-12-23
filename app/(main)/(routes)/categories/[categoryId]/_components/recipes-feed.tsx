@@ -1,19 +1,18 @@
 import React from "react";
 import HorizontalCard from "../../../(home-page)/_components/horizontal-card";
 import { db } from "@/lib/db";
+import { PAGINATION_ITEMS_PER_PAGE } from "@/constants";
 
 interface RecipesFeedProps {
   categoryId: string;
   sortOrder: "asc" | "desc";
   currentPage: number;
-  postToShow: number;
 }
 
 const RecipesFeed = async ({
   categoryId,
   sortOrder,
   currentPage,
-  postToShow,
 }: RecipesFeedProps) => {
   const recipes = await db.recipe.findMany({
     where: {
@@ -37,11 +36,11 @@ const RecipesFeed = async ({
         },
       },
     },
-    take: postToShow,
-    skip: (currentPage - 1) * postToShow,
+    take: PAGINATION_ITEMS_PER_PAGE,
+    skip: (currentPage - 1) * PAGINATION_ITEMS_PER_PAGE,
   });
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 mb-6">
       {recipes.map((recipe) => (
         <HorizontalCard key={recipe.id} recipe={recipe} />
       ))}

@@ -1,7 +1,7 @@
 import { Category, Occasion, Cuisine, Diet } from "@prisma/client";
 import { ChefHat } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { Fragment } from "react";
 
 interface FooterProps {
   categories: Category[];
@@ -16,6 +16,27 @@ const Footer = async ({
   cuisines,
   diets,
 }: FooterProps) => {
+  const items = [
+    {
+      title: "Kategorie",
+      items: categories,
+    },
+    {
+      title: "Okazje",
+      items: occasions,
+    },
+    {
+      title: "Kuchnie świata",
+      items: cuisines,
+    },
+    {
+      title: "Diety",
+      items: diets,
+    },
+  ];
+
+  const ITEMS_PER_COLUMN = 9;
+
   return (
     <footer className="pt-10 container">
       <div className="rounded-xl p-10 bg-white flex xl:space-x-8 flex-col xl:flex-row">
@@ -29,53 +50,33 @@ const Footer = async ({
             jednym miejscu
           </p>
         </div>
-        <div className="lg:gap-x-4 gap-y-8 justify-between grid grid-cols-2 lg:grid-cols-5 w-full">
-          <div>
-            <h2 className="font-display text-emerald-600 text-2xl">
-              Kategorie
-            </h2>
-            <div className="space-y-2 flex flex-col mt-4">
-              {categories.map((category) => (
-                <Link key={category.id} href="/" className="text-sm">
-                  {category.name}
-                </Link>
-              ))}
+        <div className="gap-x-4 gap-y-8 grid grid-cols-2 md:grid-cols-4 w-full">
+          {items.map((item) => (
+            <div key={item.title}>
+              <h2 className="font-display text-emerald-600 text-2xl">
+                {item.title}
+              </h2>
+              <div className="space-y-2 flex flex-col mt-4">
+                {item.items.slice(0, ITEMS_PER_COLUMN).map((link) => {
+                  return (
+                    <Fragment key={link.id}>
+                      <Link href="/" className="text-sm">
+                        {link.name}
+                      </Link>
+                    </Fragment>
+                  );
+                })}
+                {item.items.length > ITEMS_PER_COLUMN && (
+                  <p className="text-sm font-medium">
+                    {item.items.length - ITEMS_PER_COLUMN} więcej
+                  </p>
+                )}
+              </div>
             </div>
-          </div>
-          <div>
-            <h2 className="font-display text-emerald-600 text-2xl">Okazje</h2>
-            <div className="space-y-2 flex flex-col mt-4">
-              {occasions.map((occasion) => (
-                <Link key={occasion.id} href="/" className="text-sm">
-                  {occasion.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-          <div className="lg:col-span-2">
-            <h2 className="font-display text-emerald-600 text-2xl">
-              Kuchnie świata
-            </h2>
-            <div className="gap-2 flex-col mt-4 grid grid-cols-2">
-              {cuisines.map((cuisine) => (
-                <Link key={cuisine.id} href="/" className="text-sm">
-                  {cuisine.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h2 className="font-display text-emerald-600 text-2xl">Diety</h2>
-            <div className="space-y-2 flex flex-col mt-4">
-              {diets.map((diet) => (
-                <Link key={diet.id} href="/" className="text-sm">
-                  {diet.name}
-                </Link>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
+      {/* Copyright */}
       <div className="text-sm text-neutral-500 flex items-center justify-between py-8 ">
         <p>Copyright © 2023 grien</p>
         <p>by: @devmilek</p>

@@ -29,9 +29,6 @@ export async function GET(
       where: {
         recipeId: recipe.id,
       },
-      orderBy: {
-        createdAt: "desc",
-      },
     });
 
     return NextResponse.json(ingredients);

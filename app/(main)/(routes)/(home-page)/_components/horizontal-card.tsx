@@ -20,9 +20,8 @@ interface HorizontalCardProps {
 moment.locale("pl");
 
 const HorizontalCard = ({ recipe }: HorizontalCardProps) => {
-  // TODO: find reason why image make hydration error
   return (
-    <article className="grid grid-cols-3 gap-x-6 items-center">
+    <article className="grid md:grid-cols-3 gap-x-6 items-center">
       <div className="object-cover aspect-[4/3] rounded-lg overflow-hidden">
         {recipe.image && (
           <Image
@@ -34,8 +33,11 @@ const HorizontalCard = ({ recipe }: HorizontalCardProps) => {
           />
         )}
       </div>
-      <div className="col-span-2">
-        <Link className="font-semibold text-xs text-emerald-600" href={"/"}>
+      <div className="md:col-span-2 mt-2 md:mt-0">
+        <Link
+          className="font-semibold text-xs text-emerald-600"
+          href={"/recipe/" + recipe.categoryId}
+        >
           {recipe.category?.name}
         </Link>
         <Link

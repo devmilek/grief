@@ -39,7 +39,10 @@ const BigRecipeCard = ({ recipe }: BigRecipeCardProps) => {
           </div>
         )}
         <Badge className="mt-4 cursor-pointer">{recipe.category?.name}</Badge>
-        <Link href={"/"} className="text-3xl font-display mt-2">
+        <Link
+          href={"/recipe/" + recipe.id}
+          className="text-3xl font-display mt-2"
+        >
           <span className="underline-anim group-hover:bg-[length:100%_2px]">
             {recipe.name}
           </span>

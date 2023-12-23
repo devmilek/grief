@@ -39,8 +39,8 @@ const SortButton = () => {
         <DropdownMenuLabel>Sortuj według</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup value={sort} onValueChange={handleChange}>
-          <DropdownMenuRadioItem value="asc">Najnowsze</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="desc">Najstarsze</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="desc">Najnowsze</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="asc">Najstarsze</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

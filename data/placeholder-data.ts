@@ -10,6 +10,7 @@ import {
   PreparationStep,
   Profile,
   Recipe,
+  Role,
 } from "@prisma/client";
 
 export const aiProfile: Profile = {
@@ -18,11 +19,12 @@ export const aiProfile: Profile = {
   bio: "Jestem szefem kuchni AI i uwielbiam gotować. Moje przepisy generowane są maszynowo, więc uważaj bo czasem się myle.",
   email: "ai@grief.devmilek.pl",
   image: null,
+  role: Role.admin,
 
   emailVerificationToken: null,
   emailVerified: true,
 
-  hashedPassword: "132",
+  hashedPassword: process.env.AI_USER_PASS!,
   resetPasswordToken: null,
   resetPasswordTokenExpiry: null,
 
@@ -36,77 +38,77 @@ export const categories: Category[] = [
     slug: "salatki",
     name: "Sałatki",
     image:
-      "https://images.pexels.com/photos/15913452/pexels-photo-15913452/free-photo-of-jedzenie-zdrowy-warzywa-posilek.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://firebasestorage.googleapis.com/v0/b/grief-8ecef.appspot.com/o/categories%2Fpexels-roman-odintsov-4958950.avif?alt=media&token=e1cfea2e-d8bf-4ac3-bbad-65ce1a385f1c",
   },
   {
     id: "26c5ff35-514c-4dbb-8887-c0101e8f90a3",
     slug: "przetwory",
     name: "Przetwory",
     image:
-      "https://images.pexels.com/photos/15913452/pexels-photo-15913452/free-photo-of-jedzenie-zdrowy-warzywa-posilek.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://firebasestorage.googleapis.com/v0/b/grief-8ecef.appspot.com/o/categories%2Fpexels-pixabay-48817%20(1).avif?alt=media&token=15938332-cc4a-4fdf-8484-6d7104fde1ba",
   },
   {
     id: "284dbed2-b9e3-4d74-b631-3058fc48ae40",
     slug: "napoje",
     name: "Napoje",
     image:
-      "https://images.pexels.com/photos/15913452/pexels-photo-15913452/free-photo-of-jedzenie-zdrowy-warzywa-posilek.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://firebasestorage.googleapis.com/v0/b/grief-8ecef.appspot.com/o/categories%2Fpexels-rene-asmussen-3217151.avif?alt=media&token=8a2a0a07-d2bb-4c8b-81f5-777e6e82d997",
   },
   {
     id: "68127b54-8880-4b65-bf00-566c6712bc35",
     slug: "dania-glowne",
     name: "Dania główne",
     image:
-      "https://images.pexels.com/photos/15913452/pexels-photo-15913452/free-photo-of-jedzenie-zdrowy-warzywa-posilek.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://firebasestorage.googleapis.com/v0/b/grief-8ecef.appspot.com/o/categories%2Fpexels-sebastian-coman-photography-3791089.avif?alt=media&token=4d899acf-f6a6-4330-95ca-b903fbf3a96b",
   },
   {
     id: "720f659b-0daa-4a33-bda1-8473a6a6f7bf",
     slug: "desery",
     name: "Desery",
     image:
-      "https://images.pexels.com/photos/15913452/pexels-photo-15913452/free-photo-of-jedzenie-zdrowy-warzywa-posilek.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://firebasestorage.googleapis.com/v0/b/grief-8ecef.appspot.com/o/categories%2Fpexels-geraud-pfeiffer-6605961.avif?alt=media&token=38197b60-a6da-45a1-b0d2-80c339d99f6d",
   },
   {
     id: "7eb80b42-3dd5-4d32-b93b-9ea42b03b6c5",
     slug: "pieczywo",
     name: "Pieczywo",
     image:
-      "https://images.pexels.com/photos/15913452/pexels-photo-15913452/free-photo-of-jedzenie-zdrowy-warzywa-posilek.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://firebasestorage.googleapis.com/v0/b/grief-8ecef.appspot.com/o/categories%2Fpexels-mariana-kurnyk-1775043.avif?alt=media&token=404597e5-43b7-4c9c-9177-7d2ca3bf7391",
   },
   {
     id: "816d364a-cf68-46d5-af6a-1c80a040e84c",
     slug: "zupy",
     name: "Zupy",
     image:
-      "https://images.pexels.com/photos/15913452/pexels-photo-15913452/free-photo-of-jedzenie-zdrowy-warzywa-posilek.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://firebasestorage.googleapis.com/v0/b/grief-8ecef.appspot.com/o/categories%2Fpexels-valeria-boltneva-1277483.avif?alt=media&token=9a3c632b-accd-4bb0-8580-56f8f9168f14",
   },
   {
     id: "9f91b46c-498a-457b-81dc-1cea2614eec4",
     slug: "sniadania",
     name: "Śniadania",
     image:
-      "https://images.pexels.com/photos/15913452/pexels-photo-15913452/free-photo-of-jedzenie-zdrowy-warzywa-posilek.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://firebasestorage.googleapis.com/v0/b/grief-8ecef.appspot.com/o/categories%2Fpexels-sueda-19047503.avif?alt=media&token=d223c264-2052-49e2-b16a-a5d07770165c",
   },
   {
     id: "bba9d101-9467-432a-8b89-7a1657d277b9",
     slug: "przekaski",
     name: "Przekąski",
     image:
-      "https://images.pexels.com/photos/15913452/pexels-photo-15913452/free-photo-of-jedzenie-zdrowy-warzywa-posilek.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://firebasestorage.googleapis.com/v0/b/grief-8ecef.appspot.com/o/categories%2Fpexels-lucas-guizo-5337821.avif?alt=media&token=190ab9c2-85b1-404c-a285-a734e5388845",
   },
   {
     id: "c9497db2-c648-46f6-b942-4ba2cdc70041",
     slug: "wedliny",
     name: "Wędliny",
     image:
-      "https://images.pexels.com/photos/15913452/pexels-photo-15913452/free-photo-of-jedzenie-zdrowy-warzywa-posilek.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://firebasestorage.googleapis.com/v0/b/grief-8ecef.appspot.com/o/categories%2Fpexels-ruslan-khmelevsky-14118155.avif?alt=media&token=31470028-5f45-40c3-9e22-e78eba16447e",
   },
   {
     id: "f0ac28c8-d999-43aa-8325-c5f419b09fef",
     slug: "dodatki",
     name: "Dodatki",
     image:
-      "https://images.pexels.com/photos/15913452/pexels-photo-15913452/free-photo-of-jedzenie-zdrowy-warzywa-posilek.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://firebasestorage.googleapis.com/v0/b/grief-8ecef.appspot.com/o/categories%2Fpexels-pixabay-36756.avif?alt=media&token=e5db25f5-2152-4765-8d3b-35e0293adc92",
   },
 ];
 

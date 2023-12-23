@@ -1,26 +1,24 @@
 "use client";
 
-import { Category, Occasion, Cuisine, Diet } from "@prisma/client";
-import { ReactNode, createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 
-interface CreateRecipeContextProps {
+interface CreateRecipeContextType {
   title: string;
   setTitle: (title: string) => void;
 }
 
-interface CreateRecipeProviderProps extends CreateRecipeContextProps {
-  children: ReactNode;
-}
-
-export const CreateRecipeContext = createContext<CreateRecipeContextProps>({
+export const CreateRecipeContext = createContext<CreateRecipeContextType>({
   title: "",
-  setTitle: (value: string) => {},
+  setTitle: () => {},
 });
 
-export const CreateRecipeProvider = ({
-  children,
-}: CreateRecipeProviderProps) => {
-  const [title, setTitle] = useState("");
+interface Props {
+  children: React.ReactNode;
+  initTitle?: string;
+}
+
+export const CreateRecipeProvider = ({ children, initTitle }: Props) => {
+  const [title, setTitle] = useState(initTitle || "");
 
   return (
     <CreateRecipeContext.Provider value={{ title, setTitle }}>
@@ -28,15 +26,3 @@ export const CreateRecipeProvider = ({
     </CreateRecipeContext.Provider>
   );
 };
-
-CreateRecipeContext.displayName = "CreateRecipeContext";
-
-export function useCreateRecipe() {
-  const context = useContext(CreateRecipeContext);
-
-  if (!context) {
-    throw new Error("useUtilityData must be used within a UtilityDataProvider");
-  }
-
-  return context;
-}

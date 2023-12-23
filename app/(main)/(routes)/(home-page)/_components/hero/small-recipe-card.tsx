@@ -43,12 +43,15 @@ const SmallRecipeCard = ({ recipe, className }: SmallRecipeCardProps) => {
         </div>
       )}
       <Link
-        href="/"
+        href={"/categories/" + recipe.categoryId}
         className="mt-4 cursor-pointer uppercase text-emerald-600 font-semibold text-xs"
       >
         {recipe.category?.name}
       </Link>
-      <Link href="/" className="text-xl font-display mt-1">
+      <Link
+        href={"/recipe/" + recipe.id}
+        className="text-lg sm:text-xl font-display mt-1"
+      >
         <span className="underline-anim group-hover:bg-[length:100%_2px]">
           {recipe.name}
         </span>

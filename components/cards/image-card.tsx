@@ -31,7 +31,7 @@ const ImageCard = ({ recipe, className }: ImageCardProps) => {
     >
       <div>
         <Link
-          href="/"
+          href={"/categories/" + recipe.categoryId}
           className="mt-4 cursor-pointer uppercase font-medium text-xs"
         >
           {recipe.category?.name}
