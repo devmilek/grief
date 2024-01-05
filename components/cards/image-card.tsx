@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import moment from "moment";
 import { cn } from "@/lib/utils";
+import { Skeleton } from "../ui/skeleton";
 
 interface ImageCardProps {
   recipe: Recipe & {
@@ -65,4 +66,19 @@ const ImageCard = ({ recipe, className }: ImageCardProps) => {
   );
 };
 
-export default ImageCard;
+const ImageCardSkeleton = ({ className }: { className?: string }) => {
+  return (
+    <div
+      className={cn(
+        "h-96 rounded-xl flex justify-end bg-white p-8 flex-col",
+        className,
+      )}
+    >
+      <Skeleton className="h-full w-full mb-3" />
+      <Skeleton className="w-1/3 h-4 mb-1" />
+      <Skeleton className="w-2/3 h-7" />
+    </div>
+  );
+};
+
+export { ImageCard, ImageCardSkeleton };

@@ -1,3 +1,4 @@
+import { Skeleton } from "@/components/ui/skeleton";
 import { Recipe } from "@prisma/client";
 import moment from "moment";
 import Image from "next/image";
@@ -63,4 +64,17 @@ const HorizontalCard = ({ recipe }: HorizontalCardProps) => {
   );
 };
 
-export default HorizontalCard;
+const HorizontalCardSkeleton = () => {
+  return (
+    <article className="grid md:grid-cols-3 gap-x-6 items-center">
+      <Skeleton className="aspect-[4/3] rounded-lg" />
+      <div className="col-span-2">
+        <Skeleton className="h-4 w-1/2" />
+        <Skeleton className="h-8 w-3/4 mt-1" />
+        <Skeleton className="h-4 w-1/2 mt-2" />
+      </div>
+    </article>
+  );
+};
+
+export { HorizontalCard, HorizontalCardSkeleton };

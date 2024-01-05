@@ -6,7 +6,6 @@ import Image from "next/image";
 import HomeSidebar from "../../(home-page)/_components/sidebar/home-sidebar";
 import { Button } from "@/components/ui/button";
 import { DrumstickIcon, Filter, PocketKnife } from "lucide-react";
-import HorizontalCard from "../../(home-page)/_components/horizontal-card";
 import RecipesFeed from "./_components/recipes-feed";
 import Pagination from "@/components/pagination";
 import { PAGINATION_ITEMS_PER_PAGE } from "@/constants";
@@ -23,7 +22,7 @@ interface CategoryPageProps {
 }
 
 const Page = async ({ params, searchParams }: CategoryPageProps) => {
-  const query = searchParams?.sortOrder || "asc";
+  const sortOrder = searchParams?.sortOrder || "desc";
   const currentPage = Number(searchParams?.page) || 1;
 
   const category = await db.category.findUnique({
@@ -73,7 +72,7 @@ const Page = async ({ params, searchParams }: CategoryPageProps) => {
             <>
               <RecipesFeed
                 categoryId={category.id}
-                sortOrder={query}
+                sortOrder={sortOrder}
                 currentPage={currentPage}
               />
               <Pagination totalPages={totalPages} />

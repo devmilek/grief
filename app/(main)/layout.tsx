@@ -4,8 +4,7 @@ import { UtilityDataProvider } from "@/components/providers/utility-data-provide
 import { db } from "@/lib/db";
 import React, { ReactNode } from "react";
 
-const MainLayout = async ({ children }: { children: ReactNode }) => {
-  // TODO: Create store to dont fetch data every time
+const getUtilityData = async () => {
   const [categories, occasions, cuisines, diets] = await db.$transaction([
     db.category.findMany({
       orderBy: {
@@ -25,6 +24,15 @@ const MainLayout = async ({ children }: { children: ReactNode }) => {
     db.cuisine.findMany(),
     db.diet.findMany(),
   ]);
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  return { categories, occasions, cuisines, diets };
+};
+
+const MainLayout = async ({ children }: { children: ReactNode }) => {
+  // TODO: Create store to dont fetch data every time
+
+  const { categories, occasions, cuisines, diets } = await getUtilityData();
+
   return (
     <UtilityDataProvider
       categories={categories}

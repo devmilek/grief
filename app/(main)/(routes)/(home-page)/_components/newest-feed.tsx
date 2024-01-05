@@ -2,10 +2,11 @@ import { db } from "@/lib/db";
 import { Recipe } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
-import HorizontalCard from "./horizontal-card";
 import { ChevronRight } from "lucide-react";
+import { HorizontalCard, HorizontalCardSkeleton } from "./horizontal-card";
+import { Skeleton } from "@/components/ui/skeleton";
 
-const NewestFeed = async () => {
+const getNewestRecipes = async () => {
   const recipes = await db.recipe.findMany({
     where: {
       published: true,
@@ -29,6 +30,12 @@ const NewestFeed = async () => {
     },
     take: 4,
   });
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  return recipes;
+};
+
+const NewestFeed = async () => {
+  const recipes = await getNewestRecipes();
   return (
     <section className="p-9 bg-white rounded-xl my-10">
       <header className="flex items-center justify-between">
@@ -50,4 +57,19 @@ const NewestFeed = async () => {
   );
 };
 
-export default NewestFeed;
+const NewestFeedSkeleton = () => {
+  return (
+    <section className="bg-white p-9 rounded-xl my-10">
+      <header className="mb-8">
+        <Skeleton className="h-9 w-1/3"></Skeleton>
+      </header>
+      <div className="space-y-8">
+        {[...Array(3)].map((_, index) => (
+          <HorizontalCardSkeleton key={index} />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export { NewestFeed, NewestFeedSkeleton };

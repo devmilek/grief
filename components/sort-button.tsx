@@ -17,7 +17,7 @@ const SortButton = () => {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
 
-  const sort = params.get("sortOrder") || "asc";
+  const sort = params.get("sortOrder") || "desc";
 
   const pathname = usePathname();
   const { replace } = useRouter();
