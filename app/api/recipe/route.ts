@@ -1,6 +1,5 @@
-import { authOptions } from "@/lib/auth-options";
+import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
@@ -26,7 +25,7 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
     if (!session) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -41,7 +40,7 @@ export async function POST(req: Request) {
     const recipe = await db.recipe.create({
       data: {
         name,
-        profileId: session.user.id,
+        userId: session.user.id,
       },
     });
 
