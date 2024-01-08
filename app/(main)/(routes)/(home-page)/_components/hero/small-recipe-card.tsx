@@ -13,7 +13,7 @@ interface SmallRecipeCardProps {
       id: string;
       name: string;
     } | null;
-    profile: {
+    user: {
       id: string;
       name: string;
     } | null;
@@ -58,7 +58,7 @@ const SmallRecipeCard = ({ recipe, className }: SmallRecipeCardProps) => {
       </Link>
       <div className="text-xs text-neutral-500 mt-1">
         <Link href={"/"} className="capitalize">
-          {recipe.profile?.name}
+          {recipe.user?.name}
         </Link>
         {" • "}
         {moment(recipe.createdAt).fromNow()}

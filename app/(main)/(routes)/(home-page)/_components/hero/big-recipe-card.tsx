@@ -13,7 +13,7 @@ interface BigRecipeCardProps {
       id: string;
       name: string;
     } | null;
-    profile: {
+    user: {
       id: string;
       name: string;
     } | null;
@@ -49,7 +49,7 @@ const BigRecipeCard = ({ recipe }: BigRecipeCardProps) => {
         </Link>
         <div className="text-xs text-neutral-500 mt-2">
           <Link href={"/"} className="capitalize">
-            {recipe.profile?.name}
+            {recipe.user?.name}
           </Link>
           {" • "}
           {moment(recipe.createdAt).fromNow()}

@@ -12,7 +12,7 @@ const page = async ({ params }: { params: { recipeId: string } }) => {
       published: true,
     },
     include: {
-      profile: true,
+      user: true,
       category: true,
       ingredients: true,
       steps: {
@@ -31,7 +31,7 @@ const page = async ({ params }: { params: { recipeId: string } }) => {
       <div className="flex space-x-8 mt-10">
         <div className="space-y-10 flex-1">
           <StepsFeed steps={recipe.steps} />
-          <AuthorCard profile={recipe.profile} />
+          <AuthorCard user={recipe.user} />
         </div>
         <div className="w-[400px]">
           <IngredientsFeed ingredients={recipe.ingredients} />

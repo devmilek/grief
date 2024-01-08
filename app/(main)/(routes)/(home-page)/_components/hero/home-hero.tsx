@@ -26,7 +26,7 @@ const getRecipes = async () => {
           name: true,
         },
       },
-      profile: {
+      user: {
         select: {
           id: true,
           name: true,

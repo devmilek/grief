@@ -23,7 +23,7 @@ const RecipesFeed = async ({
       createdAt: sortOrder,
     },
     include: {
-      profile: {
+      user: {
         select: {
           id: true,
           name: true,

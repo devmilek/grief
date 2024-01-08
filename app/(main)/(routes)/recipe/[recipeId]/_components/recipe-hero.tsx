@@ -1,13 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { difficultyMap } from "@/maps";
-import {
-  Category,
-  Ingredient,
-  PreparationStep,
-  Profile,
-  Recipe,
-} from "@prisma/client";
+import { Category, Recipe, User } from "@prisma/client";
 import { Clock, ChefHatIcon, Star, Share } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,7 +9,7 @@ import React from "react";
 
 interface RecipeHeroProps {
   recipe: Recipe & {
-    profile: Profile;
+    user: User;
     category: Category | null;
   };
 }
@@ -42,13 +36,11 @@ const RecipeHero = ({ recipe }: RecipeHeroProps) => {
           >
             <Avatar className="h-7 w-7">
               <AvatarFallback className="uppercase text-[10px]">
-                {recipe.profile.name?.slice(0, 2)}
+                {recipe.user.name?.slice(0, 2)}
               </AvatarFallback>
-              {recipe.profile.image && (
-                <AvatarImage src={recipe.profile.image} />
-              )}
+              {recipe.user.image && <AvatarImage src={recipe.user.image} />}
             </Avatar>
-            <p className="text-emerald-700">{recipe.profile.name}</p>
+            <p className="text-emerald-700">{recipe.user.name}</p>
           </Link>
           <span className="text-neutral-500">•</span>
           <p className="text-xs text-gray-500">
