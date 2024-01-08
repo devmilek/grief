@@ -12,14 +12,14 @@ const prisma = new PrismaClient();
 
 async function main() {
   // DELETE ALL AI RECIPES AND ALL UTILITY TABLES
-  await prisma.profile.delete({
+  await prisma.user.delete({
     where: {
       id: aiProfile.id,
     },
   });
   await prisma.recipe.deleteMany({
     where: {
-      profileId: aiProfile.id,
+      userId: aiProfile.id,
     },
   });
   await prisma.category.deleteMany();
@@ -27,7 +27,7 @@ async function main() {
   await prisma.diet.deleteMany();
   await prisma.occasion.deleteMany();
   // CREATE USERS
-  const user = await prisma.profile.create({
+  const user = await prisma.user.create({
     data: aiProfile,
   });
 
@@ -91,7 +91,7 @@ async function main() {
         servingType: recipe.servingType,
         servingAmount: recipe.servingAmount,
         categoryId: recipe.categoryId,
-        profileId: recipe.profileId,
+        userId: recipe.userId,
         published: recipe.published,
         createdAt: recipe.createdAt,
         updatedAt: recipe.updatedAt,

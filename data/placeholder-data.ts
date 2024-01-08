@@ -8,28 +8,21 @@ import {
   Occasion,
   OccasionsOnRecipes,
   PreparationStep,
-  Profile,
   Recipe,
-  Role,
+  User,
 } from "@prisma/client";
 
-export const aiProfile: Profile = {
+export const aiProfile: User = {
   id: "b617d56d-e526-4f86-94e1-545e784388b4",
   name: "Szef kuchni AI",
   bio: "Jestem szefem kuchni AI i uwielbiam gotować. Moje przepisy generowane są maszynowo, więc uważaj bo czasem się myle.",
   email: "ai@grief.devmilek.pl",
   image: null,
-  role: Role.admin,
 
-  emailVerificationToken: null,
-  emailVerified: true,
+  emailVerified: new Date(),
+  isTwoFactorEnabled: false,
 
-  hashedPassword: process.env.AI_USER_PASS!,
-  resetPasswordToken: null,
-  resetPasswordTokenExpiry: null,
-
-  createdAt: new Date(),
-  updatedAt: new Date(),
+  password: process.env.AI_USER_PASS!,
 };
 
 export const categories: Category[] = [
@@ -347,7 +340,7 @@ export const recipes: RecipeWithRelations[] = [
     servingType: "PIECES",
     servingAmount: 1,
     categoryId: "26c5ff35-514c-4dbb-8887-c0101e8f90a3",
-    profileId: aiProfile.id,
+    userId: aiProfile.id,
     createdAt: new Date(),
     updatedAt: new Date(),
     cuisines: [
@@ -402,7 +395,7 @@ export const recipes: RecipeWithRelations[] = [
     servingType: "SERVINGS",
     servingAmount: 6,
     categoryId: "68127b54-8880-4b65-bf00-566c6712bc35",
-    profileId: aiProfile.id,
+    userId: aiProfile.id,
     createdAt: new Date(),
     updatedAt: new Date(),
     cuisines: [],
@@ -528,7 +521,7 @@ export const recipes: RecipeWithRelations[] = [
     servingType: "SERVINGS",
     servingAmount: 1,
     categoryId: "68127b54-8880-4b65-bf00-566c6712bc35",
-    profileId: aiProfile.id,
+    userId: aiProfile.id,
     createdAt: new Date(),
     updatedAt: new Date(),
     cuisines: [],
@@ -640,7 +633,7 @@ export const recipes: RecipeWithRelations[] = [
     servingType: "PIECES",
     servingAmount: 13,
     categoryId: "720f659b-0daa-4a33-bda1-8473a6a6f7bf",
-    profileId: aiProfile.id,
+    userId: aiProfile.id,
     createdAt: new Date(),
     updatedAt: new Date(),
     cuisines: [
@@ -761,7 +754,7 @@ export const recipes: RecipeWithRelations[] = [
     servingType: "SERVINGS",
     servingAmount: 12,
     categoryId: "68127b54-8880-4b65-bf00-566c6712bc35",
-    profileId: aiProfile.id,
+    userId: aiProfile.id,
     createdAt: new Date(),
     updatedAt: new Date(),
     cuisines: [
@@ -900,7 +893,7 @@ export const recipes: RecipeWithRelations[] = [
     servingType: "SERVINGS",
     servingAmount: 1,
     categoryId: "0dbc07ca-197a-463c-a9c3-8a1d06256eb4",
-    profileId: aiProfile.id,
+    userId: aiProfile.id,
     createdAt: new Date(),
     updatedAt: new Date(),
     cuisines: [
