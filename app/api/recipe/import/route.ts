@@ -1,11 +1,10 @@
-import { authOptions } from "@/lib/auth-options";
+import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
     if (!session) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -25,7 +24,7 @@ export async function POST(req: Request) {
         description: body.description,
         preparationTime: body.preparationTime,
         servingAmount: body.servingAmount,
-        profileId: session.user.id,
+        userId: session.user.id,
       },
     });
 
