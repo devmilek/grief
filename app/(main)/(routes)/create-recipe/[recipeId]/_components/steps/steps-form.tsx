@@ -1,6 +1,5 @@
 "use client";
 
-import StepCard from "@/app/(main)/(routes)/create-recipe/[recipeId]/_components/steps/step-card";
 import StepDropzone from "@/components/step-dropzone";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,7 +18,6 @@ import { useParams, useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import StepsFeed from "./steps-feed";
 
 interface StepsFormProps {
   steps: PreparationStep[];

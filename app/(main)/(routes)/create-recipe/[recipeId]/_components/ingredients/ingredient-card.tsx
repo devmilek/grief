@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Ingredient } from "@prisma/client";
 import axios from "axios";
 import { Loader2, XIcon } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
@@ -18,7 +18,6 @@ const IngredientCard = ({
   deleteIngredient,
 }: IngredientCardProps) => {
   const [isDeleting, setIsDeleting] = useState(false);
-  const router = useRouter();
   const params = useParams();
   const onDelete = async () => {
     setIsDeleting(true);

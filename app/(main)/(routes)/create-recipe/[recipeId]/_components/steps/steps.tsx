@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import StepsFeed from "./steps-feed";
-import { Ingredient, PreparationStep } from "@prisma/client";
+import { PreparationStep } from "@prisma/client";
 import StepsForm from "./steps-form";
 import { useQuery } from "react-query";
 import axios from "axios";

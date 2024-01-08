@@ -3,9 +3,6 @@
 import { PreparationStep } from "@prisma/client";
 import React, { useEffect, useState } from "react";
 import StepCard from "./step-card";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { GripVerticalIcon, XIcon } from "lucide-react";
 import {
   DragDropContext,
   Draggable,
@@ -13,7 +10,6 @@ import {
   Droppable,
 } from "@hello-pangea/dnd";
 import axios from "axios";
-import router from "next/router";
 import { toast } from "sonner";
 import { useParams, useRouter } from "next/navigation";
 

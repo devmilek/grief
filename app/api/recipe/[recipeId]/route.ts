@@ -1,6 +1,5 @@
-import { authOptions } from "@/lib/auth-options";
+import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function DELETE(
@@ -8,7 +7,7 @@ export async function DELETE(
   { params }: { params: { recipeId: string } },
 ) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
     if (!session) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -21,7 +20,7 @@ export async function DELETE(
     const recipe = await db.recipe.delete({
       where: {
         id: params.recipeId,
-        profileId: session.user.id,
+        userId: session.user.id,
       },
     });
 

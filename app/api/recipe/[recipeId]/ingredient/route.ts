@@ -1,6 +1,5 @@
-import { authOptions } from "@/lib/auth-options";
+import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -8,7 +7,7 @@ export async function GET(
   { params }: { params: { recipeId: string } },
 ) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
     if (!session) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -17,7 +16,7 @@ export async function GET(
     const recipe = await db.recipe.findUnique({
       where: {
         id: params.recipeId,
-        profileId: session.user.id,
+        userId: session.user.id,
       },
     });
 
@@ -43,7 +42,7 @@ export async function POST(
   { params }: { params: { recipeId: string } },
 ) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
     if (!session) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -58,7 +57,7 @@ export async function POST(
     const recipe = await db.recipe.findUnique({
       where: {
         id: params.recipeId,
-        profileId: session.user.id,
+        userId: session.user.id,
       },
     });
 

@@ -2,8 +2,6 @@ import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import BasicsForm from "./_components/basics/basics-form";
 import AdditionalInfo from "./_components/additional/additional-info";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth-options";
 import {
   Accordion,
   AccordionContent,
@@ -12,6 +10,7 @@ import {
 } from "@/components/ui/accordion";
 import Steps from "./_components/steps/steps";
 import Ingredients from "./_components/ingredients/ingredients";
+import { auth } from "@/lib/auth";
 
 interface CreateRecipePageProps {
   params: {
@@ -20,7 +19,7 @@ interface CreateRecipePageProps {
 }
 
 const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session) {
     return redirect("/");
@@ -29,7 +28,7 @@ const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
   const recipe = await db.recipe.findUnique({
     where: {
       id: params.recipeId,
-      profileId: session.user.id,
+      userId: session.user.id,
     },
   });
 

@@ -17,6 +17,7 @@ model User {
   emailVerified      DateTime?
   image              String?
   password           String?
+  bio                String?
   accounts           Account[]
   sessions           Session[]
   isTwoFactorEnabled Boolean   @default(false)
