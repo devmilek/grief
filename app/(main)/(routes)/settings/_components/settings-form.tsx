@@ -11,7 +11,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Profile } from "@prisma/client";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
 import { User } from "next-auth";
@@ -22,7 +21,7 @@ import { toast } from "sonner";
 import * as z from "zod";
 
 interface SettingsFormProps {
-  profile: Profile;
+  user: User;
 }
 
 const formSchema = z.object({
@@ -31,14 +30,14 @@ const formSchema = z.object({
   bio: z.string(),
 });
 
-const SettingsForm = ({ profile }: SettingsFormProps) => {
+const SettingsForm = ({ user }: SettingsFormProps) => {
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: profile.email,
-      name: profile.name || "",
-      bio: profile.bio || "",
+      email: user.email || "",
+      name: user.name || "",
+      // bio: user.bio || "",
     },
   });
 
@@ -46,7 +45,7 @@ const SettingsForm = ({ profile }: SettingsFormProps) => {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
-      const profileRes = await axios.patch(`/api/profile/${profile.id}`, data);
+      const profileRes = await axios.patch(`/api/profile/${user.id}`, data);
       toast.success("Zapisano zmiany");
       router.refresh();
     } catch (e) {

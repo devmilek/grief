@@ -21,7 +21,7 @@ const getNewestRecipes = async () => {
           name: true,
         },
       },
-      profile: {
+      user: {
         select: {
           id: true,
           name: true,

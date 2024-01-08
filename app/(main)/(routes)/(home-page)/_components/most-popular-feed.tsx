@@ -21,7 +21,7 @@ const getMostPopularRecipes = async () => {
           name: true,
         },
       },
-      profile: {
+      user: {
         select: {
           id: true,
           name: true,
@@ -42,7 +42,7 @@ const MostPopularFeed = async () => {
       <header className="flex items-center justify-between">
         <h1 className="font-display text-4xl">Najpopularniejsze</h1>
         <Link
-          href={"/categories/" + recipes[0].category?.id}
+          href={"/categories/" + recipes[0]?.category?.id}
           className="text-sm text-neutral-500 flex items-center space-x-1"
         >
           <span className="hidden sm:inline-block">Zobacz wszystkie</span>

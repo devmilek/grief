@@ -1,12 +1,12 @@
 import React from "react";
 import { Recipe } from "@prisma/client";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth-options";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { PAGINATION_ITEMS_PER_PAGE } from "@/constants";
 import { RecipeCard, RecipeCardSkeleton } from "./recipe-card";
 import Pagination from "@/components/pagination";
+import { auth } from "@/lib/auth";
+import { getRecipesCount } from "@/data";
 
 interface RecipesFeedProps {
   currentPage: number;
@@ -14,7 +14,7 @@ interface RecipesFeedProps {
 }
 
 const RecipesFeed = async ({ currentPage, sortOrder }: RecipesFeedProps) => {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session) {
     return redirect("/");
@@ -22,21 +22,17 @@ const RecipesFeed = async ({ currentPage, sortOrder }: RecipesFeedProps) => {
 
   const skip = (currentPage - 1) * PAGINATION_ITEMS_PER_PAGE;
 
+  const totalRecipes = await getRecipesCount(session.user.id);
+
   const recipes = await db.recipe.findMany({
     where: {
-      profileId: session.user.id,
+      userId: session.user.id,
     },
     orderBy: {
       createdAt: sortOrder,
     },
     take: PAGINATION_ITEMS_PER_PAGE,
     skip: skip,
-  });
-
-  const totalRecipes = await db.recipe.count({
-    where: {
-      profileId: session.user.id,
-    },
   });
 
   const totalPages = Math.ceil(totalRecipes / PAGINATION_ITEMS_PER_PAGE);

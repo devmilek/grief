@@ -11,7 +11,7 @@ interface HorizontalCardProps {
       id: string;
       name: string;
     } | null;
-    profile: {
+    user: {
       id: string;
       name: string;
     } | null;
@@ -54,7 +54,7 @@ const HorizontalCard = ({ recipe }: HorizontalCardProps) => {
         </p>
         <div className="text-xs mt-2 opacity-70">
           <Link href={"/"} className="capitalize">
-            {recipe.profile?.name}
+            {recipe.user?.name}
           </Link>
           {" • "}
           {moment(recipe.createdAt).fromNow()}

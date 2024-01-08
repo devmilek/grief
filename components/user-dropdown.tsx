@@ -12,7 +12,6 @@ import {
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Profile } from "@prisma/client";
 import { Book, LogOut, Plus, Settings, UserIcon } from "lucide-react";
 import Link from "next/link";
 import { useCreateRecipeModal } from "@/hooks/use-create-recipe";

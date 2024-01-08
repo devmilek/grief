@@ -37,24 +37,3 @@ export const additionalQuantityMap = {
   FRAC2_3: "&frac23;",
   FRAC3_4: "&frac34;",
 };
-
-interface ClerkErrorsMap {
-  form_password_pwned: string;
-  form_identifier_exists: string;
-  form_password_incorrect: string;
-  form_identifier_not_found: string;
-  form_param_nil: string;
-  form_code_incorrect: string;
-  [key: string]: string;
-}
-
-export const clerkErrorsMap: ClerkErrorsMap = {
-  form_password_pwned:
-    "Hasło zostało znalezione w wyniku naruszenia danych online.  Dla bezpieczeństwa konta prosimy o użycie innego hasła.",
-  form_identifier_exists: "Ten adres e-mail jest zajęty. Spróbuj użyć innego.",
-  form_password_incorrect: "Nieprawidłowe hasło.",
-  form_identifier_not_found:
-    "Nie znaleziono użytkownika o podanym adresie e-mail.",
-  form_param_nil: "Podaj hasło.",
-  form_code_incorrect: "Nieprawidłowy kod.",
-};

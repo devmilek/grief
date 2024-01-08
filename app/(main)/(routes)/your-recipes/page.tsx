@@ -1,13 +1,11 @@
-import { authOptions } from "@/lib/auth-options";
-import { db } from "@/lib/db";
-import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import React, { Suspense } from "react";
 import CreateRecipeCard from "./_components/create-recipe-card";
-import { Role } from "@prisma/client";
 import ImportRecipesCard from "./_components/import-recipes-card";
 import { RecipesFeed, RecipesFeedSkeleton } from "./_components/recipes-feed";
 import SortButton from "@/components/sort-button";
+import { getRecipesCount, getUnpublishedRecipesCount } from "@/data";
+import { auth } from "@/lib/auth";
 
 interface YourRecipesPageProps {
   searchParams?: {
@@ -17,30 +15,16 @@ interface YourRecipesPageProps {
 }
 
 const YourRecipesPage = async ({ searchParams }: YourRecipesPageProps) => {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session) {
     redirect("/");
   }
 
-  const profile = await db.profile.findUnique({
-    where: {
-      id: session.user.id,
-    },
-  });
+  const userId = session.user.id;
 
-  const recipesCount = await db.recipe.count({
-    where: {
-      profileId: session.user.id,
-    },
-  });
-
-  const unpublishedRecipesCount = await db.recipe.count({
-    where: {
-      profileId: session.user.id,
-      published: false,
-    },
-  });
+  const unpublishedRecipesCount = await getUnpublishedRecipesCount(userId);
+  const recipesCount = await getRecipesCount(userId);
 
   //TODO: Sort by published and unpublished
   //TODO: Create card suspence
@@ -68,7 +52,7 @@ const YourRecipesPage = async ({ searchParams }: YourRecipesPageProps) => {
         </div>
 
         <CreateRecipeCard />
-        {profile?.role === Role.admin && <ImportRecipesCard />}
+        {/* {profile?.role === Role.admin && <ImportRecipesCard />} */}
       </div>
       <header className="flex items-center justify-between mt-16 mb-6">
         <h1 className="font-display text-3xl">Zarządzaj przepisami</h1>

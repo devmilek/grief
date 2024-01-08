@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect } from "react";
-import UploadImageModal from "../modals/upload-image-modal";
 import CreateRecipeModal from "../modals/create-recipe-modal";
 
 const ModalProvider = () => {
@@ -14,7 +13,6 @@ const ModalProvider = () => {
   if (mounted) {
     return (
       <>
-        <UploadImageModal />
         <CreateRecipeModal />
       </>
     );

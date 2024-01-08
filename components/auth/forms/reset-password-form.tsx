@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import ResetPasswordModal from "../modals/reset-password-modal";
+import ResetPasswordModal from "../../modals/reset-password-modal";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
 

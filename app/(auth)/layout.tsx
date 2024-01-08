@@ -6,7 +6,7 @@ import { ChefHat } from "lucide-react";
 
 const AuthLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <main className="h-screen grid lg:grid-cols-2 md:p-4 lg:p-10 bg-white">
+    <main className="h-screen grid lg:grid-cols-2 md:p-4 lg:p-8 bg-white">
       <section className="rounded-xl relative overflow-hidden hidden lg:block">
         <div className="z-20 absolute inset-0 p-8 h-full flex flex-col justify-between">
           <Link
@@ -35,7 +35,9 @@ const AuthLayout = ({ children }: { children: ReactNode }) => {
           className="object-cover"
         />
       </section>
-      {children}
+      <section className="flex items-center justify-center relative">
+        <div className="max-w-lg px-8">{children}</div>
+      </section>
     </main>
   );
 };

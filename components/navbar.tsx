@@ -6,8 +6,8 @@ import { db } from "@/lib/db";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import UserDropdown from "./user-dropdown";
-import { getServerSession } from "next-auth";
 import { Category, Cuisine, Diet, Occasion } from "@prisma/client";
+import { auth } from "@/lib/auth";
 
 interface NavbarProps {
   categories: Category[];
@@ -22,7 +22,7 @@ const Navbar = async ({
   cuisines,
   diets,
 }: NavbarProps) => {
-  const session = await getServerSession();
+  const session = await auth();
 
   return (
     <header className="bg-white border-b fixed inset-x-0 z-50">

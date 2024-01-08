@@ -1,6 +1,6 @@
 "use client";
 
-import { quotes } from "@/data/quotes";
+import { QUOTES } from "@/constants";
 import { QuoteIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
@@ -10,7 +10,7 @@ const QuotesCard = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+      setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % QUOTES.length);
       setProgress(0); // Reset the time elapsed
     }, 10000); // changes every 10 seconds
 
@@ -32,10 +32,10 @@ const QuotesCard = () => {
         <QuoteIcon className="h-10 w-10 text-emerald-600" />
         <div className="flex-1">
           <p className="text-neutral-600 text-sm">
-            {quotes[currentQuoteIndex].quote}
+            {QUOTES[currentQuoteIndex].quote}
           </p>
           <p className="text-end text-neutral-600 font-medium mt-1 text-sm">
-            - {quotes[currentQuoteIndex].author}
+            - {QUOTES[currentQuoteIndex].author}
           </p>
         </div>
       </div>
