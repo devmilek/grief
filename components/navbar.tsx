@@ -1,27 +1,22 @@
-import { ChefHat, Search, SearchIcon } from "lucide-react";
+import { ChefHat, SearchIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import NavbarLinks from "./navbar-links";
-import { db } from "@/lib/db";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import UserDropdown from "./user-dropdown";
 import { Category, Cuisine, Diet, Occasion } from "@prisma/client";
 import { auth } from "@/lib/auth";
-
-interface NavbarProps {
-  categories: Category[];
-  occasions: Occasion[];
-  cuisines: Cuisine[];
-  diets: Diet[];
-}
+import { SignedIn } from "./auth/signed";
+import { UtilityData } from "@/types";
+import { SITE_NAME } from "@/constants";
 
 const Navbar = async ({
   categories,
-  occasions,
   cuisines,
   diets,
-}: NavbarProps) => {
+  occasions,
+}: UtilityData) => {
   const session = await auth();
 
   return (
@@ -30,7 +25,7 @@ const Navbar = async ({
         <div className="flex space-x-4">
           <Link href="/" className="text-2xl font-display flex items-center">
             <ChefHat className="h-6 w-6 mr-2 text-emerald-600" />
-            grien
+            {SITE_NAME}
           </Link>
           <NavbarLinks
             className="hidden md:flex"

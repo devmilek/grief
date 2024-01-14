@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import { DM_Serif_Display, Poppins } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import ModalProvider from "@/components/providers/modal-provider";
-import { Toaster } from "sonner";
-import SessionProvider from "@/components/providers/session-provider";
-import QueryProvider from "@/components/providers/query-provider";
+import { Providers } from "@/components/providers";
+import { SITE_NAME } from "@/constants";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -22,9 +20,25 @@ const db_serif_display = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Grief - Twoja baza przepisów",
-  description:
-    "Grief został stworzony z myślą o wszystkich pasjonatach wyśmienitej kuchni. Codziennie dostarczamy inspirujące przepisy na wyjątkowe i smakowite dania, abyś mógł cieszyć się wyjątkowymi posiłkami.",
+  // title: `${SITE_NAME} - Twoja baza przepisów`,
+  title: {
+    template: `%s | ${SITE_NAME}`,
+    default: `${SITE_NAME} - Twoja baza przepisów`, // a default is required when creating a template
+  },
+  description: `Znajdź inspirację do gotowania i delektuj się smakiem kuchni z różnych zakątków świata. Codziennie dostarczamy inspirujące przepisy na wyjątkowe i smakowite dania, abyś mógł cieszyć się wyjątkowymi posiłkami.`,
+  keywords: [
+    "przepisy",
+    "gotowanie",
+    "kuchnia",
+    "świat",
+    "diety",
+    "okazje",
+    "kategorie",
+    "smaki",
+    "smak",
+    "dania kuchni",
+    "przepisy kulinarne",
+  ],
 };
 
 export default function RootLayout({
@@ -38,13 +52,7 @@ export default function RootLayout({
       className={`${poppins.variable} ${db_serif_display.variable}`}
     >
       <body className={cn(poppins.className, "bg-neutral-50")}>
-        <SessionProvider>
-          <QueryProvider>
-            {children}
-            <ModalProvider />
-            <Toaster richColors closeButton />
-          </QueryProvider>
-        </SessionProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

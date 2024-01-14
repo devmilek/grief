@@ -12,16 +12,14 @@ generator client {
 }
 
 model User {
-  id                 String    @id @default(cuid())
-  name               String
-  email              String?   @unique
-  emailVerified      DateTime?
-  image              String?
-  password           String?
-  bio                String?
-  accounts           Account[]
-  sessions           Session[]
-  isTwoFactorEnabled Boolean   @default(false)
+  id            String    @id @default(cuid())
+  name          String
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  bio           String?
+  accounts      Account[]
 
   recipes Recipe[]
 }
@@ -72,14 +70,6 @@ model Account {
 
   @@unique([provider, providerAccountId])
   @@index([userId])
-}
-
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum Difficulty {
@@ -186,11 +176,9 @@ model Category {
 model Occasion {
   id   String @unique @default(uuid())
   name String
+  slug String @unique
 
   recipes OccasionsOnRecipes[]
-
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
 }
 
 model OccasionsOnRecipes {
@@ -207,11 +195,9 @@ model OccasionsOnRecipes {
 model Cuisine {
   id   String @unique @default(uuid())
   name String
+  slug String @unique
 
   recipes CuisinesOnRecipes[]
-
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
 }
 
 model CuisinesOnRecipes {
@@ -229,11 +215,9 @@ model CuisinesOnRecipes {
 model Diet {
   id   String @unique @default(uuid())
   name String
+  slug String @unique
 
   recipes DietsOnRecipes[]
-
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
 }
 
 model DietsOnRecipes {

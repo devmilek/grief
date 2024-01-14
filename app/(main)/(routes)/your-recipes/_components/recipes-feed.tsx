@@ -7,6 +7,7 @@ import { RecipeCard, RecipeCardSkeleton } from "./recipe-card";
 import Pagination from "@/components/pagination";
 import { auth } from "@/lib/auth";
 import { getRecipesCount } from "@/data";
+import EmptyState from "./empty-state";
 
 interface RecipesFeedProps {
   currentPage: number;
@@ -36,6 +37,10 @@ const RecipesFeed = async ({ currentPage, sortOrder }: RecipesFeedProps) => {
   });
 
   const totalPages = Math.ceil(totalRecipes / PAGINATION_ITEMS_PER_PAGE);
+
+  if (recipes.length === 0) {
+    return <EmptyState />;
+  }
 
   return (
     <>

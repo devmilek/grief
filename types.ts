@@ -1,3 +1,5 @@
+import { Category, Occasion, Cuisine, Diet } from "@prisma/client";
+
 export type ClerkErrors =
   | "form_password_pwned"
   | "form_identifier_exists"
@@ -9,3 +11,14 @@ export type ClerkErrors =
 export interface AcceptFilesType {
   [key: string]: string[];
 }
+
+export type UtilityData = {
+  categories: (Category & {
+    _count: {
+      recipes: number;
+    };
+  })[];
+  occasions: Occasion[];
+  cuisines: Cuisine[];
+  diets: Diet[];
+};

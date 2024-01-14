@@ -1,24 +1,12 @@
 "use client";
 
-import { Category, Occasion, Cuisine, Diet } from "@prisma/client";
-import { ReactNode, createContext, useContext, useState } from "react";
-
-interface UtilityDataContextProps {
-  categories: (Category & {
-    _count: {
-      recipes: number;
-    };
-  })[];
-  occasions: Occasion[];
-  cuisines: Cuisine[];
-  diets: Diet[];
-}
-
-interface UtilityDataProviderProps extends UtilityDataContextProps {
+import { UtilityData } from "@/types";
+import { ReactNode, createContext, useContext } from "react";
+interface UtilityDataProviderProps extends UtilityData {
   children: ReactNode;
 }
 
-export const UtilityDataContext = createContext<UtilityDataContextProps>({
+export const UtilityDataContext = createContext<UtilityData>({
   categories: [],
   occasions: [],
   cuisines: [],
