@@ -14,7 +14,6 @@ import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Book, LogOut, Plus, Settings, UserIcon } from "lucide-react";
 import Link from "next/link";
-import { useCreateRecipeModal } from "@/hooks/use-create-recipe";
 import { User } from "next-auth";
 import { signOut } from "next-auth/react";
 
@@ -23,7 +22,6 @@ interface UserButtonProps {
 }
 
 const UserDropdown = ({ profile }: UserButtonProps) => {
-  const { onOpen } = useCreateRecipeModal();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -52,13 +50,11 @@ const UserDropdown = ({ profile }: UserButtonProps) => {
             <UserIcon className="mr-2 w-4 h-4" />
             <span>Profil</span>
           </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => {
-              onOpen();
-            }}
-          >
-            <Plus className="mr-2 w-4 h-4" />
-            <span>Utwórz przepis</span>
+          <DropdownMenuItem asChild>
+            <Link href="/create-recipe">
+              <Plus className="mr-2 w-4 h-4" />
+              <span>Utwórz przepis</span>
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link href="/your-recipes">

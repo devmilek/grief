@@ -1,5 +1,4 @@
 import React from "react";
-import { Recipe } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { PAGINATION_ITEMS_PER_PAGE } from "@/constants";

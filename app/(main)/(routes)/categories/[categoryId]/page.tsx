@@ -3,7 +3,7 @@ import React from "react";
 import bgImage from "@/assets/auth-bg.jpg";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import HomeSidebar from "../../(home-page)/_components/sidebar/home-sidebar";
+import Sidebar from "../../../../../components/navigation/sidebar/sidebar";
 import { Button } from "@/components/ui/button";
 import { DrumstickIcon, Filter, PocketKnife } from "lucide-react";
 import RecipesFeed from "./_components/recipes-feed";
@@ -90,7 +90,7 @@ const Page = async ({ params, searchParams }: CategoryPageProps) => {
             </div>
           )}
         </section>
-        <HomeSidebar />
+        <Sidebar />
       </div>
     </div>
   );

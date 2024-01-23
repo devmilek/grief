@@ -3,7 +3,7 @@ import React from "react";
 import SettingsForm from "./_components/settings-form";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircleIcon } from "lucide-react";
-import { getUserById } from "@/lib/user";
+import { getUserById } from "@/data/user";
 import { auth } from "@/lib/auth";
 
 const SettingsPage = async () => {

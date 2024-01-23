@@ -1,8 +1,8 @@
 import { auth } from "@/lib/auth";
-import { getUserById } from "@/lib/user";
+import { getUserById } from "@/data/user";
 import { redirect } from "next/navigation";
 import React from "react";
-import { verificateWithToken } from "@/actions/verificate-with-token";
+import { verificateWithToken } from "@/actions/auth/verificate-with-token";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import VerificationPending from "@/components/auth/verification-pending";

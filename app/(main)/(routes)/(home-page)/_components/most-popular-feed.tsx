@@ -30,7 +30,6 @@ const getMostPopularRecipes = async () => {
     },
     take: 3,
   });
-  await new Promise((resolve) => setTimeout(resolve, 2000));
   return recipes;
 };
 

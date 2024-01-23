@@ -1,7 +1,6 @@
 import React from "react";
 import { CookingPot } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import CreateRecipeButton from "@/components/create-recipe-button";
 
 const EmptyState = () => {
   return (
@@ -11,9 +10,7 @@ const EmptyState = () => {
       <p className="text-sm text-muted-foreground mt-1 mb-3">
         Nie utworzyłeś jeszcze żadnych przepisów
       </p>
-      <CreateRecipeButton>
-        <Button>Utwórz przepis</Button>
-      </CreateRecipeButton>
+      <Button>Utwórz przepis</Button>
     </div>
   );
 };

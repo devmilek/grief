@@ -1,3 +1,5 @@
+"use server";
+
 import { db } from "@/lib/db";
 
 export const getUtilityData = async () => {
@@ -42,4 +44,30 @@ export const getRecipesCount = async (userId: string) => {
   });
 
   return recipesCount;
+};
+
+export const getIngredients = async (recipeId: string) => {
+  const ingredients = await db.ingredient.findMany({
+    where: {
+      recipeId: recipeId,
+    },
+    orderBy: {
+      name: "asc",
+    },
+  });
+
+  return ingredients;
+};
+
+export const getSteps = async (recipeId: string) => {
+  const steps = await db.preparationStep.findMany({
+    where: {
+      recipeId: recipeId,
+    },
+    orderBy: {
+      position: "asc",
+    },
+  });
+
+  return steps;
 };

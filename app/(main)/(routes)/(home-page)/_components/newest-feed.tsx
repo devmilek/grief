@@ -3,7 +3,10 @@ import { Recipe } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
 import { ChevronRight } from "lucide-react";
-import { HorizontalCard, HorizontalCardSkeleton } from "./horizontal-card";
+import {
+  HorizontalCard,
+  HorizontalCardSkeleton,
+} from "../../../../../components/cards/horizontal-card";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const getNewestRecipes = async () => {

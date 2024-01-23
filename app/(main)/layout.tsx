@@ -1,5 +1,5 @@
-import Footer from "@/components/footer";
-import Navbar from "@/components/navbar";
+import Footer from "@/components/navigation/footer";
+import Navbar from "@/components/navigation/navbar";
 import { UtilityDataProvider } from "@/components/providers/utility-data-provider";
 import { getUtilityData } from "@/data";
 import { db } from "@/lib/db";

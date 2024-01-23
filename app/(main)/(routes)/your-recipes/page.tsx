@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import React, { Suspense } from "react";
 import CreateRecipeCard from "./_components/create-recipe-card";
-import ImportRecipesCard from "./_components/import-recipes-card";
 import { RecipesFeed, RecipesFeedSkeleton } from "./_components/recipes-feed";
 import SortButton from "@/components/sort-button";
 import { getRecipesCount, getUnpublishedRecipesCount } from "@/data";
@@ -52,7 +51,6 @@ const YourRecipesPage = async ({ searchParams }: YourRecipesPageProps) => {
         </div>
 
         <CreateRecipeCard />
-        {/* {profile?.role === Role.admin && <ImportRecipesCard />} */}
       </div>
       <header className="flex items-center justify-between mt-16 mb-6">
         <h1 className="font-display text-3xl">Zarządzaj przepisami</h1>

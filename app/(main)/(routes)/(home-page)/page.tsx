@@ -1,13 +1,10 @@
-import { db } from "@/lib/db";
 import React, { Suspense } from "react";
-import { DateTime } from "luxon";
-import HomeHero from "./_components/hero/home-hero";
-import HomeSidebar from "./_components/sidebar/home-sidebar";
 import { NewestFeed, NewestFeedSkeleton } from "./_components/newest-feed";
 import {
   MostPopularFeed,
   MostPopularFeedSkeleton,
 } from "./_components/most-popular-feed";
+import Sidebar from "@/components/navigation/sidebar/sidebar";
 
 const Home = async () => {
   return (
@@ -23,7 +20,7 @@ const Home = async () => {
             <NewestFeed />
           </Suspense>
         </div>
-        <HomeSidebar />
+        <Sidebar />
       </div>
     </div>
   );

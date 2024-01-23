@@ -92,9 +92,7 @@ model Recipe {
   difficulty      Difficulty @default(EASY)
   preparationTime Int?
   published       Boolean    @default(false)
-
-  servingType   ServingType @default(SERVINGS)
-  servingAmount Int         @default(1)
+  servings        Int        @default(1)
 
   ingredients Ingredient[]
   steps       PreparationStep[]
@@ -141,7 +139,7 @@ enum AdditionalQuantity {
 
 model Ingredient {
   id       String  @unique @default(uuid())
-  quantity Int
+  quantity Int?    @db.SmallInt
   unit     String?
   name     String
 

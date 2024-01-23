@@ -1,5 +1,4 @@
 import React, { PropsWithChildren } from "react";
-import ModalProvider from "./modal-provider";
 import QueryProvider from "./query-provider";
 import { SessionProvider } from "next-auth/react";
 import { UtilityDataProvider } from "./utility-data-provider";
@@ -10,7 +9,6 @@ export const Providers = ({ children }: PropsWithChildren) => {
     <SessionProvider>
       <QueryProvider>
         {children}
-        <ModalProvider />
         <Toaster richColors closeButton />
       </QueryProvider>
     </SessionProvider>

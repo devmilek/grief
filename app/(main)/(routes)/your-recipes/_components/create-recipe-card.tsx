@@ -1,14 +1,17 @@
 "use client";
 
-import { useCreateRecipeModal } from "@/hooks/use-create-recipe";
+import { seedDb } from "@/actions/seed-db";
 import { PlusIcon } from "lucide-react";
 import React from "react";
+import { toast } from "sonner";
 
 const CreateRecipeCard = () => {
-  const { onOpen } = useCreateRecipeModal();
   return (
     <div
-      onClick={onOpen}
+      onClick={async () => {
+        await seedDb();
+        toast.success("Pomyślnie zasiano bazę danych");
+      }}
       className="p-6 rounded-xl bg-white border flex items-center col-span-2 cursor-pointer"
     >
       <div className="p-3 rounded-lg bg-emerald-500/20 text-emerald-700 mr-3">

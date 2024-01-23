@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Image as PrismaImage, Recipe } from "@prisma/client";
-import { EyeIcon, ImageIcon, PenBox, Trash } from "lucide-react";
+import { Recipe } from "@prisma/client";
+import { EyeIcon, ImageIcon, PenBox } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
