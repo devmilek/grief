@@ -45,11 +45,7 @@ export const {
 
         const { email, password } = validatedFields.data;
 
-        // console.log("BEFORE GET USER BY EMAIL");
-
         const user = await getUserByEmail(email);
-
-        // console.log("AFTER GET USER BY EMAIL");
 
         if (!user || !user.password) return null;
 
@@ -79,7 +75,6 @@ export const {
       return true;
     },
     async jwt({ token, user, account, profile }) {
-      console.log("JWT CALLBACK TOKEN", { token });
       return token;
     },
     async session({ session, user, token }) {
@@ -91,7 +86,6 @@ export const {
         session.user.email = token.email;
         session.user.isOAuth = token.isOAuth as boolean;
       }
-      console.log("SESSION CALLBACK TOKEN", { session });
       return session;
     },
   },

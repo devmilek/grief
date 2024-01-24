@@ -6,7 +6,7 @@ import { z } from "zod";
 import { useSWRConfig } from "swr";
 import { toast } from "sonner";
 import { DropResult } from "@hello-pangea/dnd";
-import { addStep, reorderSteps } from "@/actions/steps";
+import { addStep, reorderSteps } from "@/actions/recipe-creation/steps";
 
 export const useSteps = (recipeId: string) => {
   const { data: steps } = useSWR(recipeId, getSteps);

@@ -28,7 +28,7 @@ import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { useUtilityData } from "@/components/providers/utility-data-provider";
 import { BasicsInformationSchema } from "@/schemas/recipe";
-import { createRecipe } from "@/actions/create-recipe";
+import { createRecipe } from "@/actions/recipe-creation/create-recipe";
 import Dropzone from "./dropzone";
 import BasicsDropzone from "./basics/basics-dropzone";
 import { toast } from "sonner";

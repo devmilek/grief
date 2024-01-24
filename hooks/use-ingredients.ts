@@ -5,7 +5,10 @@ import useSWR from "swr";
 import { z } from "zod";
 import { useSWRConfig } from "swr";
 import { toast } from "sonner";
-import { addIngredient, deleteIngredient } from "@/actions/ingredients";
+import {
+  addIngredient,
+  deleteIngredient,
+} from "@/actions/recipe-creation/ingredients";
 
 export const useIngredients = (recipeId: string) => {
   const key = `ingredients-${recipeId}`;
