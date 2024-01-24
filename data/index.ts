@@ -25,6 +25,16 @@ export const getUtilityData = async () => {
   return { categories, occasions, cuisines, diets };
 };
 
+export const getRecipe = async (recipeId: string) => {
+  const recipe = await db.recipe.findUnique({
+    where: {
+      id: recipeId,
+    },
+  });
+
+  return recipe;
+};
+
 export const getUnpublishedRecipesCount = async (userId: string) => {
   const recipes = await db.recipe.count({
     where: {

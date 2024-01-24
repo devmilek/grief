@@ -9,7 +9,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -19,19 +18,18 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Category, Difficulty, Image, Recipe } from "@prisma/client";
-import React, { useEffect } from "react";
+import { Difficulty, Recipe } from "@prisma/client";
+import React from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { difficultyMap, servingMap } from "@/maps";
+import { difficultyMap } from "@/maps";
 import { Button } from "@/components/ui/button";
-import axios from "axios";
-import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
-import { toast } from "sonner";
 import BasicsDropzone from "./basics-dropzone";
 import { useUtilityData } from "@/components/providers/utility-data-provider";
 import { BasicsInformationSchema } from "@/schemas/recipe";
+import { SITE_NAME } from "@/constants";
+import { updateRecipe } from "@/actions/recipe-creation/update-recipe";
 
 interface BasicsFormProps {
   recipe: Recipe;
@@ -40,19 +38,18 @@ interface BasicsFormProps {
 }
 
 const BasicsForm = ({ recipe, isComplete, isPublished }: BasicsFormProps) => {
-  const router = useRouter();
   const { categories } = useUtilityData();
 
   const form = useForm<z.infer<typeof BasicsInformationSchema>>({
     resolver: zodResolver(BasicsInformationSchema),
     defaultValues: {
-      name: recipe.name || "",
-      image: recipe.image || "",
-      description: recipe.description || "",
-      categoryId: recipe.categoryId || undefined,
-      servings: recipe.servings || undefined,
-      difficulty: recipe.difficulty || Difficulty.EASY,
-      preparationTime: recipe.preparationTime || undefined,
+      name: recipe?.name || "",
+      image: recipe?.image || "",
+      description: recipe?.description || "",
+      categoryId: recipe?.categoryId || undefined,
+      servings: recipe?.servings || undefined,
+      difficulty: recipe?.difficulty || undefined,
+      preparationTime: recipe?.preparationTime || undefined,
     },
   });
 
@@ -60,54 +57,54 @@ const BasicsForm = ({ recipe, isComplete, isPublished }: BasicsFormProps) => {
 
   const onSubmit = async (values: z.infer<typeof BasicsInformationSchema>) => {
     try {
-      const res = await axios.patch(`/api/recipe/${recipe.id}/basics`, values);
-      toast.success("Przepis został zapisany");
-      router.refresh();
+      const updatedRecipe = await updateRecipe(recipe.id, values);
     } catch (e) {
       console.log(e);
     }
   };
 
   const togglePublish = async () => {
-    if (isComplete) {
-      try {
-        if (!isPublished) {
-          await axios.post(`/api/recipe/${recipe.id}/publish`);
-          toast.success("Przepis został opublikowany");
-          //TODO: modal with link to recipe
-        } else {
-          await axios.post(`/api/recipe/${recipe.id}/unpublish`);
-          toast.success("Przepis został ukryty");
-        }
-        router.refresh();
-      } catch (e) {
-        console.log(e);
-      }
-    } else {
-      toast.error("Uzupełnij wszystkie pola aby opublikować");
-    }
+    // if (isComplete) {
+    //   try {
+    //     if (!isPublished) {
+    //       await axios.post(`/api/recipe/${recipe.id}/publish`);
+    //       toast.success("Przepis został opublikowany");
+    //       //TODO: modal with link to recipe
+    //     } else {
+    //       await axios.post(`/api/recipe/${recipe.id}/unpublish`);
+    //       toast.success("Przepis został ukryty");
+    //     }
+    //     router.refresh();
+    //   } catch (e) {
+    //     console.log(e);
+    //   }
+    // } else {
+    //   toast.error("Uzupełnij wszystkie pola aby opublikować");
+    // }
   };
+
+  const { isDirty } = form.formState;
 
   return (
     <div>
-      <div className=" bg-white rounded-xl">
+      <div className="bg-white rounded-xl">
         <div className="flex items-center space-x-4">
           <div>
             <h1 className="font-display text-4xl mb-2">Tworzenie przepisu</h1>
             <p className="text-neutral-500 text-sm mb-6">
               Przesyłanie własnych przepisów jest łatwe! Dodaj swój przepis do
               ulubionych, udostępnij go znajomym, rodzinie lub społeczności{" "}
-              <span>grief</span>.
+              <strong>{SITE_NAME}</strong>.
             </p>
           </div>
           <div className="space-x-2 flex">
             <Button
               variant="outline"
               onClick={form.handleSubmit(onSubmit)}
-              disabled={isLoading}
+              disabled={!isDirty}
             >
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Zapisz
+              {isDirty ? "Zapisz" : "Zapisano"}
             </Button>
             <Button
               disabled={!isComplete}

@@ -24,6 +24,7 @@ export const useIngredients = (recipeId: string) => {
   ) => {
     const optimisticIngredient = {
       ...ingredient,
+      quantity: ingredient.quantity || null,
       id: Date.now().toString(), // Generate a temporary unique ID
       recipeId,
     };

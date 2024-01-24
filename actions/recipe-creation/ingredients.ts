@@ -20,7 +20,7 @@ export const addIngredient = async (
   const newIngredient = await db.ingredient.create({
     data: {
       name,
-      quantity,
+      quantity: quantity || null,
       unit,
       recipeId,
     },
@@ -28,6 +28,8 @@ export const addIngredient = async (
 
   return newIngredient;
 };
+
+new Promise((resolve) => setTimeout(resolve, 5000));
 
 export const deleteIngredient = async (ingredientId: string) => {
   const ingredient = await db.ingredient.delete({

@@ -31,6 +31,7 @@ const IngredientForm = ({ recipeId }: { recipeId: string }) => {
 
   const onSubmit = async (values: z.infer<typeof IngredientSchema>) => {
     mutateAddIngredient(values);
+    console.log(values);
     form.reset();
   };
 

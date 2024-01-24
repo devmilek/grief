@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Difficulty } from "@prisma/client";
+import { Difficulty, Recipe } from "@prisma/client";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -33,21 +33,20 @@ import Dropzone from "./dropzone";
 import BasicsDropzone from "./basics/basics-dropzone";
 import { toast } from "sonner";
 
-const CreateRecipeForm = () => {
+const CreateRecipeForm = ({ recipe }: { recipe: Recipe }) => {
   const router = useRouter();
   const { categories } = useUtilityData();
 
   const form = useForm<z.infer<typeof BasicsInformationSchema>>({
     resolver: zodResolver(BasicsInformationSchema),
     defaultValues: {
-      // name: recipe.name || "",
-      // image: recipe.image || "",
-      // description: recipe.description || "",
-      // categoryId: recipe.categoryId || undefined,
-      // servingAmount: recipe.servingAmount || undefined,
-      // servingType: recipe.servingType || ServingType.SERVINGS,
-      // difficulty: recipe.difficulty || Difficulty.EASY,
-      // preparationTime: recipe.preparationTime || undefined,
+      name: recipe.name || "",
+      image: recipe.image || "",
+      description: recipe.description || "",
+      categoryId: recipe.categoryId || undefined,
+      servings: recipe.servings || undefined,
+      difficulty: recipe.difficulty || undefined,
+      preparationTime: recipe.preparationTime || undefined,
     },
   });
 
