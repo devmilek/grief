@@ -15,9 +15,14 @@ const CategoriesFeed = () => {
     <div className="p-5 bg-white rounded-xl space-y-5">
       <header className="flex items-center justify-between">
         <h1 className="text-2xl font-display">Kategorie</h1>
-        <Link href={"/"} className="text-xs text-neutral-500">
-          Zobacz wszystkie
-        </Link>
+        <button
+          onClick={() => {
+            setShowAll((prev) => !prev);
+          }}
+          className="text-xs text-neutral-500"
+        >
+          {showAll ? "Pokaż mniej" : "Pokaż wszystkie"}
+        </button>
       </header>
       <div className="gap-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1">
         {displayedCategories.map((category) => (

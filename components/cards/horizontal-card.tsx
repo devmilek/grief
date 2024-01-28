@@ -1,4 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import { ROUTES } from "@/constants";
 import { Recipe } from "@prisma/client";
 import moment from "moment";
 import Image from "next/image";
@@ -35,7 +36,7 @@ const HorizontalCard = ({ recipe }: { recipe: HorizontalCardType }) => {
       <div className="md:col-span-2 mt-2 md:mt-0">
         <Link
           className="font-semibold text-xs text-emerald-600"
-          href={"/recipe/" + recipe.categoryId}
+          href={ROUTES.categories + recipe.category?.slug}
         >
           {recipe.category?.name}
         </Link>

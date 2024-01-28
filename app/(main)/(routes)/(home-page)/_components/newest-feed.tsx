@@ -3,11 +3,12 @@ import { Recipe } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
 import { ChevronRight } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   HorizontalCard,
   HorizontalCardSkeleton,
-} from "../../../../../components/cards/horizontal-card";
-import { Skeleton } from "@/components/ui/skeleton";
+} from "@/components/cards/horizontal-card";
+import { ROUTES } from "@/constants";
 
 const getNewestRecipes = async () => {
   const recipes = await db.recipe.findMany({
@@ -20,7 +21,7 @@ const getNewestRecipes = async () => {
     include: {
       category: {
         select: {
-          id: true,
+          slug: true,
           name: true,
         },
       },
@@ -43,7 +44,7 @@ const NewestFeed = async () => {
       <header className="flex items-center justify-between">
         <h1 className="font-display text-4xl">Najnowsze</h1>
         <Link
-          href={"/"}
+          href={ROUTES.search}
           className="text-sm text-neutral-500 flex items-center space-x-1"
         >
           <span className="hidden sm:inline-block">Zobacz wszystkie</span>

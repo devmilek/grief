@@ -133,12 +133,6 @@ const CreateRecipeForm = () => {
                 <FormItem>
                   <FormLabel>Zdjęcie</FormLabel>
                   <FormControl className="flex items-center">
-                    {/* <BasicsDropzone
-                      recipeId={"sdfv"}
-                      disabled={isLoading}
-                      setValue={field.onChange}
-                      value={field.value}
-                    /> */}
                     {field.value ? (
                       <div className="p-4 w-2/5 border rounded-xl mx-auto relative overflow-hidden group">
                         <div className="aspect-[4/3] w-full relative">

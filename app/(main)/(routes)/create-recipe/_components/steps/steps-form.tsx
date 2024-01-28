@@ -1,5 +1,6 @@
 "use client";
 
+import Dropzone from "@/components/dropzone";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,12 +14,12 @@ import { PreparationStepSchema } from "@/schemas/recipe";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PreparationStep } from "@prisma/client";
 import axios from "axios";
-import { Loader2 } from "lucide-react";
+import { Loader2, Trash } from "lucide-react";
+import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import Dropzone from "../dropzone";
 
 interface StepsFormProps {
   addStepFn: (step: z.infer<typeof PreparationStepSchema>) => void;
@@ -52,12 +53,25 @@ const StepsForm = ({ addStepFn }: StepsFormProps) => {
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormControl>
-                <Dropzone
-                  value={field.value}
-                  setValue={field.onChange}
-                  disabled={isLoading}
-                />
+              <FormControl className="flex items-center">
+                {field.value ? (
+                  <div className="p-4 w-2/5 border rounded-xl mx-auto relative overflow-hidden group">
+                    <div className="aspect-[4/3] w-full relative">
+                      <Image src={field.value} fill alt="Recipe image" />
+                    </div>
+                    <div className="absolute z-40 bg-gradient-to-tr from-black/0 to-black/50 inset-0 w-full h-full flex items-center justify-center group-hover:opacity-100 transition-opacity">
+                      <Button
+                        size="icon"
+                        variant="outline"
+                        className="top-8 right-8 absolute"
+                      >
+                        <Trash className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <Dropzone onUpload={field.onChange} disabled={isLoading} />
+                )}
               </FormControl>
             </FormItem>
           )}

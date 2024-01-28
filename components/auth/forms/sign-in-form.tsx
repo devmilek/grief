@@ -21,20 +21,18 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 import Socials from "../socials";
+import { FormError } from "./form-error";
 
 const formSchema = z.object({
   email: z.string().email({
     message: "Niepoprawny adres email",
   }),
-  password: z.string().min(6, {
-    message: "Hasło musi zawierać conajmniej 6 znaków",
-  }),
+  password: z.string(),
 });
 
 const SignInForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
-  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,11 +44,8 @@ const SignInForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setError("");
     startTransition(() => {
-      login(values).then((data) => {
-        setError(data.error);
-        if (data.email) {
-          router.push(`/`);
-        }
+      login(values, "/").then((data) => {
+        setError(data?.error);
       });
     });
   };
@@ -94,6 +89,7 @@ const SignInForm = () => {
                 Zapomniałeś hasła?
               </Link>
             </div>
+            <FormError message={error} />
           </div>
           <Button
             disabled={isPending}

@@ -9,8 +9,8 @@ const CreateRecipeCard = () => {
   return (
     <div
       onClick={async () => {
-        await seedDb();
-        toast.success("Pomyślnie zasiano bazę danych");
+        // await seedDb();
+        // toast.success("Pomyślnie zasiano bazę danych");
       }}
       className="p-6 rounded-xl bg-white border flex items-center col-span-2 cursor-pointer"
     >

@@ -29,9 +29,9 @@ const SignUpForm = () => {
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
-      email: "devmilek@gmail.com",
-      password: "milek123",
-      name: "Miłosz",
+      email: "",
+      password: "",
+      name: "",
     },
   });
 

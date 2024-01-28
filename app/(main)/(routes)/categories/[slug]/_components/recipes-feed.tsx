@@ -31,7 +31,7 @@ const RecipesFeed = async ({
       },
       category: {
         select: {
-          id: true,
+          slug: true,
           name: true,
         },
       },

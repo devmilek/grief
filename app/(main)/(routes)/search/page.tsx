@@ -58,7 +58,12 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
     },
   };
 
-  console.log(categories);
+  const searchQueryFilter = {
+    name: {
+      search: searchQuery,
+    },
+  };
+
   const recipes = await db.recipe.findMany({
     where: {
       name: {

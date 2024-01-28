@@ -16,7 +16,7 @@ const VerificationPending = () => {
       </p>
       <Button className="w-full mt-8 mb-8">Wyślij email ponownie</Button>
       <Link
-        href="/sign-in"
+        href="/"
         className="text-emerald-600 font-semibold text-xs flex justify-center"
       >
         <ArrowLeft className="h-4 w-4 mr-2" />

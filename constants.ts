@@ -5,7 +5,9 @@ export const EMAIL_CONFIRMATION_HREF = "email-confirmation";
 export const FOOTER_LINKS_PER_COLUMN = 9;
 
 export const ROUTES = {
-  createRecipe: "/create-recipe",
+  createRecipe: "/create-recipe/",
+  categories: "/categories/",
+  search: "/search/",
 };
 
 export const QUOTES = [

@@ -26,18 +26,6 @@ export const getVerificationTokenByEmail = async (email: string) => {
   }
 };
 
-export const getVerificationCodeByEmail = async (email: string) => {
-  try {
-    const verificationCode = await db.verificationCode.findFirst({
-      where: { email },
-    });
-
-    return verificationCode;
-  } catch {
-    return null;
-  }
-};
-
 export const generateVerificationToken = async (email: string) => {
   const token = uuidv4();
   const expires = new Date(new Date().getTime() + 3600 * 1000 * 24); // 24 hours
@@ -63,27 +51,27 @@ export const generateVerificationToken = async (email: string) => {
   return verficationToken;
 };
 
-export const generateVerificationCode = async (email: string) => {
-  const token = crypto.randomInt(100_000, 1_000_000).toString();
-  const expires = new Date(new Date().getTime() + 5 * 60 * 1000); // 5 minutes
+// export const generateVerificationCode = async (email: string) => {
+//   const token = crypto.randomInt(100_000, 1_000_000).toString();
+//   const expires = new Date(new Date().getTime() + 5 * 60 * 1000); // 5 minutes
 
-  const existingCode = await getVerificationCodeByEmail(email);
+//   const existingCode = await getVerificationCodeByEmail(email);
 
-  if (existingCode) {
-    await db.verificationCode.delete({
-      where: {
-        id: existingCode.id,
-      },
-    });
-  }
+//   if (existingCode) {
+//     await db.verificationCode.delete({
+//       where: {
+//         id: existingCode.id,
+//       },
+//     });
+//   }
 
-  const verificationCode = await db.verificationCode.create({
-    data: {
-      email,
-      token,
-      expires,
-    },
-  });
+//   const verificationCode = await db.verificationCode.create({
+//     data: {
+//       email,
+//       token,
+//       expires,
+//     },
+//   });
 
-  return verificationCode;
-};
+//   return verificationCode;
+// };
