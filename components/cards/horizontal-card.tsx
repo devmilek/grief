@@ -5,22 +5,20 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-interface HorizontalCardProps {
-  recipe: Recipe & {
-    category: {
-      id: string;
-      name: string;
-    } | null;
-    user: {
-      id: string;
-      name: string;
-    } | null;
-  };
+export interface HorizontalCardType extends Recipe {
+  category: {
+    slug: string;
+    name: string;
+  } | null;
+  user: {
+    id: string;
+    name: string;
+  } | null;
 }
 
 moment.locale("pl");
 
-const HorizontalCard = ({ recipe }: HorizontalCardProps) => {
+const HorizontalCard = ({ recipe }: { recipe: HorizontalCardType }) => {
   return (
     <article className="grid md:grid-cols-3 gap-x-6 items-center">
       <div className="object-cover aspect-[4/3] rounded-lg overflow-hidden">

@@ -10,24 +10,26 @@ import RecipesFeed from "./_components/recipes-feed";
 import Pagination from "@/components/pagination";
 import { PAGINATION_ITEMS_PER_PAGE } from "@/constants";
 import SortButton from "@/components/sort-button";
+import { delay } from "@/lib/utils";
+import FacetedSearch from "@/components/faceted-search";
 
 interface CategoryPageProps {
   params: {
-    categoryId: string;
+    slug: string;
   };
   searchParams?: {
-    sortOrder?: "asc" | "desc";
+    orderBy?: "asc" | "desc";
     page?: string;
   };
 }
 
 const Page = async ({ params, searchParams }: CategoryPageProps) => {
-  const sortOrder = searchParams?.sortOrder || "desc";
+  const orderBy = searchParams?.orderBy || "desc";
   const currentPage = Number(searchParams?.page) || 1;
 
   const category = await db.category.findUnique({
     where: {
-      id: params.categoryId,
+      slug: params.slug,
     },
     include: {
       _count: {
@@ -46,7 +48,7 @@ const Page = async ({ params, searchParams }: CategoryPageProps) => {
 
   return (
     <div className="container">
-      <section className="rounded-xl overflow-hidden relative h-96 my-10">
+      <section className="rounded-xl overflow-hidden relative h-96 my-6">
         <div className="h-full w-full absolute inset-0 bg-black/60 text-white flex items-center justify-center flex-col">
           <p className="text-lg font-medium">Przepisy z kategorią</p>
           <h1 className="font-display text-5xl">{category.name}</h1>
@@ -63,6 +65,9 @@ const Page = async ({ params, searchParams }: CategoryPageProps) => {
         />
       </section>
       <div className="flex gap-x-4">
+        <aside className="w-full lg:w-[400px] space-y-6 lg:space-y-10">
+          <FacetedSearch />
+        </aside>
         <section className="bg-white p-8 rounded-xl flex-1 h-fit">
           <header className="flex items-center justify-between mb-8">
             <h1 className="font-display text-4xl">Wyniki</h1>
@@ -72,7 +77,7 @@ const Page = async ({ params, searchParams }: CategoryPageProps) => {
             <>
               <RecipesFeed
                 categoryId={category.id}
-                sortOrder={sortOrder}
+                orderBy={orderBy}
                 currentPage={currentPage}
               />
               <Pagination totalPages={totalPages} />
@@ -90,7 +95,6 @@ const Page = async ({ params, searchParams }: CategoryPageProps) => {
             </div>
           )}
         </section>
-        <Sidebar />
       </div>
     </div>
   );

@@ -25,28 +25,28 @@ import * as z from "zod";
 import { difficultyMap } from "@/maps";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { Loader2 } from "lucide-react";
+import { Loader2, Trash } from "lucide-react";
 import { useUtilityData } from "@/components/providers/utility-data-provider";
 import { BasicsInformationSchema } from "@/schemas/recipe";
 import { createRecipe } from "@/actions/recipe-creation/create-recipe";
-import Dropzone from "./dropzone";
-import BasicsDropzone from "./basics/basics-dropzone";
 import { toast } from "sonner";
+import Dropzone from "@/components/dropzone";
+import Image from "next/image";
 
-const CreateRecipeForm = ({ recipe }: { recipe: Recipe }) => {
+const CreateRecipeForm = () => {
   const router = useRouter();
   const { categories } = useUtilityData();
 
   const form = useForm<z.infer<typeof BasicsInformationSchema>>({
     resolver: zodResolver(BasicsInformationSchema),
     defaultValues: {
-      name: recipe.name || "",
-      image: recipe.image || "",
-      description: recipe.description || "",
-      categoryId: recipe.categoryId || undefined,
-      servings: recipe.servings || undefined,
-      difficulty: recipe.difficulty || undefined,
-      preparationTime: recipe.preparationTime || undefined,
+      name: "",
+      image: "",
+      description: "",
+      categoryId: undefined,
+      servings: undefined,
+      difficulty: undefined,
+      preparationTime: undefined,
     },
   });
 
@@ -132,13 +132,34 @@ const CreateRecipeForm = ({ recipe }: { recipe: Recipe }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Zdjęcie</FormLabel>
-                  <FormControl>
-                    <BasicsDropzone
+                  <FormControl className="flex items-center">
+                    {/* <BasicsDropzone
                       recipeId={"sdfv"}
                       disabled={isLoading}
                       setValue={field.onChange}
                       value={field.value}
-                    />
+                    /> */}
+                    {field.value ? (
+                      <div className="p-4 w-2/5 border rounded-xl mx-auto relative overflow-hidden group">
+                        <div className="aspect-[4/3] w-full relative">
+                          <Image src={field.value} fill alt="Recipe image" />
+                        </div>
+                        <div className="absolute z-40 bg-gradient-to-tr from-black/0 to-black/50 inset-0 w-full h-full flex items-center justify-center group-hover:opacity-100 transition-opacity">
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            className="top-8 right-8 absolute"
+                          >
+                            <Trash className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    ) : (
+                      <Dropzone
+                        onUpload={field.onChange}
+                        disabled={isLoading}
+                      />
+                    )}
                   </FormControl>
                 </FormItem>
               )}

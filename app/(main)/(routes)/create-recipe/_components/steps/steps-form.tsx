@@ -1,6 +1,5 @@
 "use client";
 
-import StepDropzone from "@/components/step-dropzone";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -19,6 +18,7 @@ import { useParams, useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import Dropzone from "../dropzone";
 
 interface StepsFormProps {
   addStepFn: (step: z.infer<typeof PreparationStepSchema>) => void;
@@ -53,11 +53,10 @@ const StepsForm = ({ addStepFn }: StepsFormProps) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <StepDropzone
+                <Dropzone
                   value={field.value}
                   setValue={field.onChange}
                   disabled={isLoading}
-                  recipeId={params.recipeId}
                 />
               </FormControl>
             </FormItem>

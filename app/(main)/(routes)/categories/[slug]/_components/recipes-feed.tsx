@@ -5,13 +5,13 @@ import { HorizontalCard } from "@/components/cards/horizontal-card";
 
 interface RecipesFeedProps {
   categoryId: string;
-  sortOrder: "asc" | "desc";
+  orderBy: "asc" | "desc";
   currentPage: number;
 }
 
 const RecipesFeed = async ({
   categoryId,
-  sortOrder,
+  orderBy,
   currentPage,
 }: RecipesFeedProps) => {
   const recipes = await db.recipe.findMany({
@@ -20,7 +20,7 @@ const RecipesFeed = async ({
       published: true,
     },
     orderBy: {
-      createdAt: sortOrder,
+      createdAt: orderBy,
     },
     include: {
       user: {

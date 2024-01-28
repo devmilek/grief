@@ -65,7 +65,7 @@ const NavbarLinks = ({
                 {component.data.map((item) => (
                   <Link
                     className="text-sm hover:translate-x-2 transition-all"
-                    href={`${component.href}${item.id}`}
+                    href={`${component.href}${item.slug}`}
                     key={item.id}
                   >
                     {item.name}

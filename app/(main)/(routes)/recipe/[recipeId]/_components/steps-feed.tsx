@@ -1,13 +1,20 @@
-import { cn } from "@/lib/utils";
+import { db } from "@/lib/db";
+import { cn, delay } from "@/lib/utils";
 import { PreparationStep } from "@prisma/client";
 import Image from "next/image";
 import React from "react";
 
-interface StepsFeedProps {
-  steps: PreparationStep[];
-}
+const StepsFeed = async ({ recipeId }: { recipeId: string }) => {
+  const steps = await db.preparationStep.findMany({
+    where: {
+      recipeId,
+    },
+    orderBy: {
+      position: "asc",
+    },
+  });
 
-const StepsFeed = ({ steps }: StepsFeedProps) => {
+  await delay(1000);
   return (
     <div className="bg-white px-8 rounded-xl w-full">
       {steps.map((step, index) => (

@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { formatMins } from "@/lib/utils";
 import { difficultyMap } from "@/maps";
 import { Category, Recipe, User } from "@prisma/client";
 import { Clock, ChefHatIcon, Star, Share } from "lucide-react";
@@ -53,11 +54,14 @@ const RecipeHero = ({ recipe }: RecipeHeroProps) => {
           </Button>
           <Button size="xs" variant="outline">
             <Clock className="h-4 w-4 mr-2" />
-            {recipe.preparationTime}
+            {formatMins(recipe.preparationTime!)}
           </Button>
           <Button size="xs" variant="outline">
             <ChefHatIcon className="h-4 w-4 mr-2" />
             {difficultyMap[recipe.difficulty]}
+          </Button>
+          <Button size="xs" variant="outline">
+            {recipe.servings} {recipe.servings > 1 ? "porcji" : "porcja"}
           </Button>
         </div>
         <p className="mt-6 leading-normal flex-1 text-neutral-500">

@@ -17,13 +17,13 @@ const SortButton = () => {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
 
-  const sort = params.get("sortOrder") || "desc";
+  const sort = params.get("orderBy") || "desc";
 
   const pathname = usePathname();
   const { replace } = useRouter();
 
   const handleChange = (value: string) => {
-    params.set("sortOrder", value);
+    params.set("orderBy", value);
     replace(`${pathname}?${params.toString()}`);
   };
 

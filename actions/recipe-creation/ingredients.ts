@@ -29,8 +29,6 @@ export const addIngredient = async (
   return newIngredient;
 };
 
-new Promise((resolve) => setTimeout(resolve, 5000));
-
 export const deleteIngredient = async (ingredientId: string) => {
   const ingredient = await db.ingredient.delete({
     where: {

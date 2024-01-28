@@ -1,6 +1,5 @@
 import React from "react";
 import { db } from "@/lib/db";
-import ResetPasswordForm from "@/components/auth/forms/reset-password-form";
 import ChangePasswordForm from "@/components/auth/forms/change-password-form";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";

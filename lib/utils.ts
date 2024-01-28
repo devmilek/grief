@@ -25,3 +25,32 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     totalPages,
   ];
 };
+
+export const buildCloudinaryUrl = (publidId: string) => {
+  const cloudname = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUDNAME!;
+  const baseUrl = `https://res.cloudinary.com/${cloudname}/image/upload/`;
+  return baseUrl + publidId;
+};
+
+export const delay = async (ms: number) => {
+  await new Promise((resolve) => setTimeout(resolve, ms));
+};
+
+export const formatMins = (minutes: number) => {
+  if (typeof minutes !== "number" || isNaN(minutes)) {
+    return "NaN";
+  }
+
+  if (minutes < 0) {
+    return "NaN";
+  }
+
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+
+  if (hours === 0) {
+    return `${remainingMinutes}m`;
+  } else {
+    return `${hours}g ${remainingMinutes}min`;
+  }
+};

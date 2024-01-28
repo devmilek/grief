@@ -31,16 +31,15 @@ const getNewestRecipes = async () => {
         },
       },
     },
-    take: 4,
+    take: 6,
   });
-  await new Promise((resolve) => setTimeout(resolve, 2000));
   return recipes;
 };
 
 const NewestFeed = async () => {
   const recipes = await getNewestRecipes();
   return (
-    <section className="p-9 bg-white rounded-xl my-10">
+    <section className="p-6 lg:p-9 bg-white rounded-xl my-10">
       <header className="flex items-center justify-between">
         <h1 className="font-display text-4xl">Najnowsze</h1>
         <Link
@@ -62,7 +61,7 @@ const NewestFeed = async () => {
 
 const NewestFeedSkeleton = () => {
   return (
-    <section className="bg-white p-9 rounded-xl my-10">
+    <section className="bg-white p-6 lg:p-9 rounded-xl my-10">
       <header className="mb-8">
         <Skeleton className="h-9 w-1/3"></Skeleton>
       </header>

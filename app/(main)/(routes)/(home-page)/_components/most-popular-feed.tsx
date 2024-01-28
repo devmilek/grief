@@ -38,7 +38,7 @@ const MostPopularFeed = async () => {
 
   return (
     <section>
-      <header className="flex items-center justify-between">
+      {/* <header className="flex items-center justify-between">
         <h1 className="font-display text-4xl">Najpopularniejsze</h1>
         <Link
           href={"/categories/" + recipes[0]?.category?.id}
@@ -47,8 +47,8 @@ const MostPopularFeed = async () => {
           <span className="hidden sm:inline-block">Zobacz wszystkie</span>
           <ChevronRight className="h-6 w-6 inline-block" />
         </Link>
-      </header>
-      <div className="grid md:grid-cols-2 gap-5 mt-8">
+      </header> */}
+      <div className="grid md:grid-cols-2 gap-5">
         {recipes.map((recipe, index) => (
           <ImageCard
             recipe={recipe}

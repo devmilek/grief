@@ -8,7 +8,8 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 model User {
@@ -29,16 +30,6 @@ model VerificationToken {
   email   String
   token   String   @unique
   expires DateTime
-
-  @@unique([email, token])
-}
-
-model VerificationCode {
-  id        String   @id @default(cuid())
-  email     String
-  token     String   @unique
-  expires   DateTime
-  createdAt DateTime @default(now())
 
   @@unique([email, token])
 }
@@ -78,11 +69,6 @@ enum Difficulty {
   HARD
 }
 
-enum ServingType {
-  SERVINGS
-  PIECES
-}
-
 model Recipe {
   id              String     @unique @default(uuid())
   // slug            String     @unique
@@ -109,10 +95,10 @@ model Recipe {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Image     Image[]
 
   @@index([categoryId])
   @@index([userId])
+  @@fulltext([name])
 }
 
 model PreparationStep {
@@ -125,16 +111,6 @@ model PreparationStep {
   recipeId String
 
   @@index([recipeId])
-}
-
-enum AdditionalQuantity {
-  NULL
-  FRAC1_2
-  FRAC1_3
-  FRAC1_4
-  FRAC1_8
-  FRAC2_3
-  FRAC3_4
 }
 
 model Ingredient {
@@ -150,16 +126,9 @@ model Ingredient {
 }
 
 model Image {
-  id   String  @unique @default(uuid())
-  url  String  @db.Text
-  alt  String?
-  size Int
-  name String
-
-  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-  recipeId String
-
-  @@index([recipeId])
+  id       String @unique @default(uuid())
+  url      String @db.Text
+  publicId String @db.TinyText
 }
 
 model Category {
@@ -169,6 +138,8 @@ model Category {
   image String @db.Text
 
   recipes Recipe[]
+
+  @@index([slug])
 }
 
 model Occasion {
@@ -177,6 +148,8 @@ model Occasion {
   slug String @unique
 
   recipes OccasionsOnRecipes[]
+
+  @@index([slug])
 }
 
 model OccasionsOnRecipes {
@@ -196,6 +169,8 @@ model Cuisine {
   slug String @unique
 
   recipes CuisinesOnRecipes[]
+
+  @@index([slug])
 }
 
 model CuisinesOnRecipes {
@@ -216,6 +191,8 @@ model Diet {
   slug String @unique
 
   recipes DietsOnRecipes[]
+
+  @@index([slug])
 }
 
 model DietsOnRecipes {

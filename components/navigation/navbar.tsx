@@ -10,6 +10,7 @@ import { auth } from "@/lib/auth";
 import { SignedIn } from "../auth/signed";
 import { UtilityData } from "@/types";
 import { SITE_NAME } from "@/constants";
+import NavbarSearch from "./navbar-search";
 
 const Navbar = async ({
   categories,
@@ -36,13 +37,7 @@ const Navbar = async ({
           />
         </div>
         <div className="flex space-x-3 flex-1 justify-end">
-          <Input
-            className="max-w-xs w-full hidden xl:inline-block"
-            placeholder="Szukaj przepisu..."
-          />
-          <Button size="icon" variant="ghost">
-            <SearchIcon className="w-4 h-4" />
-          </Button>
+          <NavbarSearch />
           {session ? (
             <UserDropdown profile={session.user} />
           ) : (

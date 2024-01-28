@@ -291,60 +291,25 @@ type RecipeWithRelations = Recipe & {
   steps: PreparationStep[];
 };
 
+export type RecipeWithRelationsWithoutId = {
+  name: string;
+  description: string;
+  image: string;
+  difficulty: string;
+  preparationTime: number;
+  servings: number;
+  ingredients: {
+    quantity: number;
+    unit: string;
+    name: string;
+  }[];
+  steps: {
+    description: string;
+    position: number;
+  }[];
+};
+
 export const recipes: RecipeWithRelations[] = [
-  {
-    id: "42feff88-7961-4a50-a022-ee2c7f8ac144",
-    name: "Ciasto Michelle",
-    description: "asdcsdc",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/grief-8ecef.appspot.com/o/images%2Frecipe-42feff88-7961-4a50-a022-ee2c7f8ac144%2Fcover%2F13576.png?alt=media&token=1b27e290-6e2d-49b9-8024-08ffb5300e52",
-    difficulty: "MEDIUM",
-    preparationTime: 58,
-    published: true,
-    servings: 1,
-    categoryId: "26c5ff35-514c-4dbb-8887-c0101e8f90a3",
-    userId: aiProfile.id,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    cuisines: [
-      {
-        recipeId: "42feff88-7961-4a50-a022-ee2c7f8ac144",
-        cuisineId: "137e2326-aff4-4a89-9d55-903464cb603c",
-      },
-    ],
-    category: {
-      id: "26c5ff35-514c-4dbb-8887-c0101e8f90a3",
-      slug: "przetwory",
-      name: "Przetwory",
-      image:
-        "https://firebasestorage.googleapis.com/v0/b/grief-8ecef.appspot.com/o/categories%2Fpexels-pixabay-48817%20(1).avif?alt=media&token=4e6477ce-9904-485b-ab3c-74b032f20d58",
-    },
-    ingredients: [
-      {
-        id: "7fe03e4a-73d7-4824-a892-e11809c0883b",
-        quantity: 40,
-        unit: "gram",
-        name: "malska",
-        recipeId: "42feff88-7961-4a50-a022-ee2c7f8ac144",
-      },
-    ],
-    steps: [
-      {
-        id: "5e216f5b-c765-457d-af61-dbc735a59c7d",
-        description: "sdfvsdfv",
-        position: 1,
-        image: "",
-        recipeId: "42feff88-7961-4a50-a022-ee2c7f8ac144",
-      },
-      {
-        id: "d50df874-eb6c-40e5-a975-cd37d2548d18",
-        description: "sdfv",
-        position: 2,
-        image: "",
-        recipeId: "42feff88-7961-4a50-a022-ee2c7f8ac144",
-      },
-    ],
-  },
   {
     id: "5c161ca7-1cf0-4be1-9a68-2c81d8e079ce",
     name: "Zapiekanka ziemniaczana z kiełbasą",
