@@ -4,20 +4,24 @@ import React from "react";
 interface RecipesHeroProps {
   headline: string;
   heading: string;
+  imageSrc?: string;
 }
 
-const RecipesHero = ({ heading, headline }: RecipesHeroProps) => {
+const RecipesHero = ({
+  heading,
+  headline,
+  imageSrc = "/food.jpg",
+}: RecipesHeroProps) => {
   return (
-    <section className="rounded-xl overflow-hidden relative h-96">
+    <section className="rounded-xl overflow-hidden relative h-56 md:h-64 lg:h-96">
       <div className="h-full w-full absolute inset-0 bg-black/60 text-white flex items-center justify-center flex-col">
         <p className="text-lg font-medium">{headline}</p>
         <h1 className="font-display text-5xl">{heading}</h1>
       </div>
       <Image
-        src={"/food.jpg"}
+        src={imageSrc}
         alt="Zdjęcie jedzenia"
-        width={300}
-        height={200}
+        fill
         className="w-full h-full object-cover absolute inset-0 -z-10 group-hover:scale-105 transition"
       />
     </section>

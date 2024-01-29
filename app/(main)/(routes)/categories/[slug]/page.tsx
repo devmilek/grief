@@ -70,21 +70,16 @@ const Page = async ({ params, searchParams }: CategoryPageProps) => {
   );
 
   return (
-    <div className="container">
-      <section className="rounded-xl overflow-hidden relative h-96 my-6">
-        <RecipesHero headline="Przepisy z kategorią" heading={category.name} />
-        <Image
-          src={category.image}
-          alt={category.name}
-          width={300}
-          height={200}
-          className="w-full h-full object-cover absolute inset-0 -z-10 group-hover:scale-105 transition"
-        />
-      </section>
-      <div className="flex gap-x-4">
-        <section className="bg-white p-8 rounded-xl flex-1 h-fit">
+    <div className="container pt-6">
+      <RecipesHero
+        headline="Przepisy z kategorią"
+        heading={category.name}
+        imageSrc={category.image}
+      />
+      <div className="flex gap-4 mt-6 flex-col lg:flex-row">
+        <section className="bg-white p-6 lg:p-8 rounded-xl flex-1 h-fit">
           <header className="flex items-center justify-between mb-8">
-            <h1 className="font-display text-4xl">Wyniki</h1>
+            <h1 className="font-display text-3xl lg:text-4xl">Wyniki</h1>
             <SortButton />
           </header>
           {category._count.recipes > 0 ? (

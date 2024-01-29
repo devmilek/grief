@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Filter } from "lucide-react";
+import { ArrowDownAZ, Filter } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -32,7 +32,7 @@ const SortButton = () => {
       <DropdownMenuTrigger asChild>
         <Button variant="outline">
           Sortuj
-          <Filter className="w-4 h-4 ml-2" />
+          <ArrowDownAZ className="w-4 h-4 ml-2" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">

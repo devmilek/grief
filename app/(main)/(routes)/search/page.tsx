@@ -8,6 +8,7 @@ import {
   HorizontalCard,
   HorizontalCardType,
 } from "@/components/cards/horizontal-card";
+import FacetedSearchSeet from "@/components/facated-search/faceted-search-sheet";
 
 interface SearchPageProps {
   searchParams?: {
@@ -92,20 +93,12 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
   console.log(recipes);
 
   return (
-    <div className="container pt-6">
+    <div className="container pt-6 space-y-6">
       {searchQuery && (
         <RecipesHero headline="Wyniki wyszukiwania dla" heading={searchQuery} />
       )}
       <div className="flex gap-x-4">
-        <aside className="w-full lg:w-[400px] space-y-6 lg:space-y-10">
-          <FacetedSearch
-            categoriesProp={categories}
-            cuisinesProp={cuisines}
-            dietsProp={diets}
-            occasionsProp={occasions}
-          />
-        </aside>
-        <section className="bg-white p-8 rounded-xl flex-1 h-fit">
+        <section className="bg-white p-6 lg:p-8 rounded-xl flex-1 h-fit">
           <RecipesHeader />
           {!!recipes.length && <RecipesFeed recipes={recipes} />}
           {!recipes.length && (
@@ -116,6 +109,14 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
             />
           )}
         </section>
+        <aside className="w-full lg:w-[300px] hidden lg:flex rounded-xl p-6 bg-white h-fit">
+          <FacetedSearch
+            categoriesProp={categories}
+            cuisinesProp={cuisines}
+            dietsProp={diets}
+            occasionsProp={occasions}
+          />
+        </aside>
       </div>
     </div>
   );
@@ -124,8 +125,11 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
 const RecipesHeader = () => {
   return (
     <header className="flex items-center justify-between mb-8">
-      <h1 className="font-display text-4xl">Przepisy</h1>
-      <SortButton />
+      <h1 className="font-display text-3xl lg:text-4xl">Przepisy</h1>
+      <div className="flex space-x-2">
+        <SortButton />
+        <FacetedSearchSeet className="lg:hidden" />
+      </div>
     </header>
   );
 };

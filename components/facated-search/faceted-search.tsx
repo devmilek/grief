@@ -71,7 +71,7 @@ const FacetedSearch = ({
   }
 
   return (
-    <div className="bg-white p-6 rounded-xl">
+    <div className=" w-full">
       <h1 className="font-display text-2xl mb-3">Filtruj</h1>
       <Accordion type="multiple" defaultValue={["categories"]}>
         <FilterItem
