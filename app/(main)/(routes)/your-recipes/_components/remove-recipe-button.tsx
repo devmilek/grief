@@ -1,5 +1,6 @@
 "use client";
 
+import { deleteRecipe } from "@/actions/recipe-creation/delete-recipe";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -25,7 +26,7 @@ const RemoveRecipeButton = ({ id }: { id: string }) => {
   const handleDelete = async () => {
     try {
       setIsLoading(true);
-      await axios.delete(`/api/recipe/${id}`);
+      await deleteRecipe(id);
       router.refresh();
       toast.success("Pomyślnie usunięto przepis");
       setIsOpen(false);
@@ -65,15 +66,15 @@ const RemoveRecipeButton = ({ id }: { id: string }) => {
           </AlertDialogDescription>
           <AlertDialogFooter>
             <AlertDialogCancel disabled={isLoading}>Anuluj</AlertDialogCancel>
-            <AlertDialogAction
-              disabled={isLoading}
+            <Button
+              variant="destructive"
               onClick={(e) => {
                 e.preventDefault();
                 handleDelete();
               }}
             >
               Usuń
-            </AlertDialogAction>
+            </Button>
           </AlertDialogFooter>
         </AlertDialogHeader>
       </AlertDialogContent>

@@ -43,7 +43,7 @@ const IngredientForm = ({ recipeId }: { recipeId: string }) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col items-end space-y-4"
       >
-        <div className="grid grid-cols-2 w-full gap-4 md:grid-cols-5">
+        <div className="grid grid-cols-2 w-full gap-2 sm:gap-4 md:grid-cols-5">
           <FormField
             name="quantity"
             control={form.control}
@@ -52,7 +52,7 @@ const IngredientForm = ({ recipeId }: { recipeId: string }) => {
                 <FormLabel>Ilość</FormLabel>
                 <FormControl>
                   <Input
-                    className="lg:w-20"
+                    className=""
                     placeholder="0"
                     {...field}
                     type="number"
@@ -68,11 +68,7 @@ const IngredientForm = ({ recipeId }: { recipeId: string }) => {
               <FormItem>
                 <FormLabel>Jednostka</FormLabel>
                 <FormControl>
-                  <Input
-                    className="lg:w-32"
-                    {...field}
-                    placeholder="np. Gram"
-                  />
+                  <Input className="" {...field} placeholder="np. Gram" />
                 </FormControl>
               </FormItem>
             )}

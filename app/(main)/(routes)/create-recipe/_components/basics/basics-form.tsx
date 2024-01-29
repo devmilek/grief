@@ -81,14 +81,26 @@ const BasicsForm = ({ recipe, isComplete }: BasicsFormProps) => {
   };
 
   const togglePublish = async () => {
-    toast.promise(setRecipePublish(recipe.id, !recipe.published), {
-      error: "Nie udało się zmienić statusu publikacji",
-      loading: "Zmienianie statusu publikacji...",
-      success: "Status publikacji został zmieniony",
-    });
+    toast.promise(
+      async () => {
+        await setRecipePublish(recipe.id, !recipe.published);
+        await mutate(
+          recipe.id,
+          { ...recipe, published: !recipe.published },
+          {
+            revalidate: false,
+          },
+        );
+      },
+      {
+        error: (e: any) => e.message,
+        loading: "Zmienianie statusu publikacji...",
+        success: "Status publikacji został zmieniony",
+      },
+    );
   };
 
-  const { isDirty } = form.formState;
+  const { isDirty, isValid } = form.formState;
 
   return (
     <div>
@@ -106,13 +118,12 @@ const BasicsForm = ({ recipe, isComplete }: BasicsFormProps) => {
             <Button
               variant="outline"
               onClick={form.handleSubmit(onSubmit)}
-              disabled={!isDirty}
+              disabled={!isDirty || isLoading}
             >
-              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {isDirty ? "Zapisz" : "Zapisano"}
             </Button>
             <Button
-              disabled={!isComplete}
+              disabled={!isValid || isLoading}
               className="disabled:pointer-events-auto"
               onClick={form.handleSubmit(togglePublish)}
             >
