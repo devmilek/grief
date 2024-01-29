@@ -1,4 +1,4 @@
-import { ChefHat, SearchIcon } from "lucide-react";
+import { ChefHat, SearchIcon, UserIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import NavbarLinks from "./navbar-links";
@@ -11,6 +11,7 @@ import { SignedIn } from "../auth/signed";
 import { UtilityData } from "@/types";
 import { SITE_NAME } from "@/constants";
 import NavbarSearch from "./navbar-search";
+import MobileMenu from "./mobile-menu";
 
 const Navbar = async ({
   categories,
@@ -29,27 +30,40 @@ const Navbar = async ({
             {SITE_NAME}
           </Link>
           <NavbarLinks
-            className="hidden md:flex"
+            className="hidden lg:flex"
             categories={categories}
             occasions={occasions}
             cuisines={cuisines}
             diets={diets}
           />
         </div>
-        <div className="flex space-x-3 flex-1 justify-end">
-          <NavbarSearch />
+        <div className="flex space-x-2 flex-1 justify-end">
+          <NavbarSearch className="hidden md:flex" />
           {session ? (
             <UserDropdown profile={session.user} />
           ) : (
-            <div className="space-x-2">
-              <Button variant="ghost" asChild>
-                <Link href="/sign-in">Zaloguj się</Link>
+            <>
+              <div className="space-x-2 hidden xl:flex">
+                <Button variant="ghost" asChild>
+                  <Link href="/sign-in">Zaloguj się</Link>
+                </Button>
+                <Button asChild>
+                  <Link href="/sign-up">Utwórz konto</Link>
+                </Button>
+              </div>
+              <Button
+                size="icon"
+                asChild
+                className="hidden lg:flex xl:hidden"
+                variant="secondary"
+              >
+                <Link href="/sign-in">
+                  <UserIcon className="w-4 h-4" />
+                </Link>
               </Button>
-              <Button asChild>
-                <Link href="/sign-up">Utwórz konto</Link>
-              </Button>
-            </div>
+            </>
           )}
+          <MobileMenu className="lg:hidden" />
         </div>
       </div>
     </header>

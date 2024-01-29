@@ -5,8 +5,9 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { SearchIcon } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { cn } from "@/lib/utils";
 
-const NavbarSearch = () => {
+const NavbarSearch = ({ className }: { className?: string }) => {
   const [search, setSearch] = React.useState("");
   const { replace } = useRouter();
   const searchParams = useSearchParams();
@@ -22,17 +23,20 @@ const NavbarSearch = () => {
   };
 
   return (
-    <form className="flex items-center space-x-2" onSubmit={handleSubmit}>
+    <form
+      className={cn("flex items-center space-x-2", className)}
+      onSubmit={handleSubmit}
+    >
       <Input
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="max-w-xs w-full hidden xl:inline-block"
+        className="max-w-sm w-full"
         placeholder="Szukaj przepisu..."
       />
       <Button
         type="submit"
         size="icon"
-        variant="ghost"
+        variant="secondary"
         className="flex-shrink-0"
       >
         <span className="sr-only">Search</span>
