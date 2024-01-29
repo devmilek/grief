@@ -1,6 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db";
+import { delay } from "@/lib/utils";
 
 export const getUtilityData = async () => {
   const [categories, occasions, cuisines, diets] = await db.$transaction([
@@ -26,11 +27,14 @@ export const getUtilityData = async () => {
 };
 
 export const getRecipe = async (recipeId: string) => {
+  console.log("GET RECIPE");
   const recipe = await db.recipe.findUnique({
     where: {
       id: recipeId,
     },
   });
+
+  await delay(3000);
 
   return recipe;
 };

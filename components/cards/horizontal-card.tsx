@@ -35,7 +35,7 @@ const HorizontalCard = ({ recipe }: { recipe: HorizontalCardType }) => {
       </div>
       <div className="md:col-span-2 mt-2 md:mt-0">
         <Link
-          className="font-semibold text-xs text-emerald-600"
+          className="font-semibold text-xs text-emerald-700"
           href={ROUTES.categories + recipe.category?.slug}
         >
           {recipe.category?.name}

@@ -42,7 +42,7 @@ export const BasicsInformationSchema = z.object({
 });
 
 export const IngredientSchema = z.object({
-  quantity: z.coerce.number().optional(),
+  quantity: z.coerce.number().min(0).optional(),
   unit: z.string(),
   name: z.string().min(1),
 });

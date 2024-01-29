@@ -35,6 +35,7 @@ const NavbarSearch = () => {
         variant="ghost"
         className="flex-shrink-0"
       >
+        <span className="sr-only">Search</span>
         <SearchIcon className="w-4 h-4" />
       </Button>
     </form>

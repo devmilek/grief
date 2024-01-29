@@ -31,57 +31,61 @@ import { SITE_NAME } from "@/constants";
 import { updateRecipe } from "@/actions/recipe-creation/update-recipe";
 import Image from "next/image";
 import Dropzone from "@/components/dropzone";
+import { toast } from "sonner";
+import { setRecipePublish } from "@/actions/recipe-creation/set-recipe-publish";
+import { useSWRConfig } from "swr";
 
 interface BasicsFormProps {
   recipe: Recipe;
-  isPublished: boolean;
   isComplete: boolean;
 }
 
-const BasicsForm = ({ recipe, isComplete, isPublished }: BasicsFormProps) => {
+const BasicsForm = ({ recipe, isComplete }: BasicsFormProps) => {
   const { categories } = useUtilityData();
+  const { mutate } = useSWRConfig();
 
   const form = useForm<z.infer<typeof BasicsInformationSchema>>({
     resolver: zodResolver(BasicsInformationSchema),
     defaultValues: {
-      name: recipe?.name || "",
-      image: recipe?.image || "",
-      description: recipe?.description || "",
-      categoryId: recipe?.categoryId || undefined,
-      servings: recipe?.servings || undefined,
-      difficulty: recipe?.difficulty || undefined,
-      preparationTime: recipe?.preparationTime || undefined,
+      name: recipe.name,
+      image: recipe.image,
+      description: recipe.description,
+      categoryId: recipe.categoryId,
+      servings: recipe.servings,
+      difficulty: recipe.difficulty,
+      preparationTime: recipe.preparationTime,
     },
   });
 
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof BasicsInformationSchema>) => {
-    try {
-      const updatedRecipe = await updateRecipe(recipe.id, values);
-    } catch (e) {
-      console.log(e);
-    }
+    const updateMutation = async () => {
+      const updated = await updateRecipe(recipe.id, values);
+      const mutated = await mutate(recipe.id, updated);
+      form.reset({
+        name: mutated?.name,
+        image: mutated?.image,
+        description: mutated?.description,
+        categoryId: mutated?.categoryId,
+        servings: mutated?.servings,
+        difficulty: mutated?.difficulty,
+        preparationTime: mutated?.preparationTime,
+      });
+    };
+    toast.promise(updateMutation, {
+      error: "Nie udało się zaktualizować przepisu",
+      loading: "Aktualizowanie przepisu...",
+      success: "Przepis został zaktualizowany",
+    });
   };
 
   const togglePublish = async () => {
-    // if (isComplete) {
-    //   try {
-    //     if (!isPublished) {
-    //       await axios.post(`/api/recipe/${recipe.id}/publish`);
-    //       toast.success("Przepis został opublikowany");
-    //       //TODO: modal with link to recipe
-    //     } else {
-    //       await axios.post(`/api/recipe/${recipe.id}/unpublish`);
-    //       toast.success("Przepis został ukryty");
-    //     }
-    //     router.refresh();
-    //   } catch (e) {
-    //     console.log(e);
-    //   }
-    // } else {
-    //   toast.error("Uzupełnij wszystkie pola aby opublikować");
-    // }
+    toast.promise(setRecipePublish(recipe.id, !recipe.published), {
+      error: "Nie udało się zmienić statusu publikacji",
+      loading: "Zmienianie statusu publikacji...",
+      success: "Status publikacji został zmieniony",
+    });
   };
 
   const { isDirty } = form.formState;
@@ -110,9 +114,9 @@ const BasicsForm = ({ recipe, isComplete, isPublished }: BasicsFormProps) => {
             <Button
               disabled={!isComplete}
               className="w-full disabled:pointer-events-auto"
-              onClick={togglePublish}
+              onClick={form.handleSubmit(togglePublish)}
             >
-              {isPublished ? "Cofnij publikacje" : "Opublikuj"}
+              {recipe.published ? "Cofnij publikacje" : "Opublikuj"}
             </Button>
           </div>
         </div>

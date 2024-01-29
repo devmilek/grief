@@ -77,16 +77,6 @@ const CreateRecipeForm = () => {
               <span>grief</span>.
             </p>
           </div>
-          <div className="space-x-2 flex">
-            <Button
-              variant="outline"
-              onClick={form.handleSubmit(onSubmit)}
-              disabled={isLoading}
-            >
-              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Zapisz i przejdź dalej
-            </Button>
-          </div>
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
@@ -258,6 +248,15 @@ const CreateRecipeForm = () => {
                 )}
               />
             </div>
+            <Button
+              className="w-full"
+              size="lg"
+              onClick={form.handleSubmit(onSubmit)}
+              disabled={isLoading}
+            >
+              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Zapisz i przejdź dalej
+            </Button>
           </form>
         </Form>
       </div>

@@ -11,6 +11,12 @@ import {
 import Steps from "../_components/steps/steps";
 import Ingredients from "../_components/ingredients/ingredients";
 import { auth } from "@/lib/auth";
+import { Button } from "@/components/ui/button";
+import { ArrowUp } from "lucide-react";
+import { updateRecipe } from "@/actions/recipe-creation/update-recipe";
+import { z } from "zod";
+import { BasicsInformationSchema } from "@/schemas/recipe";
+import EditRecipeForm from "../_components/edit-recipe-form";
 
 interface CreateRecipePageProps {
   params: {
@@ -36,8 +42,6 @@ const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
     return redirect("/");
   }
 
-  console.log("REVALIDATE ALL THE THINGS");
-
   const requiredFields = [
     recipe.name,
     recipe.image,
@@ -47,44 +51,16 @@ const CreateRecipePage = async ({ params }: CreateRecipePageProps) => {
     recipe.preparationTime,
   ];
 
-  //TODO: make sure that ingredients are added becuase i already delete this functionality
-
   const isComplete = requiredFields.every(Boolean);
 
   return (
-    <div className="container mt-8 max-w-4xl bg-white rounded-xl p-12 mb-16">
-      <BasicsForm
+    <>
+      <EditRecipeForm
+        recipeId={recipe.id}
         recipe={recipe}
         isComplete={isComplete}
-        isPublished={recipe.published}
       />
-      <Accordion type="multiple" className="mt-8">
-        <AccordionItem value="Składniki">
-          <AccordionTrigger className="font-display text-3xl">
-            Składniki
-          </AccordionTrigger>
-          <AccordionContent>
-            <Ingredients recipeId={params.recipeId} />
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="steps">
-          <AccordionTrigger className="font-display text-3xl">
-            Kroki przygotowania
-          </AccordionTrigger>
-          <AccordionContent>
-            <Steps recipeId={params.recipeId} />
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="additional">
-          <AccordionTrigger className="font-display text-3xl">
-            Dodatkowe informacje
-          </AccordionTrigger>
-          <AccordionContent>
-            <AdditionalInfo recipeId={recipe.id} />
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-    </div>
+    </>
   );
 };
 
