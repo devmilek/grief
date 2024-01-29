@@ -56,14 +56,14 @@ const page = async ({ params }: { params: { recipeId: string } }) => {
   return (
     <section className="container pt-8">
       <RecipeHero recipe={recipe} />
-      <div className="flex space-x-8 mt-10">
+      <div className="flex flex-col-reverse lg:flex-row gap-8 mt-10">
         <div className="space-y-10 flex-1">
           <Suspense>
             <StepsFeed recipeId={params.recipeId} />
           </Suspense>
           <AuthorCard user={recipe.user} />
         </div>
-        <div className="w-[400px]">
+        <div className="lg:w-[400px]">
           <Suspense>
             <IngredientsFeed recipeId={params.recipeId} />
           </Suspense>

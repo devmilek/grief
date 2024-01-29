@@ -20,16 +20,16 @@ const RecipeHero = ({ recipe }: RecipeHeroProps) => {
     return null;
   }
   return (
-    <div className="bg-white grid grid-cols-5 p-7 rounded-xl space-x-8">
+    <div className="bg-white flex flex-col md:flex-row p-4 lg:p-7 rounded-xl gap-x-8 items-center">
       <Image
         src={recipe.image}
         alt={recipe?.name}
         width={660}
         height={440}
-        className="rounded-lg aspect-[4/3] object-cover flex-shrink-0 col-span-2"
+        className="rounded-lg aspect-[4/3] w-full md:w-2/5 object-cover flex-shrink-0"
       />
-      <div className="flex flex-col col-span-3">
-        <h1 className="text-4xl font-display">{recipe.name}</h1>
+      <div className="flex flex-col">
+        <h1 className="text-4xl font-display mt-4 lg:mt-0">{recipe.name}</h1>
         <div className="flex items-center space-x-3 mt-4">
           <Link
             href={""}
@@ -64,7 +64,7 @@ const RecipeHero = ({ recipe }: RecipeHeroProps) => {
             {recipe.servings} {recipe.servings > 1 ? "porcji" : "porcja"}
           </Button>
         </div>
-        <p className="mt-6 leading-normal flex-1 text-neutral-500">
+        <p className="mt-6 leading-normal text-sm flex-1 pb-8 text-neutral-500">
           {recipe.description}
         </p>
         <div className="w-full flex items-center justify-between pt-3 border-t">
