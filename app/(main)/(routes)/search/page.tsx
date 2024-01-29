@@ -1,4 +1,4 @@
-import FacetedSearch from "@/components/faceted-search";
+import FacetedSearch from "@/components/facated-search/faceted-search";
 import SortButton from "@/components/sort-button";
 import React from "react";
 import { db } from "@/lib/db";

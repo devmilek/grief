@@ -6,11 +6,12 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "./ui/accordion";
-import { useUtilityData } from "./providers/utility-data-provider";
-import { Checkbox } from "./ui/checkbox";
-import { Button } from "./ui/button";
+} from "../ui/accordion";
+import { useUtilityData } from "../providers/utility-data-provider";
+import { Checkbox } from "../ui/checkbox";
+import { Button } from "../ui/button";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { FilterItem } from "./filter-item";
 
 interface FacetedSearchProps {
   categoriesProp?: string[];
@@ -20,10 +21,10 @@ interface FacetedSearchProps {
 }
 
 const FacetedSearch = ({
-  categoriesProp,
-  cuisinesProp,
-  dietsProp,
-  occasionsProp,
+  categoriesProp = [],
+  cuisinesProp = [],
+  dietsProp = [],
+  occasionsProp = [],
 }: FacetedSearchProps) => {
   const searchParams = useSearchParams();
   const { categories, occasions, cuisines, diets } = useUtilityData();
@@ -36,15 +37,10 @@ const FacetedSearch = ({
 
   console.log("categoriesProp", categoriesProp);
 
-  const [selectedCategories, setSelectedCategories] = useState(
-    categoriesProp || [],
-  );
-
-  const [selectedOccasions, setSelectedOccasions] = useState(
-    occasionsProp || [],
-  );
-  const [selectedCuisines, setSelectedCuisines] = useState(cuisinesProp || []);
-  const [selectedDiets, setSelectedDiets] = useState(dietsProp || []);
+  const [selectedCategories, setSelectedCategories] = useState(categoriesProp);
+  const [selectedOccasions, setSelectedOccasions] = useState(occasionsProp);
+  const [selectedCuisines, setSelectedCuisines] = useState(cuisinesProp);
+  const [selectedDiets, setSelectedDiets] = useState(dietsProp);
 
   function setParams() {
     const params = new URLSearchParams(searchParams);
@@ -112,75 +108,6 @@ const FacetedSearch = ({
           Zatwierdź
         </Button>
       </div>
-    </div>
-  );
-};
-
-const FilterItem = ({
-  name,
-  value,
-  items,
-  selectedItems,
-  setSelectedItems,
-}: {
-  name: string;
-  value: string;
-  items: {
-    name: string;
-    slug: string;
-  }[];
-  selectedItems: string[];
-  setSelectedItems: (value: string[] | ((prev: string[]) => string[])) => void;
-}) => {
-  return (
-    <AccordionItem value={value}>
-      <AccordionTrigger className="text-base">{name}</AccordionTrigger>
-      <AccordionContent className="space-y-4 pl-4">
-        {items.map((item) => (
-          <CheckboxItem
-            name={item.name}
-            slug={item.slug}
-            checked={selectedItems.includes(item.slug)}
-            setSelectedItems={setSelectedItems}
-            key={item.slug}
-          />
-        ))}
-      </AccordionContent>
-    </AccordionItem>
-  );
-};
-
-const CheckboxItem = ({
-  slug,
-  checked,
-  setSelectedItems,
-  name,
-}: {
-  slug: string;
-  checked: boolean;
-  setSelectedItems: (value: ((prev: string[]) => string[]) | string[]) => void;
-  name: string;
-}) => {
-  return (
-    <div className="flex items-center space-x-2" key={slug}>
-      <Checkbox
-        id={slug}
-        checked={checked}
-        onCheckedChange={() => {
-          setSelectedItems((prev: string[]) => {
-            if (prev.includes(slug)) {
-              return prev.filter((item) => item !== slug);
-            }
-            return [...prev, slug];
-          });
-        }}
-      />
-      <label
-        htmlFor={slug}
-        className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-      >
-        {name}
-      </label>
     </div>
   );
 };
