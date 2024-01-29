@@ -10,8 +10,31 @@ import RecipesFeed from "./_components/recipes-feed";
 import Pagination from "@/components/pagination";
 import { PAGINATION_ITEMS_PER_PAGE } from "@/constants";
 import SortButton from "@/components/sort-button";
-import { delay } from "@/lib/utils";
 import FacetedSearch from "@/components/faceted-search";
+import RecipesHero from "@/components/recipes-hero";
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { slug: string };
+}) => {
+  const category = await db.category.findUnique({
+    where: {
+      slug: params.slug,
+    },
+  });
+
+  if (!category) {
+    return null;
+  }
+
+  return {
+    title: category.name,
+    description: `Przepisy z kategorii ${category.name}`,
+    image: category.image,
+    type: "article",
+  };
+};
 
 interface CategoryPageProps {
   params: {
@@ -49,13 +72,7 @@ const Page = async ({ params, searchParams }: CategoryPageProps) => {
   return (
     <div className="container">
       <section className="rounded-xl overflow-hidden relative h-96 my-6">
-        <div className="h-full w-full absolute inset-0 bg-black/60 text-white flex items-center justify-center flex-col">
-          <p className="text-lg font-medium">Przepisy z kategorią</p>
-          <h1 className="font-display text-5xl">{category.name}</h1>
-          <p className="text-medium text-sm opacity-70 mt-2">
-            {category._count.recipes} przepisów
-          </p>
-        </div>
+        <RecipesHero headline="Przepisy z kategorią" heading={category.name} />
         <Image
           src={category.image}
           alt={category.name}
@@ -65,9 +82,6 @@ const Page = async ({ params, searchParams }: CategoryPageProps) => {
         />
       </section>
       <div className="flex gap-x-4">
-        <aside className="w-full lg:w-[400px] space-y-6 lg:space-y-10">
-          <FacetedSearch />
-        </aside>
         <section className="bg-white p-8 rounded-xl flex-1 h-fit">
           <header className="flex items-center justify-between mb-8">
             <h1 className="font-display text-4xl">Wyniki</h1>
@@ -95,6 +109,7 @@ const Page = async ({ params, searchParams }: CategoryPageProps) => {
             </div>
           )}
         </section>
+        <Sidebar />
       </div>
     </div>
   );

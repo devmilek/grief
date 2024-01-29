@@ -23,6 +23,7 @@ interface SearchPageProps {
 
 const SearchPage = async ({ searchParams }: SearchPageProps) => {
   const searchQuery = searchParams?.q;
+
   const categories = searchParams?.categories?.split(",");
   const occasions = searchParams?.occasions?.split(",");
   const cuisines = searchParams?.cuisines?.split(",");
@@ -30,7 +31,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
 
   const occasionFilter = {
     some: {
-      occassion: {
+      occasion: {
         slug: {
           in: occasions,
         },
@@ -55,12 +56,6 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
           in: diets,
         },
       },
-    },
-  };
-
-  const searchQueryFilter = {
-    name: {
-      search: searchQuery,
     },
   };
 
@@ -103,7 +98,12 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
       )}
       <div className="flex gap-x-4">
         <aside className="w-full lg:w-[400px] space-y-6 lg:space-y-10">
-          <FacetedSearch />
+          <FacetedSearch
+            categoriesProp={categories}
+            cuisinesProp={cuisines}
+            dietsProp={diets}
+            occasionsProp={occasions}
+          />
         </aside>
         <section className="bg-white p-8 rounded-xl flex-1 h-fit">
           <RecipesHeader />

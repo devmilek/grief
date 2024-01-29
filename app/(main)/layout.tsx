@@ -7,7 +7,9 @@ import React, { ReactNode } from "react";
 
 const fetchUtilityData = async () => {
   const baseurl = process.env.BASE_URL;
-  const response = await fetch(baseurl + "api/utility-data");
+  const response = await fetch(baseurl + "api/utility-data", {
+    cache: "force-cache",
+  });
   const data = await response.json();
   return data;
 };

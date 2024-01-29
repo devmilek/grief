@@ -16,3 +16,9 @@ export const RegisterSchema = z.object({
     message: "Hasło musi mieć co najmniej 8 znaków.",
   }),
 });
+
+export const UserInfoSchema = z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+  bio: z.string(),
+});

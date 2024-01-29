@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
       db.diet.findMany(),
     ]);
 
-    console.log("Fetched utility data");
+    console.log("Fetched utility data from api route");
 
     return NextResponse.json({
       categories,

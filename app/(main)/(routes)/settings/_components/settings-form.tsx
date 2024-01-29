@@ -1,5 +1,6 @@
 "use client";
 
+import { updateUserInfo } from "@/actions/update-user-info";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -11,9 +12,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { User } from "@prisma/client";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
-import { User } from "next-auth";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -37,21 +38,18 @@ const SettingsForm = ({ user }: SettingsFormProps) => {
     defaultValues: {
       email: user.email || "",
       name: user.name || "",
-      // bio: user.bio || "",
+      bio: user.bio || "",
     },
   });
 
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    try {
-      const profileRes = await axios.patch(`/api/profile/${user.id}`, data);
-      toast.success("Zapisano zmiany");
-      router.refresh();
-    } catch (e) {
-      console.log(e);
-      toast.error("Wystąpił błąd");
-    }
+    toast.promise(updateUserInfo(data), {
+      loading: "Zapisywanie zmian...",
+      success: "Zapisano zmiany",
+      error: "Nie udało się zapisać zmian",
+    });
   };
 
   return (

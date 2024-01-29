@@ -5,6 +5,37 @@ import StepsFeed from "./_components/steps-feed";
 import AuthorCard from "./_components/author-card";
 import RecipeHero from "./_components/recipe-hero";
 
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { recipeId: string };
+}) => {
+  const recipe = await db.recipe.findUnique({
+    where: {
+      id: params.recipeId,
+    },
+    include: {
+      user: true,
+    },
+  });
+
+  if (!recipe) {
+    return null;
+  }
+
+  return {
+    title: recipe.name,
+    description: recipe.description,
+    image: recipe.image,
+    type: "article",
+    article: {
+      publishedTime: recipe.createdAt,
+      modifiedTime: recipe.updatedAt,
+      authors: [recipe.user?.name],
+    },
+  };
+};
+
 const page = async ({ params }: { params: { recipeId: string } }) => {
   const recipe = await db.recipe.findUnique({
     where: {

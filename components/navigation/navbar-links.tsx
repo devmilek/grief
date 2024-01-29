@@ -38,17 +38,17 @@ const NavbarLinks = ({
     {
       name: "Okazje",
       data: occasions,
-      href: "/search?occasion=",
+      href: "/search?occasions=",
     },
     {
       name: "Kuchnie świata",
       data: cuisines,
-      href: "/search?occasion=",
+      href: "/search?cuisines=",
     },
     {
       name: "Dieta",
       data: diets,
-      href: "/search?occasion=",
+      href: "/search?diets=",
     },
   ];
   return (

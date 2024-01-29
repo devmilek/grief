@@ -12,7 +12,19 @@ import { Checkbox } from "./ui/checkbox";
 import { Button } from "./ui/button";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-const FacetedSearch = () => {
+interface FacetedSearchProps {
+  categoriesProp?: string[];
+  occasionsProp?: string[];
+  cuisinesProp?: string[];
+  dietsProp?: string[];
+}
+
+const FacetedSearch = ({
+  categoriesProp,
+  cuisinesProp,
+  dietsProp,
+  occasionsProp,
+}: FacetedSearchProps) => {
   const searchParams = useSearchParams();
   const { categories, occasions, cuisines, diets } = useUtilityData();
   const { replace } = useRouter();
@@ -22,16 +34,17 @@ const FacetedSearch = () => {
     return searchParams.get(key)?.split(",") ?? [];
   };
 
+  console.log("categoriesProp", categoriesProp);
+
   const [selectedCategories, setSelectedCategories] = useState(
-    getSelected("categories"),
+    categoriesProp || [],
   );
+
   const [selectedOccasions, setSelectedOccasions] = useState(
-    getSelected("occasions"),
+    occasionsProp || [],
   );
-  const [selectedCuisines, setSelectedCuisines] = useState(
-    getSelected("cuisines"),
-  );
-  const [selectedDiets, setSelectedDiets] = useState(getSelected("diets"));
+  const [selectedCuisines, setSelectedCuisines] = useState(cuisinesProp || []);
+  const [selectedDiets, setSelectedDiets] = useState(dietsProp || []);
 
   function setParams() {
     const params = new URLSearchParams(searchParams);
