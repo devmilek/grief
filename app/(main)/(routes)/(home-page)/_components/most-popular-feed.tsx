@@ -1,6 +1,7 @@
 import { ImageCard, ImageCardSkeleton } from "@/components/cards/image-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { db } from "@/lib/db";
+import { delay } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import React from "react";
