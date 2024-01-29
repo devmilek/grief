@@ -10,7 +10,7 @@ import {
 } from "@/actions/recipe-creation/recipe-additional";
 import { AdditionalItem } from "@/app/(main)/(routes)/create-recipe/_components/additional/additional-select";
 import { useUtilityData } from "@/components/providers/utility-data-provider";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import useSWR, { useSWRConfig } from "swr";
 
@@ -22,35 +22,50 @@ export const useRecipeAdditional = (recipeId: string) => {
   const cuisinesKey = recipeId + "-cuisines";
   const dietsKey = recipeId + "-diets";
 
-  const { data: selectedOccasions } = useSWR(occassionsKey, () =>
-    getRecipeOccasions(recipeId),
+  const { data: selectedOccasions, isLoading: isOccasionsLoading } = useSWR(
+    occassionsKey,
+    () => getRecipeOccasions(recipeId),
   );
 
-  const { data: selectedCuisines } = useSWR(cuisinesKey, () =>
-    getRecipeCuisines(recipeId),
+  const { data: selectedCuisines, isLoading: isCuisinesLoading } = useSWR(
+    cuisinesKey,
+    () => getRecipeCuisines(recipeId),
   );
 
-  const { data: selectedDiets } = useSWR(dietsKey, () =>
-    getRecipeDiets(recipeId),
+  const { data: selectedDiets, isLoading: isDietsLoading } = useSWR(
+    dietsKey,
+    () => getRecipeDiets(recipeId),
   );
 
-  const unselectedCuisines = cuisines?.filter(
-    (cuisine) =>
-      !selectedCuisines?.some(
-        (selectedCuisine) => selectedCuisine.id === cuisine.id,
+  const unselectedCuisines = useMemo(
+    () =>
+      cuisines?.filter(
+        (cuisine) =>
+          !selectedCuisines?.some(
+            (selectedCuisine) => selectedCuisine.id === cuisine.id,
+          ),
       ),
+    [selectedCuisines, cuisines],
   );
 
-  const unselectedOccasions = occasions?.filter(
-    (occasion) =>
-      !selectedOccasions?.some(
-        (selectedOccasion) => selectedOccasion.id === occasion.id,
+  const unselectedOccasions = useMemo(
+    () =>
+      occasions?.filter(
+        (occasion) =>
+          !selectedOccasions?.some(
+            (selectedOccasion) => selectedOccasion.id === occasion.id,
+          ),
       ),
+    [selectedOccasions, occasions],
   );
 
-  const unselectedDiets = diets?.filter(
-    (diet) =>
-      !selectedDiets?.some((selectedDiet) => selectedDiet.id === diet.id),
+  const unselectedDiets = useMemo(
+    () =>
+      diets?.filter(
+        (diet) =>
+          !selectedDiets?.some((selectedDiet) => selectedDiet.id === diet.id),
+      ),
+    [selectedDiets, diets],
   );
 
   const addMutation = async (
@@ -166,16 +181,19 @@ export const useRecipeAdditional = (recipeId: string) => {
   };
 
   return {
+    isCuisinesLoading,
     selectedCuisines,
     unselectedCuisines,
     addCuisineMutation,
     removeCuisineMutation,
 
+    isOccasionsLoading,
     selectedOccasions,
     unselectedOccasions,
     addOccasionMutation,
     removeOccasionMutation,
 
+    isDietsLoading,
     selectedDiets,
     unselectedDiets,
     addDietMutation,

@@ -1,16 +1,12 @@
 import { db } from "@/lib/db";
 import React from "react";
-import bgImage from "@/assets/auth-bg.jpg";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Sidebar from "../../../../../components/navigation/sidebar/sidebar";
-import { Button } from "@/components/ui/button";
-import { DrumstickIcon, Filter, PocketKnife } from "lucide-react";
+import { DrumstickIcon } from "lucide-react";
 import RecipesFeed from "./_components/recipes-feed";
 import Pagination from "@/components/pagination";
 import { PAGINATION_ITEMS_PER_PAGE } from "@/constants";
 import SortButton from "@/components/sort-button";
-import FacetedSearch from "@/components/facated-search/faceted-search";
 import RecipesHero from "@/components/recipes-hero";
 
 export const generateMetadata = async ({

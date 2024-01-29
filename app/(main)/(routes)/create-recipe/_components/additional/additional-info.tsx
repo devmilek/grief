@@ -3,6 +3,7 @@
 import React from "react";
 import { useRecipeAdditional } from "@/hooks/use-recipe-additional";
 import { AdditionalSelect } from "./additional-select";
+import OccasionsSelect from "./occasions-select";
 
 interface AdditionalInfoFormProps {
   recipeId: string;
@@ -10,16 +11,19 @@ interface AdditionalInfoFormProps {
 
 const AdditionalInfo = ({ recipeId }: AdditionalInfoFormProps) => {
   const {
+    isCuisinesLoading,
     selectedCuisines,
     addCuisineMutation,
     removeCuisineMutation,
     unselectedCuisines,
 
+    isOccasionsLoading,
     selectedOccasions,
     addOccasionMutation,
     removeOccasionMutation,
     unselectedOccasions,
 
+    isDietsLoading,
     selectedDiets,
     addDietMutation,
     removeDietMutation,
@@ -28,16 +32,7 @@ const AdditionalInfo = ({ recipeId }: AdditionalInfoFormProps) => {
   return (
     <div>
       <div className="p-8 rounded-xl bg-white space-y-12">
-        <div>
-          <h2 className="text-xl font-semibold mb-4">Okazje</h2>
-          <AdditionalSelect
-            selectedItems={selectedOccasions}
-            unselectedItems={unselectedOccasions}
-            addFn={addOccasionMutation}
-            removeFn={removeOccasionMutation}
-            placeholder="Wybierz okazje"
-          />
-        </div>
+        <OccasionsSelect recipeId={recipeId} />
         <div>
           <h2 className="text-xl font-semibold mb-4">Kuchnie świata</h2>
           <AdditionalSelect
@@ -46,6 +41,7 @@ const AdditionalInfo = ({ recipeId }: AdditionalInfoFormProps) => {
             addFn={addCuisineMutation}
             removeFn={removeCuisineMutation}
             placeholder="Wybierz kuchnie"
+            disabled={isCuisinesLoading}
           />
         </div>
         <div>
@@ -56,6 +52,7 @@ const AdditionalInfo = ({ recipeId }: AdditionalInfoFormProps) => {
             addFn={addDietMutation}
             removeFn={removeDietMutation}
             placeholder="Wybierz diety"
+            disabled={isDietsLoading}
           />
         </div>
       </div>

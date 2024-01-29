@@ -14,7 +14,6 @@ import Ingredients from "../_components/ingredients/ingredients";
 import { Recipe } from "@prisma/client";
 import useSWR from "swr";
 import { getRecipe } from "@/data";
-import { redirect } from "next/navigation";
 
 interface EditRecipeProps {
   recipeId: string;

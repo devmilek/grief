@@ -14,7 +14,6 @@ const StepsFeed = async ({ recipeId }: { recipeId: string }) => {
     },
   });
 
-  await delay(1000);
   return (
     <div className="bg-white px-8 rounded-xl w-full">
       {steps.map((step, index) => (
