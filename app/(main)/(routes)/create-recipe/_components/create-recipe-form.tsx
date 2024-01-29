@@ -148,7 +148,7 @@ const CreateRecipeForm = () => {
                 </FormItem>
               )}
             />
-            <div className="pt-6 w-full grid grid-cols-2 gap-6">
+            <div className="pt-6 w-full grid md:grid-cols-2 gap-6">
               <FormField
                 control={form.control}
                 name="categoryId"

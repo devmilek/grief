@@ -17,9 +17,9 @@ module.exports = {
         xl: '2rem',
         '2xl': '6rem',
       },
-      // screens: {
-      //   "2xl": "1400px",
-      // },
+      screens: {
+        "2xl": "1400px",
+      },
     },
     extend: {
       colors: {

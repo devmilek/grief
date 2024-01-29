@@ -16,9 +16,9 @@ const EmptyState = ({
   buttonLabel = "Dodaj przepis",
 }: EmptyStateProps) => {
   return (
-    <div className="flex flex-col items-center mt-10">
+    <div className="flex flex-col items-center">
       <DrumstickIcon className="text-emerald-600 h-10 w-10" />
-      <h1 className="mt-4">{heading}</h1>
+      <h1 className="mt-4 mb-1 font-medium">{heading}</h1>
       <p className="text-muted-foreground text-sm">{description}</p>
       <Button asChild className="mt-6">
         <Link href={ROUTES.createRecipe}>{buttonLabel}</Link>

@@ -1,6 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db";
+import { delay } from "@/lib/utils";
 
 // OCCASIONS
 
@@ -24,7 +25,7 @@ export const addRecipeOccasion = async (
 ) => {
   await db.occasionsOnRecipes.create({
     data: {
-      occassionId: occasionId,
+      occasionId: occasionId,
       recipeId,
     },
   });
@@ -36,8 +37,8 @@ export const removeRecipeOccasion = async (
 ) => {
   await db.occasionsOnRecipes.delete({
     where: {
-      recipeId_occassionId: {
-        occassionId: occasionId,
+      recipeId_occasionId: {
+        occasionId: occasionId,
         recipeId,
       },
     },

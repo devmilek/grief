@@ -136,7 +136,7 @@ const RecipesHeader = () => {
 
 const RecipesFeed = ({ recipes }: { recipes: HorizontalCardType[] }) => {
   return (
-    <div className="grid gap-6">
+    <div className="grid gap-8 lg:gap-6">
       {recipes.map((recipe) => (
         <HorizontalCard key={recipe.id} recipe={recipe} />
       ))}

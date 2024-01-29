@@ -70,7 +70,7 @@ export const useRecipeAdditional = (recipeId: string) => {
       mutate(
         key,
         async () => {
-          addFn(itemId, recipeId);
+          await addFn(itemId, recipeId);
           return [optimisticItem, ...(selectedItems || [])];
         },
         {
@@ -94,24 +94,23 @@ export const useRecipeAdditional = (recipeId: string) => {
   ) => {
     const optimisticItems = selectedItems?.filter((item) => item.id !== itemId);
 
-    toast.promise(
-      mutate(
-        key,
-        async () => {
-          await removeFn(itemId, recipeId);
-          return optimisticItems;
-        },
-        {
-          revalidate: false,
-          optimisticData: optimisticItems,
-        },
-      ),
+    const toastPromise = mutate(
+      key,
+      async () => {
+        await removeFn(itemId, recipeId);
+        return optimisticItems;
+      },
       {
-        loading: "Usuwanie...",
-        success: "Usunięto!",
-        error: "Dodawananie nie powiodło się",
+        revalidate: false,
+        optimisticData: optimisticItems,
       },
     );
+
+    toast.promise(toastPromise, {
+      loading: "Usuwanie...",
+      success: "Usunięto!",
+      error: "Dodawananie nie powiodło się",
+    });
   };
 
   const addOccasionMutation = async (occasionId: string) => {

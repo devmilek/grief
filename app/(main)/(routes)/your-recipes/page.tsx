@@ -35,7 +35,7 @@ const YourRecipesPage = async ({ searchParams }: YourRecipesPageProps) => {
   return (
     <section className="container">
       <h1 className="font-display text-3xl mt-6 mb-6">Twoje przepisy</h1>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="p-6 rounded-xl bg-white border">
           <p className="text-sm font-medium text-neutral-600">
             Łączna ilość postów
@@ -50,7 +50,7 @@ const YourRecipesPage = async ({ searchParams }: YourRecipesPageProps) => {
           </h1>
         </div>
 
-        <CreateRecipeCard />
+        <CreateRecipeCard className="sm:col-span-2" />
       </div>
       <header className="flex items-center justify-between mt-16 mb-6">
         <h1 className="font-display text-3xl">Zarządzaj przepisami</h1>

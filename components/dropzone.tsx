@@ -137,9 +137,9 @@ const Dropzone = ({
                 </span>{" "}
                 lub przeciągnij i upuść
               </p>
-              <span className="text-xs text-muted-foreground/60">
+              <p className="text-xs text-muted-foreground/60 mt-2">
                 Maskymalny rozmiar 2MB, akceptowany format .jpg, .jpeg .png
-              </span>
+              </p>
             </div>
           )}
         </>

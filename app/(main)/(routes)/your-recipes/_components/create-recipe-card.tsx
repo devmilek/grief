@@ -1,18 +1,21 @@
 "use client";
 
 import { seedDb } from "@/actions/seed-db";
+import { ROUTES } from "@/constants";
+import { cn } from "@/lib/utils";
 import { PlusIcon } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 import { toast } from "sonner";
 
-const CreateRecipeCard = () => {
+const CreateRecipeCard = ({ className }: { className?: string }) => {
   return (
-    <div
-      onClick={async () => {
-        await seedDb();
-        toast.success("Pomyślnie zasiano bazę danych");
-      }}
-      className="p-6 rounded-xl bg-white border flex items-center col-span-2 cursor-pointer"
+    <Link
+      href={ROUTES.createRecipe}
+      className={cn(
+        "p-6 rounded-xl bg-white border flex items-center cursor-pointer",
+        className,
+      )}
     >
       <div className="p-3 rounded-lg bg-emerald-500/20 text-emerald-700 mr-3">
         <PlusIcon className="w-4 h-4" />
@@ -23,7 +26,7 @@ const CreateRecipeCard = () => {
           Podziel się z innymi twoim talentem.
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 

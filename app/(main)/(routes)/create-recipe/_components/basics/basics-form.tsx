@@ -93,16 +93,16 @@ const BasicsForm = ({ recipe, isComplete }: BasicsFormProps) => {
   return (
     <div>
       <div className="bg-white rounded-xl">
-        <div className="flex items-center space-x-4">
+        <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
           <div>
             <h1 className="font-display text-4xl mb-2">Tworzenie przepisu</h1>
-            <p className="text-neutral-500 text-sm mb-6">
+            <p className="text-neutral-500 text-sm">
               Przesyłanie własnych przepisów jest łatwe! Dodaj swój przepis do
               ulubionych, udostępnij go znajomym, rodzinie lub społeczności{" "}
               <strong>{SITE_NAME}</strong>.
             </p>
           </div>
-          <div className="space-x-2 flex">
+          <div className="space-x-2 grid grid-cols-2 md:mb-0 md:flex">
             <Button
               variant="outline"
               onClick={form.handleSubmit(onSubmit)}
@@ -113,7 +113,7 @@ const BasicsForm = ({ recipe, isComplete }: BasicsFormProps) => {
             </Button>
             <Button
               disabled={!isComplete}
-              className="w-full disabled:pointer-events-auto"
+              className="disabled:pointer-events-auto"
               onClick={form.handleSubmit(togglePublish)}
             >
               {recipe.published ? "Cofnij publikacje" : "Opublikuj"}
@@ -190,7 +190,7 @@ const BasicsForm = ({ recipe, isComplete }: BasicsFormProps) => {
                 </FormItem>
               )}
             />
-            <div className="pt-6 w-full grid grid-cols-2 gap-6">
+            <div className="pt-6 w-full grid sm:grid-cols-2 gap-6">
               <FormField
                 control={form.control}
                 name="categoryId"
