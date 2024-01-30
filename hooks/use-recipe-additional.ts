@@ -25,16 +25,25 @@ export const useRecipeAdditional = (recipeId: string) => {
   const { data: selectedOccasions, isLoading: isOccasionsLoading } = useSWR(
     occassionsKey,
     () => getRecipeOccasions(recipeId),
+    {
+      revalidateOnFocus: false,
+    },
   );
 
   const { data: selectedCuisines, isLoading: isCuisinesLoading } = useSWR(
     cuisinesKey,
     () => getRecipeCuisines(recipeId),
+    {
+      revalidateOnFocus: false,
+    },
   );
 
   const { data: selectedDiets, isLoading: isDietsLoading } = useSWR(
     dietsKey,
     () => getRecipeDiets(recipeId),
+    {
+      revalidateOnFocus: false,
+    },
   );
 
   const unselectedCuisines = useMemo(

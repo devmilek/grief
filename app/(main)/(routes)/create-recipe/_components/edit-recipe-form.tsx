@@ -24,6 +24,7 @@ interface EditRecipeProps {
 const EditRecipeForm = ({ recipeId, recipe, isComplete }: EditRecipeProps) => {
   const { data } = useSWR(recipeId, getRecipe, {
     fallbackData: recipe,
+    revalidateOnFocus: false,
   });
 
   if (!data) {

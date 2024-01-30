@@ -9,7 +9,10 @@ import { DropResult } from "@hello-pangea/dnd";
 import { addStep, reorderSteps } from "@/actions/recipe-creation/steps";
 
 export const useSteps = (recipeId: string) => {
-  const { data: steps } = useSWR(recipeId, getSteps);
+  const stepsKey = recipeId + "-steps";
+  const { data: steps } = useSWR(stepsKey, () => getSteps(recipeId), {
+    revalidateOnFocus: false,
+  });
   const { mutate } = useSWRConfig();
 
   const mutateAddStep = async (step: z.infer<typeof PreparationStepSchema>) => {
@@ -37,9 +40,9 @@ export const useSteps = (recipeId: string) => {
     );
 
     toast.promise(mutatePromise, {
-      loading: "Dodawanie składnika...",
-      success: "Składnik dodany!",
-      error: "Nie udało się dodać składnika",
+      loading: "Dodawanie kroku przygotowania...",
+      success: "Krok przygotowania dodany!",
+      error: "Nie udało się dodać kroku przygotowania",
     });
   };
 

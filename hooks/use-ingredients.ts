@@ -15,7 +15,9 @@ export const useIngredients = (recipeId: string) => {
   const { data: ingredients, isLoading } = useSWR(
     key,
     () => getIngredients(recipeId),
-    {},
+    {
+      revalidateOnFocus: false,
+    },
   );
   const { mutate } = useSWRConfig();
 
