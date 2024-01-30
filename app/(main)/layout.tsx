@@ -5,17 +5,17 @@ import { getUtilityData } from "@/data";
 import { db } from "@/lib/db";
 import React, { ReactNode } from "react";
 
-const fetchUtilityData = async () => {
-  const baseurl = process.env.BASE_URL;
-  const response = await fetch(baseurl + "api/utility-data", {
-    cache: "force-cache",
-  });
-  const data = await response.json();
-  return data;
-};
+// const fetchUtilityData = async () => {
+//   const baseurl = process.env.BASE_URL;
+//   const response = await fetch(baseurl + "api/utility-data", {
+//     cache: "force-cache",
+//   });
+//   const data = await response.json();
+//   return data;
+// };
 
 const MainLayout = async ({ children }: { children: ReactNode }) => {
-  const data = await fetchUtilityData();
+  const data = await getUtilityData();
 
   return (
     <UtilityDataProvider {...data}>
