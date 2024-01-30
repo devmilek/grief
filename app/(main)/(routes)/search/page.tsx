@@ -62,6 +62,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
 
   const recipes = await db.recipe.findMany({
     where: {
+      published: true,
       name: {
         search: searchQuery,
       },

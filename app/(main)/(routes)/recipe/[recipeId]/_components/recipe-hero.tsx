@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { formatMins } from "@/lib/utils";
 import { difficultyMap } from "@/maps";
 import { Category, Recipe, User } from "@prisma/client";
-import { Clock, ChefHatIcon, Star, Share } from "lucide-react";
+import { Clock, ChefHatIcon, Star, Share, Bookmark } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -69,11 +69,12 @@ const RecipeHero = ({ recipe }: RecipeHeroProps) => {
         </p>
         <div className="w-full flex items-center justify-between pt-3 border-t">
           <Button variant="ghost">
-            <Star className="h-4 w-4 mr-2 text-amber-600" />
-            1231
+            <Bookmark className="h-4 w-4 mr-2" />
+            Zapisz przepis
           </Button>
           <Button variant="ghost" size="icon">
             <Share className="h-4 w-4" />
+            <span className="sr-only">Udostępnij</span>
           </Button>
         </div>
       </div>

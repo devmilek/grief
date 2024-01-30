@@ -39,7 +39,7 @@ const RecipesFeed = async ({ currentPage, sortOrder }: RecipesFeedProps) => {
 
   if (recipes.length === 0) {
     return (
-      <div className="flex items-center p-8 bg-white rounded-xl justify-center">
+      <div className="flex items-center p-8 bg-white rounded-xl justify-center text-center">
         <EmptyState description="Nie utworzyłeś jeszcze żadnych przepisów" />
       </div>
     );
