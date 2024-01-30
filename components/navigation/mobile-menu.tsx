@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -22,8 +24,14 @@ const MobileMenu = ({
   className?: string;
   session: Session | null;
 }) => {
+  const [open, setOpen] = useState(false);
   return (
-    <Sheet>
+    <Sheet
+      open={open}
+      onOpenChange={() => {
+        setOpen(!open);
+      }}
+    >
       <SheetTrigger asChild>
         <Button size="icon" className={className}>
           <MenuIcon className="h-4 w-4" />
@@ -44,7 +52,7 @@ const MobileMenu = ({
             </Button>
           </div>
         )}
-        <MobileMenuAccordion />
+        <MobileMenuAccordion setOpen={setOpen} />
       </SheetContent>
     </Sheet>
   );

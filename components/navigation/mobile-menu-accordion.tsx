@@ -8,69 +8,103 @@ import {
   AccordionTrigger,
 } from "../ui/accordion";
 import { useUtilityData } from "../providers/utility-data-provider";
-import Link from "next/link";
 import { ScrollArea } from "../ui/scroll-area";
-import NavbarSearch from "./navbar-search";
 import { ROUTES } from "@/constants";
+import { useRouter } from "next/navigation";
 
-const MobileMenuAccordion = () => {
+const MobileMenuAccordion = ({
+  setOpen,
+}: {
+  setOpen: (open: boolean) => void;
+}) => {
   const { categories, cuisines, diets, occasions } = useUtilityData();
 
   return (
     <ScrollArea className="h-full">
       <Accordion type="multiple" className="mt-4">
-        <AccordionItem value="categories">
-          <AccordionTrigger className="text-base">Kategorie</AccordionTrigger>
-          <AccordionContent className="space-y-4 pl-4 grid">
-            {categories.map((category) => (
-              <ItemLink
-                key={category.slug}
-                href={`${ROUTES.categories}/${category.slug}`}
-                label={category.name}
-              />
-            ))}
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="occasions">
-          <AccordionTrigger className="text-base">Okazje</AccordionTrigger>
-          <AccordionContent className="space-y-4 pl-4 grid">
-            {occasions.map((item) => (
-              <ItemLink
-                key={item.slug}
-                href={`${ROUTES.search}/?occasions=${item.slug}`}
-                label={item.name}
-              />
-            ))}
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="cuisines">
-          <AccordionTrigger className="text-base">
-            Kuchnie świata
-          </AccordionTrigger>
-          <AccordionContent className="space-y-4 pl-4 grid">
-            {cuisines.map((item) => (
-              <ItemLink key={item.slug} href="asd" label={item.name} />
-            ))}
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="Diety">
-          <AccordionTrigger className="text-base">Diety</AccordionTrigger>
-          <AccordionContent className="space-y-4 pl-4 grid">
-            {diets.map((item) => (
-              <ItemLink key={item.slug} href="asd" label={item.name} />
-            ))}
-          </AccordionContent>
-        </AccordionItem>
+        <AccordionItemComponent
+          value="categories"
+          title="Kategorie"
+          items={categories}
+          hrefPrefix={ROUTES.categories + "/"}
+          setOpen={setOpen}
+        />
+        <AccordionItemComponent
+          value="occasions"
+          title="Okazje"
+          items={occasions}
+          hrefPrefix={ROUTES.search + "?occasions="}
+          setOpen={setOpen}
+        />
+        <AccordionItemComponent
+          value="cuisines"
+          title="Kuchnie świata"
+          items={cuisines}
+          hrefPrefix={ROUTES.search + "?cuisines="}
+          setOpen={setOpen}
+        />
+        <AccordionItemComponent
+          value="diets"
+          title="Diety"
+          items={diets}
+          hrefPrefix={ROUTES.search + "?diets="}
+          setOpen={setOpen}
+        />
       </Accordion>
     </ScrollArea>
   );
 };
 
-const ItemLink = ({ href, label }: { href: string; label: string }) => {
+const AccordionItemComponent = ({
+  value,
+  title,
+  items,
+  hrefPrefix,
+  setOpen,
+}: {
+  value: string;
+  title: string;
+  items: Array<{ slug: string; name: string }>;
+  hrefPrefix: string;
+  setOpen: (open: boolean) => void;
+}) => {
+  const { push } = useRouter();
+
+  const onClick = (slug: string) => {
+    push(`${hrefPrefix}${slug}`);
+    setOpen(false);
+  };
+
   return (
-    <Link className="hover:translate-x-2 transition-transform" href={href}>
+    <AccordionItem value={value}>
+      <AccordionTrigger className="text-base">{title}</AccordionTrigger>
+      <AccordionContent className="space-y-4 pl-4 grid">
+        {items.map((item) => (
+          <ItemLink
+            key={item.slug}
+            label={item.name}
+            onClick={() => onClick(item.slug)}
+          />
+        ))}
+      </AccordionContent>
+    </AccordionItem>
+  );
+};
+
+const ItemLink = ({
+  label,
+  onClick,
+}: {
+  label: string;
+  onClick: () => void;
+}) => {
+  return (
+    <button
+      onClick={onClick}
+      className="hover:translate-x-2 transition-transform text-start"
+    >
       {label}
-    </Link>
+    </button>
   );
 };
 
