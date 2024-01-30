@@ -1,5 +1,3 @@
-"use client";
-
 import SignInForm from "@/components/auth/forms/sign-in-form";
 import Link from "next/link";
 import React from "react";
