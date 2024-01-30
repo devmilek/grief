@@ -34,7 +34,7 @@ const YourRecipesPage = async ({ searchParams }: YourRecipesPageProps) => {
 
   return (
     <section className="container">
-      <h1 className="font-display text-3xl mt-6 mb-6">Twoje przepisy</h1>
+      <h1 className="font-display text-3xl mb-6">Twoje przepisy</h1>
       <div className="grid grid-cols sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="p-6 rounded-xl bg-white border">
           <p className="text-sm font-medium text-neutral-600">

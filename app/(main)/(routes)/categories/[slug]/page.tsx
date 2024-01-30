@@ -66,7 +66,7 @@ const Page = async ({ params, searchParams }: CategoryPageProps) => {
   );
 
   return (
-    <div className="container pt-6">
+    <div className="container">
       <RecipesHero
         headline="Przepisy z kategorią"
         heading={category.name}
