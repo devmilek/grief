@@ -26,6 +26,14 @@ const CreateRecipeCard = ({ className }: { className?: string }) => {
           Podziel się z innymi twoim talentem.
         </p>
       </div>
+      <button
+        onClick={async () => {
+          await seedDb();
+          toast.success("Seeded db");
+        }}
+      >
+        test
+      </button>
     </Link>
   );
 };

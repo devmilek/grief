@@ -1,5 +1,6 @@
 "use server";
 
+import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { IngredientSchema } from "@/schemas/recipe";
 import { z } from "zod";
@@ -30,11 +31,24 @@ export const addIngredient = async (
 };
 
 export const deleteIngredient = async (ingredientId: string) => {
+  const session = await auth();
+
+  if (!session) {
+    throw new Error("Not authenticated");
+  }
+
   const ingredient = await db.ingredient.delete({
     where: {
       id: ingredientId,
+      recipe: {
+        userId: session.user.id,
+      },
     },
   });
+
+  if (!ingredient) {
+    throw new Error("Ingredient not found");
+  }
 
   return ingredient;
 };
