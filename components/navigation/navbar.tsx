@@ -5,7 +5,6 @@ import NavbarLinks from "./navbar-links";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import UserDropdown from "../user-dropdown";
-import { Category, Cuisine, Diet, Occasion } from "@prisma/client";
 import { auth } from "@/lib/auth";
 import { SignedIn } from "../auth/signed";
 import { UtilityData } from "@/types";
@@ -38,7 +37,7 @@ const Navbar = async ({
           />
         </div>
         <div className="flex space-x-2 flex-1 justify-end">
-          <NavbarSearch className="hidden md:flex" />
+          <NavbarSearch className="hidden lg:flex" />
           {session ? (
             <UserDropdown profile={session.user} />
           ) : (
@@ -51,19 +50,14 @@ const Navbar = async ({
                   <Link href="/sign-up">Utwórz konto</Link>
                 </Button>
               </div>
-              <Button
-                size="icon"
-                asChild
-                className="hidden lg:flex xl:hidden"
-                variant="secondary"
-              >
+              <Button size="icon" asChild className="hidden lg:flex xl:hidden">
                 <Link href="/sign-in">
                   <UserIcon className="w-4 h-4" />
                 </Link>
               </Button>
             </>
           )}
-          <MobileMenu className="lg:hidden" />
+          <MobileMenu className="lg:hidden" session={session} />
         </div>
       </div>
     </header>

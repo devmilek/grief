@@ -30,7 +30,7 @@ const NavbarSearch = ({ className }: { className?: string }) => {
       <Input
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="max-w-sm w-full"
+        className="w-full"
         placeholder="Szukaj przepisu..."
       />
       <Button
