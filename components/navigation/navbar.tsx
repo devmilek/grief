@@ -53,6 +53,9 @@ const Navbar = async ({
               <Button size="icon" asChild className="hidden lg:flex xl:hidden">
                 <Link href="/sign-in">
                   <UserIcon className="w-4 h-4" />
+                  <span className="sr-only">
+                    Zaloguj się do konta lub utwórz nowe
+                  </span>
                 </Link>
               </Button>
             </>

@@ -35,6 +35,7 @@ const MobileMenu = ({
       <SheetTrigger asChild>
         <Button size="icon" className={className}>
           <MenuIcon className="h-4 w-4" />
+          <span className="sr-only">Otwórz menu</span>
         </Button>
       </SheetTrigger>
       <SheetContent className="w-full flex-col flex gap-0">
