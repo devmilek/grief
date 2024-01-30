@@ -26,7 +26,7 @@ const ImageCard = ({ recipe, className }: ImageCardProps) => {
   return (
     <div
       className={cn(
-        "group bg-gradient-to-t text-white from-black/60 to-black/0 relative w-full h-96 rounded-xl overflow-hidden flex flex-col justify-end p-8",
+        "group bg-gradient-to-t text-white from-black/60 to-black/0 relative w-full h-80 sm:h-96 rounded-xl overflow-hidden flex flex-col justify-end p-6 sm:p-8",
         className,
       )}
     >

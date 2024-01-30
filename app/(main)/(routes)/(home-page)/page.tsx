@@ -11,7 +11,7 @@ const Home = async () => {
     <div>
       {/* <HomeHero /> */}
       {/* LAYOUT */}
-      <div className="flex flex-col lg:flex-row lg:space-x-12 container py-8">
+      <div className="flex flex-col lg:flex-row lg:space-x-12 container pb-8">
         <div className="flex-1">
           <Suspense fallback={<MostPopularFeedSkeleton />}>
             <MostPopularFeed />
