@@ -7,6 +7,7 @@ import { Clock, ChefHatIcon, Star, Share, Bookmark } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import ShareRecipeButton from "./share-recipe-button";
 
 interface RecipeHeroProps {
   recipe: Recipe & {
@@ -28,7 +29,7 @@ const RecipeHero = ({ recipe }: RecipeHeroProps) => {
         height={440}
         className="rounded-lg aspect-[4/3] w-full md:w-2/5 object-cover flex-shrink-0"
       />
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full">
         <h1 className="text-4xl font-display mt-4 lg:mt-0">{recipe.name}</h1>
         <div className="flex items-center space-x-3 mt-4">
           <Link
@@ -72,10 +73,7 @@ const RecipeHero = ({ recipe }: RecipeHeroProps) => {
             <Bookmark className="h-4 w-4 mr-2" />
             Zapisz przepis
           </Button>
-          <Button variant="ghost" size="icon">
-            <Share className="h-4 w-4" />
-            <span className="sr-only">Udostępnij</span>
-          </Button>
+          <ShareRecipeButton recipeId={recipe.id} />
         </div>
       </div>
     </div>
