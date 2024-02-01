@@ -32,7 +32,7 @@ const EditRecipeForm = ({ recipeId, recipe, isComplete }: EditRecipeProps) => {
   }
 
   return (
-    <div className="container mt-8 max-w-4xl bg-white rounded-xl p-8 lg:p-12 mb-16 relative">
+    <div className="container max-w-4xl bg-white rounded-xl p-8 lg:p-12 mb-16 relative">
       <BasicsForm recipe={data} isComplete={isComplete} />
       <Accordion type="multiple" className="mt-8">
         <AccordionItem value="ingredients">

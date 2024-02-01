@@ -1,21 +1,28 @@
 "use client";
 
-import React, { useCallback, useRef, useState } from "react";
+import React, { ReactEventHandler, useCallback, useRef, useState } from "react";
 import { Accept, FileRejection, useDropzone } from "react-dropzone";
 import { toast } from "sonner";
 import { CropperRef, Cropper } from "react-advanced-cropper";
 import "react-advanced-cropper/dist/style.css";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogFooter } from "@/components/ui/dialog";
-import { UploadCloud } from "lucide-react";
+import { Trash, UploadCloud } from "lucide-react";
 import { buildCloudinaryUrl, cn } from "@/lib/utils";
-import { getSignature, saveToDatabase } from "@/actions/upload-image";
+import {
+  deleteImage,
+  getSignature,
+  saveToDatabase,
+} from "@/actions/upload-image";
+import Image from "next/image";
+import { set } from "zod";
 
 interface DropzoneProps {
   disabled?: boolean;
   accept?: Accept;
   maxSize?: number;
-  onUpload: (src: string) => void;
+  value?: string;
+  onUpload: (src: string | null) => void;
 }
 
 interface Image {
@@ -25,7 +32,8 @@ interface Image {
 
 const Dropzone = ({
   disabled = false,
-  maxSize = 2 * 1024 * 1024,
+  value,
+  maxSize = 5 * 1024 * 1024,
   accept = {
     "image/*": [".png", ".jpeg", ".jpg", ".webp"],
   },
@@ -104,6 +112,47 @@ const Dropzone = ({
     disabled,
   });
 
+  const onDelete = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    e.preventDefault();
+    if (!value) return;
+
+    toast.promise(
+      async () => {
+        await deleteImage(value);
+      },
+      {
+        loading: "Usuwanie zdjęcia",
+        success: () => {
+          onUpload(null);
+          return "Zdjęcie usunięte";
+        },
+        error: "Nie udało się usunąć zdjęcia",
+      },
+    );
+  };
+
+  if (value) {
+    return (
+      <div className="">
+        <div className="max-w-xs mx-auto">
+          <div className="aspect-[4/3] relative">
+            <Image src={value} alt="Recipe image" fill />
+          </div>
+          <Button
+            variant="outline"
+            className="mx-auto w-full mt-3"
+            onClick={onDelete}
+          >
+            <Trash className="w-4 h-4 mr-2" />
+            Usuń zdjęcie
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       {/* DROPZONE */}
@@ -138,7 +187,7 @@ const Dropzone = ({
                 lub przeciągnij i upuść
               </p>
               <p className="text-xs text-muted-foreground/60 mt-2">
-                Maskymalny rozmiar 2MB, akceptowany format .jpg, .jpeg .png
+                Maskymalny rozmiar 5MB, akceptowany format .jpg, .jpeg .png
               </p>
             </div>
           )}
