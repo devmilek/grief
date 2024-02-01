@@ -2,6 +2,7 @@
 
 .react-email
 .VSCodeCounter
+.idea
 
 # dependencies
 /node_modules

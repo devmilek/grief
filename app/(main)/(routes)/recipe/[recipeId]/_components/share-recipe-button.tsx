@@ -10,17 +10,42 @@ import {
 } from "@/components/ui/dialog";
 import { ShareIcon } from "lucide-react";
 import React from "react";
-import { getShareUrl, SocialPlatforms } from "@phntms/react-share";
-import Link from "next/link";
-import { FacebookShareButton, FacebookIcon } from "next-share";
 import {
-  ShareFacebookButton,
-  ShareTwitterButton,
-} from "./share-social-media-button";
+  IconType,
+  SiFacebook,
+  SiMessenger,
+  SiPinterest,
+  SiTwitter,
+  SiWhatsapp,
+} from "@icons-pack/react-simple-icons";
+import Link from "next/link";
 
 const ShareRecipeButton = ({ recipeId }: { recipeId: string }) => {
   const baseUrl = process.env.BASE_URL;
   const url = `https://grief.devmilek.com/recipe/${recipeId}`;
+
+  const socialMediaShares = [
+    {
+      name: "Facebook",
+      icon: SiFacebook,
+      url: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+    },
+    {
+      name: "Twitter",
+      icon: SiTwitter,
+      url: `https://twitter.com/intent/tweet?url=${url}`,
+    },
+    {
+      name: "WhatsApp",
+      icon: SiWhatsapp,
+      url: `https://wa.me/?text=${url}`,
+    },
+    {
+      name: "Pinterest",
+      icon: SiPinterest,
+      url: `https://pinterest.com/pin/create/button/?url=${url}`,
+    },
+  ];
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -29,19 +54,44 @@ const ShareRecipeButton = ({ recipeId }: { recipeId: string }) => {
           <span className="sr-only">Udostępnij</span>
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle>Udostępnij przepis</DialogTitle>
           <DialogDescription>
-            Skopiuj link i udostępnij go znajomym
+            Skopiuj link lub udostępnij go znajomym
           </DialogDescription>
         </DialogHeader>
-        <div>
-          <ShareFacebookButton url={url} />
-          <ShareTwitterButton url={url} />
+        <div className="flex justify-between">
+          {socialMediaShares.map((share) => (
+            <ShareSocialMediaButton
+              key={share.name}
+              href={share.url}
+              icon={share.icon}
+              name={share.name}
+            />
+          ))}
         </div>
       </DialogContent>
     </Dialog>
+  );
+};
+
+const ShareSocialMediaButton = ({
+  icon: Icon,
+  name,
+  href,
+}: {
+  icon: IconType;
+  name: string;
+  href: string;
+}) => {
+  return (
+    <Link className="group text-center" href={href} target="_blank">
+      <div className="p-6 rounded-full bg-muted text-muted-foreground group-hover:bg-emerald-700/5 group-hover:text-emerald-700 transition-all">
+        <Icon className="h-8 w-8" />
+      </div>
+      <p className="font-medium text-sm mt-2">{name}</p>
+    </Link>
   );
 };
 
