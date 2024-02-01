@@ -9,33 +9,7 @@ import {
   HorizontalCardSkeleton,
 } from "@/components/cards/horizontal-card";
 import { ROUTES } from "@/constants";
-
-const getNewestRecipes = async () => {
-  const recipes = await db.recipe.findMany({
-    where: {
-      published: true,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-    include: {
-      category: {
-        select: {
-          slug: true,
-          name: true,
-        },
-      },
-      user: {
-        select: {
-          id: true,
-          name: true,
-        },
-      },
-    },
-    take: 6,
-  });
-  return recipes;
-};
+import { getNewestRecipes } from "@/data";
 
 const NewestFeed = async () => {
   const recipes = await getNewestRecipes();

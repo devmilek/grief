@@ -1,4 +1,4 @@
-import { Category, Occasion, Cuisine, Diet } from "@prisma/client";
+import { Category, Occasion, Cuisine, Diet, Recipe } from "@prisma/client";
 
 export type ClerkErrors =
   | "form_password_pwned"
@@ -21,4 +21,15 @@ export type UtilityData = {
   occasions: Occasion[];
   cuisines: Cuisine[];
   diets: Diet[];
+};
+
+export type RecipeWithCategoryAndUser = Recipe & {
+  category: {
+    name: string;
+    slug: string;
+  };
+  user: {
+    name: string;
+    id: string;
+  };
 };

@@ -1,10 +1,11 @@
 import React, { Suspense } from "react";
-import { NewestFeed, NewestFeedSkeleton } from "./_components/newest-feed";
 import {
   MostPopularFeed,
   MostPopularFeedSkeleton,
 } from "./_components/most-popular-feed";
 import Sidebar from "@/components/navigation/sidebar/sidebar";
+import { getNewestRecipes } from "@/data";
+import { NewestFeed, NewestFeedSkeleton } from "./_components/newest-feed";
 
 const Home = async () => {
   return (
