@@ -37,6 +37,12 @@ Grien offers a wide range of features to enhance your recipe management and cook
 - 💨 **TailwindCSS** - CSS Framework
 - 🤚 **hello-pangea/dnd** - Drag n Drop functionality
 
+## Performance
+
+**Grien** is not just about providing a great user experience, it's also about performance. Our application has scored 100 points in Lighthouse performance. This means our app loads fast, runs smoothly, and uses resources efficiently, providing an optimal user experience.
+
+![](https://raw.githubusercontent.com/devmilek/grief/main/assets/lighthouse.png)
+
 ## License
 
 Grien is licensed under the MIT License. You are free to use, modify, and distribute the application as long as you comply with the terms of the license.
