@@ -2,6 +2,8 @@
 
 Digital platform that allows users to find, save, and share recipes.
 
+> The project is still being built.
+
 ![](https://raw.githubusercontent.com/devmilek/grief/main/app/opengraph-image.jpg)
 
 ## Introduction
