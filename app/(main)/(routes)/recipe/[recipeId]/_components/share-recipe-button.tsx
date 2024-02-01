@@ -19,6 +19,7 @@ import {
   SiWhatsapp,
 } from "@icons-pack/react-simple-icons";
 import Link from "next/link";
+import { ShareRecipeInput } from "./share-recipe-input";
 
 const ShareRecipeButton = ({ recipeId }: { recipeId: string }) => {
   const baseUrl = process.env.BASE_URL;
@@ -71,6 +72,7 @@ const ShareRecipeButton = ({ recipeId }: { recipeId: string }) => {
             />
           ))}
         </div>
+        <ShareRecipeInput url={url} />
       </DialogContent>
     </Dialog>
   );
@@ -87,10 +89,10 @@ const ShareSocialMediaButton = ({
 }) => {
   return (
     <Link className="group text-center" href={href} target="_blank">
-      <div className="p-6 rounded-full bg-muted text-muted-foreground group-hover:bg-emerald-700/5 group-hover:text-emerald-700 transition-all">
-        <Icon className="h-8 w-8" />
+      <div className="flex items-center justify-center aspect-square w-16 rounded-full bg-muted text-muted-foreground group-hover:bg-emerald-700/5 group-hover:text-emerald-700 transition-all">
+        <Icon className="h-6 w-6" />
       </div>
-      <p className="font-medium text-sm mt-2">{name}</p>
+      {/* <p className="font-medium text-sm mt-2">{name}</p> */}
     </Link>
   );
 };
