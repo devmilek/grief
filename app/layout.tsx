@@ -7,6 +7,8 @@ import { SITE_NAME } from "@/constants";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
+const baseUrl = process.env.BASE_URL;
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -43,6 +45,7 @@ export const metadata: Metadata = {
     "dania kuchni",
     "przepisy kulinarne",
   ],
+  metadataBase: new URL(baseUrl!),
 };
 
 export default function RootLayout({
