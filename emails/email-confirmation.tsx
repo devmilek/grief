@@ -10,9 +10,7 @@ import { Text } from "@react-email/text";
 import { Img } from "@react-email/components";
 import { EMAIL_CONFIRMATION_HREF } from "@/constants";
 
-const baseUrl = process.env.BASE_URL
-  ? process.env.BASE_URL
-  : "http://localhost:3000/";
+const baseUrl = process.env.BASE_URL;
 
 interface MailConfirmationEmailProps {
   token: string;
