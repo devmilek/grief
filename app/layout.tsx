@@ -22,10 +22,12 @@ const db_serif_display = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  // title: `${SITE_NAME} - Twoja baza przepisów`,
   title: {
     template: `%s | Grien`,
     default: `${SITE_NAME} - Twoja baza przepisów`, // a default is required when creating a template
+  },
+  alternates: {
+    canonical: "https://grief.devmilek.pl",
   },
   description: `Znajdź inspirację do gotowania i delektuj się smakiem kuchni z różnych zakątków świata. Codziennie dostarczamy inspirujące przepisy na wyjątkowe i smakowite dania, abyś mógł cieszyć się wyjątkowymi posiłkami.`,
   keywords: [
