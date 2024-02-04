@@ -15,6 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "@prisma/client";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -33,6 +34,7 @@ const formSchema = z.object({
 
 const SettingsForm = ({ user }: SettingsFormProps) => {
   const router = useRouter();
+  const { update } = useSession();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -45,11 +47,20 @@ const SettingsForm = ({ user }: SettingsFormProps) => {
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    toast.promise(updateUserInfo(data), {
-      loading: "Zapisywanie zmian...",
-      success: "Zapisano zmiany",
-      error: "Nie udało się zapisać zmian",
-    });
+    toast.promise(
+      async () => {
+        await updateUserInfo(data);
+        await update({
+          name: data.name,
+        });
+        router.refresh();
+      },
+      {
+        loading: "Zapisywanie zmian...",
+        success: "Zapisano zmiany",
+        error: "Nie udało się zapisać zmian",
+      },
+    );
   };
 
   return (

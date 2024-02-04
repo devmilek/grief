@@ -74,7 +74,12 @@ export const {
 
       return true;
     },
-    async jwt({ token, user, account, profile }) {
+    async jwt({ token, trigger, session, user, account, profile }) {
+      if (trigger === "update" && session?.name) {
+        console.log("session update");
+        // Note, that `session` can be any arbitrary object, remember to validate it!
+        token.name = session.name;
+      }
       return token;
     },
     async session({ session, user, token }) {

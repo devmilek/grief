@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import { delay } from "@/lib/utils";
 
 export const getUtilityData = async () => {
+  console.log("GET UTILITY DATA");
   const [categories, occasions, cuisines, diets] = await db.$transaction([
     db.category.findMany({
       orderBy: {

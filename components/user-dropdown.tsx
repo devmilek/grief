@@ -12,7 +12,14 @@ import {
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Book, LogOut, Plus, Settings, UserIcon } from "lucide-react";
+import {
+  Book,
+  LogOut,
+  PencilRulerIcon,
+  Plus,
+  Settings,
+  UserIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { User } from "next-auth";
 import { signOut } from "next-auth/react";
@@ -66,9 +73,9 @@ const UserDropdown = ({ profile }: UserButtonProps) => {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href="/settings">
-              <Settings className="w-4 h-4 mr-2" />
-              <span>Ustawienia</span>
+            <Link href="/edit-profile">
+              <PencilRulerIcon className="w-4 h-4 mr-2" />
+              <span>Edytuj profil</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem
