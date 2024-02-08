@@ -10,7 +10,6 @@ import {
 } from "../ui/sheet";
 import { Button } from "../ui/button";
 import { MenuIcon, UserIcon } from "lucide-react";
-import MobileMenuContent from "./mobile-menu-content";
 import { Session } from "next-auth/types";
 import UserDropdown from "../user-dropdown";
 import Link from "next/link";
@@ -42,7 +41,12 @@ const MobileMenu = ({
         <SheetHeader className="text-start mb-6">
           <SheetTitle className="font-display text-2xl">Nawigacja</SheetTitle>
         </SheetHeader>
-        <NavbarSearch className="w-full" />
+        <NavbarSearch
+          className="w-full"
+          onSearch={() => {
+            setOpen(false);
+          }}
+        />
         {!session && (
           <div className="space-x-2 xl:flex grid grid-cols-2 mt-4">
             <Button variant="outline" asChild>

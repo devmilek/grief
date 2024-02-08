@@ -19,7 +19,7 @@ const MainLayout = async ({ children }: { children: ReactNode }) => {
     <UtilityDataProvider {...data}>
       <>
         <Navbar {...data} />
-        <main className="pt-20 lg:pt-24 min-h-screen">{children}</main>
+        <main className="pt-20 lg:pt-24 pb-16 min-h-screen">{children}</main>
         <Footer {...data} />
       </>
     </UtilityDataProvider>

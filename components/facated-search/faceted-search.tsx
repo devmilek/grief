@@ -13,19 +13,7 @@ import { Button } from "../ui/button";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FilterItem } from "./filter-item";
 
-interface FacetedSearchProps {
-  categoriesProp?: string[];
-  occasionsProp?: string[];
-  cuisinesProp?: string[];
-  dietsProp?: string[];
-}
-
-const FacetedSearch = ({
-  categoriesProp = [],
-  cuisinesProp = [],
-  dietsProp = [],
-  occasionsProp = [],
-}: FacetedSearchProps) => {
+const FacetedSearch = () => {
   const searchParams = useSearchParams();
   const { categories, occasions, cuisines, diets } = useUtilityData();
   const { replace } = useRouter();
@@ -35,12 +23,21 @@ const FacetedSearch = ({
     return searchParams.get(key)?.split(",") ?? [];
   };
 
-  console.log("categoriesProp", categoriesProp);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(
+    getSelected("categories"),
+  );
 
-  const [selectedCategories, setSelectedCategories] = useState(categoriesProp);
-  const [selectedOccasions, setSelectedOccasions] = useState(occasionsProp);
-  const [selectedCuisines, setSelectedCuisines] = useState(cuisinesProp);
-  const [selectedDiets, setSelectedDiets] = useState(dietsProp);
+  const [selectedOccasions, setSelectedOccasions] = useState<string[]>(
+    getSelected("occasions"),
+  );
+
+  const [selectedCuisines, setSelectedCuisines] = useState<string[]>(
+    getSelected("cuisines"),
+  );
+
+  const [selectedDiets, setSelectedDiets] = useState<string[]>(
+    getSelected("diets"),
+  );
 
   function setParams() {
     const params = new URLSearchParams(searchParams);
@@ -79,28 +76,56 @@ const FacetedSearch = ({
           value="categories"
           items={categories}
           selectedItems={selectedCategories}
-          setSelectedItems={setSelectedCategories}
+          onChecked={(slug) => {
+            setSelectedCategories((prev) => {
+              if (prev.includes(slug)) {
+                return prev.filter((item) => item !== slug);
+              }
+              return [...prev, slug];
+            });
+          }}
         />
         <FilterItem
           name="Okazje"
           value="occasions"
           items={occasions}
           selectedItems={selectedOccasions}
-          setSelectedItems={setSelectedOccasions}
+          onChecked={(slug) => {
+            setSelectedOccasions((prev) => {
+              if (prev.includes(slug)) {
+                return prev.filter((item) => item !== slug);
+              }
+              return [...prev, slug];
+            });
+          }}
         />
         <FilterItem
           name="Kuchnie"
           value="cuisines"
           items={cuisines}
           selectedItems={selectedCuisines}
-          setSelectedItems={setSelectedCuisines}
+          onChecked={(slug) => {
+            setSelectedCuisines((prev) => {
+              if (prev.includes(slug)) {
+                return prev.filter((item) => item !== slug);
+              }
+              return [...prev, slug];
+            });
+          }}
         />
         <FilterItem
           name="Diety"
           value="diets"
           items={diets}
           selectedItems={selectedDiets}
-          setSelectedItems={setSelectedDiets}
+          onChecked={(slug) => {
+            setSelectedDiets((prev) => {
+              if (prev.includes(slug)) {
+                return prev.filter((item) => item !== slug);
+              }
+              return [...prev, slug];
+            });
+          }}
         />
       </Accordion>
       <div className="grid">

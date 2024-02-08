@@ -6,6 +6,8 @@ import { Providers } from "@/components/providers";
 import { SITE_NAME } from "@/constants";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import "moment/locale/pl";
+import moment from "moment";
 
 const baseUrl = process.env.BASE_URL;
 
@@ -47,6 +49,8 @@ export const metadata: Metadata = {
   ],
   metadataBase: new URL(baseUrl!),
 };
+
+moment.locale("pl");
 
 export default function RootLayout({
   children,

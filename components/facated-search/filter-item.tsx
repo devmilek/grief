@@ -11,7 +11,8 @@ export const FilterItem = ({
   value,
   items,
   selectedItems,
-  setSelectedItems,
+  // setSelectedItems,
+  onChecked,
 }: {
   name: string;
   value: string;
@@ -20,7 +21,8 @@ export const FilterItem = ({
     slug: string;
   }[];
   selectedItems: string[];
-  setSelectedItems: (value: string[] | ((prev: string[]) => string[])) => void;
+  onChecked: (slug: string) => void;
+  // setSelectedItems: (value: string[] | ((prev: string[]) => string[])) => void;
 }) => {
   return (
     <AccordionItem value={value}>
@@ -31,8 +33,9 @@ export const FilterItem = ({
             name={item.name}
             slug={item.slug}
             checked={selectedItems.includes(item.slug)}
-            setSelectedItems={setSelectedItems}
+            // setSelectedItems={setSelectedItems}
             key={item.slug}
+            onChecked={onChecked}
           />
         ))}
       </AccordionContent>

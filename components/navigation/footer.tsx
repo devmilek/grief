@@ -30,8 +30,8 @@ const Footer = async ({
   ];
 
   return (
-    <footer className="pt-10 container">
-      <div className="rounded-xl p-10 bg-white flex xl:space-x-8 flex-col xl:flex-row">
+    <footer className="container">
+      <div className="rounded-xl p-5 lg:p-10 bg-white flex xl:space-x-8 flex-col xl:flex-row">
         <div className="xl:max-w-xs mb-10 xl:mb-0">
           <Link href="/" className="flex items-center">
             <ChefHat className="h-6 w-6 mr-2 text-emerald-600" />

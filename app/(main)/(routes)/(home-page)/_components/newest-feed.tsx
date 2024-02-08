@@ -10,11 +10,12 @@ import {
 } from "@/components/cards/horizontal-card";
 import { ROUTES } from "@/constants";
 import { getNewestRecipes } from "@/data";
+import SectionWrapper from "@/components/section-wrapper";
 
 const NewestFeed = async () => {
   const recipes = await getNewestRecipes();
   return (
-    <section className="p-6 lg:p-9 bg-white rounded-xl my-10">
+    <SectionWrapper className="my-10">
       <header className="flex items-center justify-between">
         <h1 className="font-display text-4xl">Najnowsze</h1>
         <Link
@@ -30,7 +31,7 @@ const NewestFeed = async () => {
           <HorizontalCard key={recipe.id} recipe={recipe} />
         ))}
       </div>
-    </section>
+    </SectionWrapper>
   );
 };
 

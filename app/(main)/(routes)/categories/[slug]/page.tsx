@@ -8,6 +8,7 @@ import Pagination from "@/components/pagination";
 import { PAGINATION_ITEMS_PER_PAGE } from "@/constants";
 import SortButton from "@/components/sort-button";
 import RecipesHero from "@/components/recipes-hero";
+import SectionWrapper from "@/components/section-wrapper";
 
 export const generateMetadata = async ({
   params,
@@ -73,7 +74,7 @@ const Page = async ({ params, searchParams }: CategoryPageProps) => {
         imageSrc={category.image}
       />
       <div className="flex gap-4 mt-6 flex-col lg:flex-row">
-        <section className="bg-white p-6 lg:p-8 rounded-xl flex-1 h-fit">
+        <SectionWrapper className="flex-1 h-fit">
           <header className="flex items-center justify-between mb-8">
             <h1 className="font-display text-3xl lg:text-4xl">Wyniki</h1>
             <SortButton />
@@ -99,7 +100,7 @@ const Page = async ({ params, searchParams }: CategoryPageProps) => {
               </p>
             </div>
           )}
-        </section>
+        </SectionWrapper>
         <Sidebar />
       </div>
     </div>

@@ -9,6 +9,7 @@ import {
   HorizontalCardType,
 } from "@/components/cards/horizontal-card";
 import FacetedSearchSeet from "@/components/facated-search/faceted-search-sheet";
+import SectionWrapper from "@/components/section-wrapper";
 
 interface SearchPageProps {
   searchParams?: {
@@ -30,34 +31,18 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
   const cuisines = searchParams?.cuisines?.split(",");
   const diets = searchParams?.diets?.split(",");
 
-  const occasionFilter = {
-    some: {
-      occasion: {
-        slug: {
-          in: occasions,
+  const createFilter = (key: string, values: string | string[] | undefined) => {
+    if (!values) return undefined;
+    const inValues = Array.isArray(values) ? values : values.split(",");
+    return {
+      some: {
+        [key]: {
+          slug: {
+            in: inValues,
+          },
         },
       },
-    },
-  };
-
-  const cuisinesFilter = {
-    some: {
-      cuisines: {
-        slug: {
-          in: cuisines,
-        },
-      },
-    },
-  };
-
-  const dietsFilter = {
-    some: {
-      diet: {
-        slug: {
-          in: diets,
-        },
-      },
-    },
+    };
   };
 
   const recipes = await db.recipe.findMany({
@@ -71,9 +56,9 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
           in: categories,
         },
       },
-      occasions: occasions ? occasionFilter : undefined,
-      cuisines: cuisines ? cuisinesFilter : undefined,
-      diets: diets ? dietsFilter : undefined,
+      occasions: createFilter("occasion", searchParams?.occasions),
+      cuisines: createFilter("cuisines", searchParams?.cuisines),
+      diets: createFilter("diet", searchParams?.diets),
     },
     include: {
       category: {
@@ -99,7 +84,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
         <RecipesHero headline="Wyniki wyszukiwania dla" heading={searchQuery} />
       )}
       <div className="flex gap-x-4">
-        <section className="bg-white p-6 lg:p-8 rounded-xl flex-1 h-fit">
+        <SectionWrapper className="flex-1 h-fit">
           <RecipesHeader />
           {!!recipes.length && <RecipesFeed recipes={recipes} />}
           {!recipes.length && (
@@ -109,14 +94,9 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
               buttonLabel="Dodaj przepis"
             />
           )}
-        </section>
+        </SectionWrapper>
         <aside className="w-full lg:w-[300px] hidden lg:flex rounded-xl p-6 bg-white h-fit">
-          <FacetedSearch
-            categoriesProp={categories}
-            cuisinesProp={cuisines}
-            dietsProp={diets}
-            occasionsProp={occasions}
-          />
+          <FacetedSearch />
         </aside>
       </div>
     </div>
@@ -125,7 +105,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
 
 const RecipesHeader = () => {
   return (
-    <header className="flex items-center justify-between mb-8">
+    <header className="flex justify-between mb-8 flex-col items-start space-y-3 sm:flex-row sm:items-center">
       <h1 className="font-display text-3xl lg:text-4xl">Przepisy</h1>
       <div className="flex space-x-2">
         <SortButton />

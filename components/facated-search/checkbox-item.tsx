@@ -4,12 +4,14 @@ import { Checkbox } from "../ui/checkbox";
 export const CheckboxItem = ({
   slug,
   checked,
-  setSelectedItems,
+  // setSelectedItems,
+  onChecked,
   name,
 }: {
   slug: string;
   checked: boolean;
-  setSelectedItems: (value: ((prev: string[]) => string[]) | string[]) => void;
+  // setSelectedItems: (value: ((prev: string[]) => string[]) | string[]) => void;
+  onChecked: (slug: string) => void;
   name: string;
 }) => {
   return (
@@ -18,12 +20,13 @@ export const CheckboxItem = ({
         id={slug}
         checked={checked}
         onCheckedChange={() => {
-          setSelectedItems((prev: string[]) => {
-            if (prev.includes(slug)) {
-              return prev.filter((item) => item !== slug);
-            }
-            return [...prev, slug];
-          });
+          // setSelectedItems((prev: string[]) => {
+          //   if (prev.includes(slug)) {
+          //     return prev.filter((item) => item !== slug);
+          //   }
+          //   return [...prev, slug];
+          // });
+          onChecked(slug);
         }}
       />
       <label
