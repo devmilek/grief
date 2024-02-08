@@ -2,6 +2,7 @@ import React from "react";
 import { db } from "@/lib/db";
 import { PAGINATION_ITEMS_PER_PAGE } from "@/constants";
 import { HorizontalCard } from "@/components/cards/horizontal-card";
+import { delay } from "@/lib/utils";
 
 interface RecipesFeedProps {
   categoryId: string;

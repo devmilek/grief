@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import React from "react";
+import React, { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Sidebar from "../../../../../components/navigation/sidebar/sidebar";
 import { DrumstickIcon } from "lucide-react";
@@ -9,6 +9,11 @@ import { PAGINATION_ITEMS_PER_PAGE } from "@/constants";
 import SortButton from "@/components/sort-button";
 import RecipesHero from "@/components/recipes-hero";
 import SectionWrapper from "@/components/section-wrapper";
+import { delay } from "@/lib/utils";
+import {
+  HorizontalCardSkeleton,
+  HorizontalCardSkeletonFeed,
+} from "@/components/cards/horizontal-card";
 
 export const generateMetadata = async ({
   params,
@@ -81,11 +86,13 @@ const Page = async ({ params, searchParams }: CategoryPageProps) => {
           </header>
           {category._count.recipes > 0 ? (
             <>
-              <RecipesFeed
-                categoryId={category.id}
-                orderBy={orderBy}
-                currentPage={currentPage}
-              />
+              <Suspense fallback={<HorizontalCardSkeletonFeed count={5} />}>
+                <RecipesFeed
+                  categoryId={category.id}
+                  orderBy={orderBy}
+                  currentPage={currentPage}
+                />
+              </Suspense>
               <Pagination totalPages={totalPages} />
             </>
           ) : (

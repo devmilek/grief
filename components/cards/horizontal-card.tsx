@@ -76,4 +76,14 @@ const HorizontalCardSkeleton = () => {
   );
 };
 
-export { HorizontalCard, HorizontalCardSkeleton };
+const HorizontalCardSkeletonFeed = ({ count = 4 }: { count?: number }) => {
+  return (
+    <div className="space-y-6 mb-6">
+      {[...Array(count)].map((_, i) => (
+        <HorizontalCardSkeleton key={i} />
+      ))}
+    </div>
+  );
+};
+
+export { HorizontalCard, HorizontalCardSkeleton, HorizontalCardSkeletonFeed };
