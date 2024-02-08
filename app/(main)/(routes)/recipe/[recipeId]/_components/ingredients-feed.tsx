@@ -24,10 +24,13 @@ const IngredientsFeed = async ({ recipeId }: { recipeId: string }) => {
             className="flex items-center space-x-2 py-4 border-b"
           >
             <Checkbox id={ingredient.id} />
-            <Label className="font-medium" htmlFor={ingredient.id}>
+            <Label
+              className="font-medium leading-tight"
+              htmlFor={ingredient.id}
+            >
               {ingredient.quantity} {ingredient.unit}{" "}
               <span className="font-normal text-neutral-600">
-                ({ingredient.name})
+                {ingredient.name}
               </span>
             </Label>
           </div>
