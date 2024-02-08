@@ -15,7 +15,7 @@ const NavbarSearch = ({
   onSearch?: () => void;
 }) => {
   const [search, setSearch] = React.useState("");
-  const { replace } = useRouter();
+  const { push } = useRouter();
   const searchParams = useSearchParams();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,7 +23,7 @@ const NavbarSearch = ({
     if (search) {
       const params = new URLSearchParams(searchParams);
       params.set("q", search);
-      replace(`/search?${params.toString()}`);
+      push(`/search?${params.toString()}`);
       setSearch("");
     }
     if (onSearch) onSearch();
