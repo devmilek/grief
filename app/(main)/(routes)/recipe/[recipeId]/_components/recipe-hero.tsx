@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import ShareRecipeButton from "./share-recipe-button";
+import SaveRecipeButton from "./save-recipe-button";
 
 interface RecipeHeroProps {
   recipe: Recipe & {
@@ -69,10 +70,7 @@ const RecipeHero = ({ recipe }: RecipeHeroProps) => {
           {recipe.description}
         </p>
         <div className="w-full flex items-center justify-between pt-3 border-t">
-          <Button variant="ghost">
-            <Bookmark className="h-4 w-4 mr-2" />
-            Zapisz przepis
-          </Button>
+          <SaveRecipeButton recipeId={recipe.id} />
           <ShareRecipeButton recipeId={recipe.id} />
         </div>
       </div>

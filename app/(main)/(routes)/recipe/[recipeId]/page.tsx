@@ -54,7 +54,7 @@ const page = async ({ params }: { params: { recipeId: string } }) => {
   }
 
   return (
-    <section className="container">
+    <section className="">
       <RecipeHero recipe={recipe} />
       <div className="flex flex-col-reverse lg:flex-row gap-8 mt-10">
         <div className="space-y-10 flex-1">

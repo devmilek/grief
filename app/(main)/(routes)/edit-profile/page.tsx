@@ -16,7 +16,7 @@ const SettingsPage = async () => {
     return redirect("/");
   }
   return (
-    <section className="container max-w-2xl pt-10">
+    <section className="max-w-2xl mx-auto pt-10">
       <h1 className="font-display text-3xl">Ustawienia konta</h1>
       <p className="text-sm text-neutral-600 mt-1 mb-6">
         Zaktualizuj swoję zdjęcie oraz dane osobowe tutaj.

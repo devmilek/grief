@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 interface RecipesHeroProps {
-  headline: string;
+  headline?: string;
   heading: string;
   imageSrc?: string;
 }

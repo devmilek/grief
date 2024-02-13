@@ -79,7 +79,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
   console.log(recipes);
 
   return (
-    <div className="container space-y-6">
+    <div className="space-y-6">
       {searchQuery && (
         <RecipesHero headline="Wyniki wyszukiwania dla" heading={searchQuery} />
       )}

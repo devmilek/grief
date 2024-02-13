@@ -14,6 +14,7 @@ import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
   Book,
+  BookmarkIcon,
   LogOut,
   PencilRulerIcon,
   Plus,
@@ -67,6 +68,12 @@ const UserDropdown = ({ profile }: UserButtonProps) => {
             <Link href="/your-recipes">
               <Book className="mr-2 w-4 h-4" />
               <span>Zarządzaj przepisami</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/saved-recipes">
+              <BookmarkIcon className="mr-2 w-4 h-4" />
+              <span>Zapisane przepisy</span>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>

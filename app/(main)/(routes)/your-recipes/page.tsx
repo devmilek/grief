@@ -33,7 +33,7 @@ const YourRecipesPage = async ({ searchParams }: YourRecipesPageProps) => {
   const sortOrder = searchParams?.sortOrder || "asc";
 
   return (
-    <section className="container">
+    <section>
       <h1 className="font-display text-3xl mb-6">Twoje przepisy</h1>
       <div className="grid grid-cols sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="p-6 rounded-xl bg-white border">

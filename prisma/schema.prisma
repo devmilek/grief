@@ -23,7 +23,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
 
-  recipes Recipe[]
+  recipes      Recipe[]
+  savedRecipes UserSavedRecipe[]
 }
 
 model Session {
@@ -107,8 +108,9 @@ model Recipe {
   cuisines  CuisinesOnRecipes[]
   diets     DietsOnRecipes[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  savedBy   UserSavedRecipe[]
 
   @@index([categoryId])
   @@index([userId])
@@ -219,4 +221,16 @@ model DietsOnRecipes {
   @@id([recipeId, dietId])
   @@index([dietId])
   @@index([recipeId])
+}
+
+model UserSavedRecipe {
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  @@id([recipeId])
+  @@index([recipeId])
+  @@index([userId])
 }

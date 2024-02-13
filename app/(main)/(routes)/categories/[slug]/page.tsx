@@ -9,11 +9,7 @@ import { PAGINATION_ITEMS_PER_PAGE } from "@/constants";
 import SortButton from "@/components/sort-button";
 import RecipesHero from "@/components/recipes-hero";
 import SectionWrapper from "@/components/section-wrapper";
-import { delay } from "@/lib/utils";
-import {
-  HorizontalCardSkeleton,
-  HorizontalCardSkeletonFeed,
-} from "@/components/cards/horizontal-card";
+import { HorizontalCardSkeletonFeed } from "@/components/cards/horizontal-card";
 
 export const generateMetadata = async ({
   params,
@@ -72,7 +68,7 @@ const Page = async ({ params, searchParams }: CategoryPageProps) => {
   );
 
   return (
-    <div className="container">
+    <div className="">
       <RecipesHero
         headline="Przepisy z kategorią"
         heading={category.name}

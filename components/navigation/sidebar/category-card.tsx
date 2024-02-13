@@ -22,16 +22,13 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
     >
       <div className="relative z-10 w-full h-full p-8 flex text-white justify-between items-center bg-black/60">
         <h1 className="text-lg font-medium mt-1">{category.name}</h1>
-        {/* <div className="px-3 py-2 rounded-full bg-black/40">
-          {category._count.recipes}
-        </div> */}
       </div>
       {category.image && (
         <Image
           src={category.image}
           alt={"Zdjęcie kategorii " + category.name}
-          width={300}
-          height={200}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="w-full h-full object-cover absolute inset-0 group-hover:scale-105 transition"
         />
       )}
