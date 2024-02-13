@@ -1,0 +1,124 @@
+[
+  {
+    "name": "Chleb pszenny z pestkami słonecznika",
+    "description": "Pyszny chleb pszenny z chrupiącymi pestkami słonecznika. Idealny do śniadania lub jako dodatek do obiadu.",
+    "image": "chleb_pszenny.jpg",
+    "difficulty": "MEDIUM",
+    "preparationTime": 180,
+    "servings": 10,
+    "ingredients": [
+      {"quantity": 500, "unit": "g", "name": "mąka pszenna"},
+      {"quantity": 300, "unit": "ml", "name": "ciepła woda"},
+      {"quantity": 10, "unit": "g", "name": "drożdże"},
+      {"quantity": 100, "unit": "g", "name": "pestki słonecznika"},
+      {"quantity": 10, "unit": "g", "name": "sól"},
+      {"quantity": 1, "unit": "łyżka", "name": "cukier"}
+    ],
+    "steps": [
+      {"description": "Rozpuść drożdże w ciepłej wodzie z cukrem i odstaw na 10 minut, aby zaczęły pracować.", "position": 1},
+      {"description": "W dużej misce wymieszaj mąkę pszenną, sól i pestki słonecznika.", "position": 2},
+      {"description": "Dodaj rozpuszczone drożdże do mąki i zagnieć elastyczne ciasto.", "position": 3},
+      {"description": "Przykryj ciasto ściereczką i pozostaw do wyrośnięcia na około 1,5 godziny.", "position": 4},
+      {"description": "Po wyrośnięciu uformuj chleb, umieść go w foremce i pozostaw jeszcze na 30 minut.", "position": 5},
+      {"description": "Rozgrzej piekarnik do 200°C. Piecz chleb przez około 30-40 minut, aż będzie złocisty.", "position": 6},
+      {"description": "Odstaw chleb do ostygnięcia przed krojeniem.", "position": 7}
+    ]
+  },
+  {
+    "name": "Pampuchy z czosnkiem",
+    "description": "Puszyste pampuchy pełne smaku czosnku, idealne do zup lub jako samodzielne danie.",
+    "image": "pampuchy.jpg",
+    "difficulty": "EASY",
+    "preparationTime": 90,
+    "servings": 6,
+    "ingredients": [
+      {"quantity": 500, "unit": "g", "name": "mąka pszenna"},
+      {"quantity": 250, "unit": "ml", "name": "ciepła woda"},
+      {"quantity": 10, "unit": "g", "name": "drożdże"},
+      {"quantity": 3, "unit": "ząbki", "name": "czosnek"},
+      {"quantity": 50, "unit": "g", "name": "masło"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "sól"}
+    ],
+    "steps": [
+      {"description": "Rozpuść drożdże w ciepłej wodzie i pozostaw na 10 minut.", "position": 1},
+      {"description": "W dużej misce wymieszaj mąkę z solą. Dodaj rozpuszczone drożdże i zagnieć ciasto.", "position": 2},
+      {"description": "Odstaw ciasto na 30 minut do wyrośnięcia.", "position": 3},
+      {"description": "Uformuj pampuchy i włóż po jednym ząbku czosnku do środka każdego.", "position": 4},
+      {"description": "Gotuj pampuchy na parze przez 15-20 minut.", "position": 5},
+      {"description": "Podawaj pampuchy polane roztopionym masłem.", "position": 6}
+    ]
+  },
+  {
+    "name": "Bagietka francuska",
+    "description": "Tradycyjna francuska bagietka o chrupiącej skórce i miękkim wnętrzu. Doskonała jako dodatek do sałatek i dań mięsnych.",
+    "image": "bagietka_francuska.jpg",
+    "difficulty": "HARD",
+    "preparationTime": 240,
+    "servings": 4,
+    "ingredients": [
+      {"quantity": 500, "unit": "g", "name": "mąka pszenna"},
+      {"quantity": 350, "unit": "ml", "name": "woda"},
+      {"quantity": 10, "unit": "g", "name": "drożdże"},
+      {"quantity": 10, "unit": "g", "name": "sól"}
+    ],
+    "steps": [
+      {"description": "Rozpuść drożdże w ciepłej wodzie i pozostaw na 10 minut, aż się aktywują.", "position": 1},
+      {"description": "W dużej misce wymieszaj mąkę z solą. Dodaj rozpuszczone drożdże i zagnieć ciasto.", "position": 2},
+      {"description": "Odstaw ciasto na 2 godziny do wyrośnięcia.", "position": 3},
+      {"description": "Po wyrośnięciu uformuj bagietkę i pozostaw do ponownego wyrośnięcia na 30 minut.", "position": 4},
+      {"description": "Rozgrzej piekarnik do 220°C. Przed pieczeniem naciągnij ciasto i włóż do gorącego piekarnika.", "position": 5},
+      {"description": "Piecz bagietkę przez 20-25 minut, aż będzie złocista.", "position": 6},
+      {"description": "Odstaw bagietkę do ostygnięcia przed podaniem.", "position": 7}
+    ]
+  },
+  {
+    "name": "Bułeczki drożdżowe z sezamem",
+    "description": "Puszyste bułeczki drożdżowe posypane chrupiącym sezamem. Idealne na śniadanie lub jako przekąska.",
+    "image": "buleczki_drozdzowe.jpg",
+    "difficulty": "MEDIUM",
+    "preparationTime": 120,
+    "servings": 8,
+    "ingredients": [
+      {"quantity": 500, "unit": "g", "name": "mąka pszenna"},
+      {"quantity": 300, "unit": "ml", "name": "ciepłe mleko"},
+      {"quantity": 10, "unit": "g", "name": "drożdże"},
+      {"quantity": 50, "unit": "g", "name": "masło"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "sól"},
+      {"quantity": 2, "unit": "łyżki", "name": "sezam"}
+    ],
+    "steps": [
+      {"description": "Rozpuść drożdże w ciepłym mleku i pozostaw na 10 minut, aż się aktywują.", "position": 1},
+      {"description": "W dużej misce wymieszaj mąkę z solą. Dodaj rozpuszczone drożdże i masło, zagnieć ciasto.", "position": 2},
+      {"description": "Odstaw ciasto na 1 godzinę do wyrośnięcia.", "position": 3},
+      {"description": "Uformuj bułeczki, posyp je sezamem i pozostaw do ponownego wyrośnięcia na 30 minut.", "position": 4},
+      {"description": "Rozgrzej piekarnik do 180°C. Piecz bułeczki przez 15-20 minut, aż staną się złociste.", "position": 5},
+      {"description": "Odstaw bułeczki do ostygnięcia przed podaniem.", "position": 6}
+    ]
+  },
+  {
+    "name": "Pączki domowe z nadzieniem różanym",
+    "description": "Puchate pączki domowej roboty, nadziewane aromatycznym dżemem różanym. Idealne na karnawałowe przyjęcia.",
+    "image": "paczki_domowe.jpg",
+    "difficulty": "HARD",
+    "preparationTime": 180,
+    "servings": 12,
+    "ingredients": [
+      {"quantity": 500, "unit": "g", "name": "mąka pszenna"},
+      {"quantity": 250, "unit": "ml", "name": "ciepłe mleko"},
+      {"quantity": 10, "unit": "g", "name": "drożdże"},
+      {"quantity": 50, "unit": "g", "name": "cukier"},
+      {"quantity": 2, "unit": "jajka"},
+      {"quantity": 50, "unit": "g", "name": "masło"},
+      {"quantity": 200, "unit": "g", "name": "dżem różany"}
+    ],
+    "steps": [
+      {"description": "Rozpuść drożdże w ciepłym mleku z cukrem i pozostaw na 10 minut, aż się aktywują.", "position": 1},
+      {"description": "W dużej misce wymieszaj mąkę z solą. Dodaj rozpuszczone drożdże, jajka i masło, zagnieć ciasto.", "position": 2},
+      {"description": "Odstaw ciasto na 1,5 godziny do wyrośnięcia.", "position": 3},
+      {"description": "Uformuj małe kulki z ciasta, każdą rozłóż na blasze i pozostaw na 30 minut do ponownego wyrośnięcia.", "position": 4},
+      {"description": "Rozgrzej olej w głębokim garnku. Smaż pączki na złoty kolor, odwracając, aby się równomiernie zarumieniły.", "position": 5},
+      {"description": "Odstaw pączki na papierowym ręczniku, aby odsączyć nadmiar tłuszczu.", "position": 6},
+      {"description": "Po wystygnięciu nadziej pączki dżemem różanym i posyp cukrem pudrem.", "position": 7}
+    ]
+  }
+]

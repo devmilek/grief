@@ -1,0 +1,119 @@
+[
+  {
+    "name": "Egzotyczne Smoothie Mango-Turmeric",
+    "description": "Egzotyczne i orzeźwiające smoothie z mango i kurkumą.",
+    "image": "smoothie_mango_turmeric.jpg",
+    "difficulty": "EASY",
+    "preparationTime": 10,
+    "servings": 2,
+    "ingredients": [
+      {"quantity": 2, "unit": "sztuki", "name": "mango"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "kurkuma (świeża lub mielona)"},
+      {"quantity": 1, "unit": "szklanka", "name": "mleko kokosowe"},
+      {"quantity": 1, "unit": "szklanka", "name": "sok pomarańczowy"},
+      {"quantity": 1, "unit": "łyżka", "name": "miód"},
+      {"quantity": 1, "unit": "kawałek", "name": "imbir (opcjonalnie)"},
+      {"quantity": 1, "unit": "garść", "name": "lód"}
+    ],
+    "steps": [
+      {"description": "Obierz i pokrój mango."},
+      {"description": "Włóż mango do blendera razem z pozostałymi składnikami."},
+      {"description": "Zblenduj aż do uzyskania jednolitej konsystencji."},
+      {"description": "Podawaj schłodzone."}
+    ]
+  },
+  {
+    "name": "Kwiatowy Napój Hibiskusowy",
+    "description": "Napój o wyrazistym smaku hibiskusa z nutką cytryny.",
+    "image": "hibiscus_drink.jpg",
+    "difficulty": "MEDIUM",
+    "preparationTime": 20,
+    "servings": 4,
+    "ingredients": [
+      {"quantity": 4, "unit": "łyżki", "name": "suszone kwiaty hibiskusa"},
+      {"quantity": 4, "unit": "szklanki", "name": "woda"},
+      {"quantity": 2, "unit": "łyżki", "name": "miód (opcjonalnie)"},
+      {"quantity": 1, "unit": "sztuka", "name": "cytryna (pokrojona w plastry)"}
+    ],
+    "steps": [
+      {"description": "W garnku zagotuj wodę."},
+      {"description": "Dodaj kwiaty hibiskusa i ewentualnie miód."},
+      {"description": "Gotuj na małym ogniu przez około 10 minut."},
+      {"description": "Zdejmij z ognia i ostudź."},
+      {"description": "Podawaj z plasterkami cytryny, schłodzone lub z lodem."}
+    ]
+  },
+  {
+    "name": "Rześki Napój Arbuzowy z Miętą",
+    "description": "Orzeźwiający napój z soczystego arbuza i świeżej mięty.",
+    "image": "watermelon_mint_drink.jpg",
+    "difficulty": "EASY",
+    "preparationTime": 15,
+    "servings": 6,
+    "ingredients": [
+      {"quantity": 1, "unit": "kg", "name": "arbuzy (bez pestek)"},
+      {"quantity": 1, "unit": "garść", "name": "świeża mięta"},
+      {"quantity": 1, "unit": "szklanka", "name": "woda gazowana"},
+      {"quantity": 1, "unit": "sztuka", "name": "limonka (wyciśnięty sok)"},
+      {"quantity": 1, "unit": "sztuka", "name": "cytryna (wyciśnięty sok)"},
+      {"quantity": 1, "unit": "łyżka", "name": "cukier (opcjonalnie)"},
+      {"quantity": 1, "unit": "garść", "name": "lód"}
+    ],
+    "steps": [
+      {"description": "Pokrój arbuza na kawałki."},
+      {"description": "Włóż arbuza i miętę do blendera i zblenduj."},
+      {"description": "Przecedź przez drobne sitko, aby usunąć pestki."},
+      {"description": "Wlej sok z arbuza do dzbanka i wymieszaj z sokiem z limonki i cytryny."},
+      {"description": "Dodaj wodę gazowaną i ewentualnie cukier, wymieszaj."},
+      {"description": "Podawaj schłodzone z kostkami lodu."}
+    ]
+  },
+  {
+    "name": "Kakao Chia Shake",
+    "description": "Bogate w białko i składniki odżywcze shake na bazie kakao i nasion chia.",
+    "image": "cacao_chia_shake.jpg",
+    "difficulty": "MEDIUM",
+    "preparationTime": 5,
+    "servings": 2,
+    "ingredients": [
+      {"quantity": 2, "unit": "łyżki", "name": "nasiona chia"},
+      {"quantity": 2, "unit": "szklanki", "name": "mleko roślinne (np. migdałowe)"},
+      {"quantity": 2, "unit": "łyżki", "name": "kakao w proszku"},
+      {"quantity": 1, "unit": "łyżka", "name": "miód (opcjonalnie)"},
+      {"quantity": 1, "unit": "łyżka", "name": "orzechy laskowe (posiekane)"},
+      {"quantity": 1, "unit": "łyżka", "name": "cynamon (opcjonalnie)"},
+      {"quantity": 1, "unit": "garść", "name": "lód"}
+    ],
+    "steps": [
+      {"description": "W małej miseczce wymieszaj nasiona chia z 1/2 szklanki mleka roślinnego."},
+      {"description": "Odstaw na około 15 minut, aby nasiona chia napęczniały."},
+      {"description": "Włóż napęczniałe nasiona chia, pozostałe mleko, kakao, i ewentualnie miód do blendera."},
+      {"description": "Blenduj aż do uzyskania jednolitej konsystencji."},
+      {"description": "Podawaj posypane posiekanymi orzechami laskowymi i ewentualnie cynamonem."}
+    ]
+  },
+  {
+    "name": "Zielony Koktajl Detoks",
+    "description": "Oczyszczający koktajl zielony pełen witamin i minerałów.",
+    "image": "green_detox_smoothie.jpg",
+    "difficulty": "HARD",
+    "preparationTime": 15,
+    "servings": 2,
+    "ingredients": [
+      {"quantity": 2, "unit": "szklanki", "name": "szpinak"},
+      {"quantity": 1, "unit": "szklanka", "name": "jabłka (pokrojone w kostkę)"},
+      {"quantity": 1, "unit": "sztuka", "name": "banan"},
+      {"quantity": 1, "unit": "sztuka", "name": "awokado"},
+      {"quantity": 1, "unit": "szklanka", "name": "mleko kokosowe"},
+      {"quantity": 1, "unit": "szklanka", "name": "woda kokosowa"},
+      {"quantity": 1, "unit": "sztuka", "name": "kiwi (obrane i pokrojone)"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "migdały (posiekane)"},
+      {"quantity": 1, "unit": "łyżka", "name": "miodu (opcjonalnie)"}
+    ],
+    "steps": [
+      {"description": "Włóż szpinak, jabłko, banan, awokado, mleko kokosowe, wodę kokosową i ewentualnie miód do blendera."},
+      {"description": "Blenduj aż do uzyskania gładkiej konsystencji."},
+      {"description": "Podawaj w szklankach, udekorowane pokrojonym kiwi i posiekanymi migdałami."}
+    ]
+  }
+]

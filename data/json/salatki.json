@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Sałatka z grillowanym kurczakiem i awokado",
+    "description": "Pyszna sałatka z soczystym kurczakiem z grilla, kremowym awokado i świeżymi warzywami. Idealna na letnie dni!",
+    "image": "https://example.com/salad1.jpg",
+    "difficulty": "MEDIUM",
+    "preparationTime": 30,
+    "servings": 4,
+    "ingredients": [
+      {"quantity": 2, "unit": "sztuki", "name": "piersi z kurczaka"},
+      {"quantity": 2, "unit": "łyżki", "name": "oliwa z oliwek"},
+      {"quantity": 2, "unit": "sztuki", "name": "awokado"},
+      {"quantity": 1, "unit": "sztuka", "name": "pomidor"},
+      {"quantity": 1, "unit": "sztuka", "name": "ogórek"},
+      {"quantity": 1, "unit": "sztuka", "name": "czerwona cebula"},
+      {"quantity": 1, "unit": "garść", "name": "mieszana sałata"},
+      {"quantity": 2, "unit": "łyżki", "name": "sok z cytryny"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "miód"},
+      {"quantity": 1, "unit": "szczypta", "name": "sól"},
+      {"quantity": 1, "unit": "szczypta", "name": "pieprz"}
+    ],
+    "steps": [
+      {"description": "Grilluj kurczaka na patelni grillowej lub na grillu przez około 6-8 minut z każdej strony, aż będzie gotowy."},
+      {"description": "Pokrój awokado, pomidora, ogórka i czerwoną cebulę w kostkę."},
+      {"description": "W dużej misce wymieszaj sok z cytryny, oliwę z oliwek, miód, sól i pieprz."},
+      {"description": "Dodaj pokrojone warzywa i sałatę do miski z sosem, delikatnie wymieszaj."},
+      {"description": "Na talerzach ułóż sałatę, na wierzchu połóż kawałki grillowanego kurczaka i podawaj."}
+    ]
+  },
+  {
+    "name": "Sałatka grecka z fetą",
+    "description": "Tradycyjna grecka sałatka z chrupiącymi warzywami, oliwkami, serem fetą i aromatycznym dressingiem. Idealna jako lekki posiłek lub dodatek do grillowanych dań.",
+    "image": "https://example.com/salad2.jpg",
+    "difficulty": "EASY",
+    "preparationTime": 20,
+    "servings": 6,
+    "ingredients": [
+      {"quantity": 1, "unit": "sztuka", "name": "ogórek"},
+      {"quantity": 4, "unit": "sztuki", "name": "pomidory"},
+      {"quantity": 1, "unit": "sztuka", "name": "czerwona cebula"},
+      {"quantity": 200, "unit": "gram", "name": "ser feta"},
+      {"quantity": 100, "unit": "gram", "name": "oliwki"},
+      {"quantity": 1, "unit": "garść", "name": "mieszana sałata"},
+      {"quantity": 2, "unit": "łyżki", "name": "oliwa z oliwek"},
+      {"quantity": 1, "unit": "łyżka", "name": "ocet balsamiczny"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "suszone oregano"},
+      {"quantity": 1, "unit": "szczypta", "name": "sól"},
+      {"quantity": 1, "unit": "szczypta", "name": "pieprz"}
+    ],
+    "steps": [
+      {"description": "Pokrój ogórka, pomidory, cebulę i fetę w kostkę."},
+      {"description": "W dużej misce wymieszaj oliwę z oliwek, ocet balsamiczny, suszone oregano, sól i pieprz."},
+      {"description": "Dodaj pokrojone warzywa, oliwki i sałatę do miski z sosem, delikatnie wymieszaj."},
+      {"description": "Na wierzchu połóż kawałki sera feta."},
+      {"description": "Sałatkę podawaj schłodzoną."}
+    ]
+  },
+  {
+    "name": "Sałatka z grillowanymi warzywami",
+    "description": "Zdrowa sałatka z różnymi grillowanymi warzywami, podawana z aromatycznym dressingiem. Doskonała jako danie główne lub jako dodatek do grillowanych mięs.",
+    "image": "https://example.com/salad3.jpg",
+    "difficulty": "MEDIUM",
+    "preparationTime": 40,
+    "servings": 4,
+    "ingredients": [
+      {"quantity": 1, "unit": "sztuka", "name": "bakłażan"},
+      {"quantity": 1, "unit": "sztuka", "name": "cukinia"},
+      {"quantity": 1, "unit": "sztuka", "name": "papryka czerwona"},
+      {"quantity": 1, "unit": "sztuka", "name": "papryka żółta"},
+      {"quantity": 1, "unit": "sztuka", "name": "papryka zielona"},
+      {"quantity": 2, "unit": "łyżki", "name": "oliwa z oliwek"},
+      {"quantity": 2, "unit": "łyżki", "name": "ocet balsamiczny"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "suszone zioła prowansalskie"},
+      {"quantity": 1, "unit": "szczypta", "name": "sól"},
+      {"quantity": 1, "unit": "szczypta", "name": "pieprz"}
+    ],
+    "steps": [
+      {"description": "Pokrój bakłażana, cukinię i papryki na plasterki."},
+      {"description": "Na rozgrzanym grillu grilluj warzywa z obu stron przez około 5-7 minut."},
+      {"description": "W małej misce wymieszaj oliwę z oliwek, ocet balsamiczny, suszone zioła prowansalskie, sól i pieprz."},
+      {"description": "Po zgrillowaniu warzyw połącz je z sosem, delikatnie wymieszaj."},
+      {"description": "Podawaj sałatkę ciepłą lub schłodzoną."}
+    ]
+  },
+  {
+    "name": "Sałatka z quinoa i warzywami",
+    "description": "Pyszna i pożywna sałatka z białą quinoa, warzywami, orzechami włoskimi i świeżymi ziołami. Doskonała jako pełnowartościowy posiłek lub zdrowa przekąska.",
+    "image": "https://example.com/salad4.jpg",
+    "difficulty": "EASY",
+    "preparationTime": 25,
+    "servings": 4,
+    "ingredients": [
+      {"quantity": 1, "unit": "szklanka", "name": "biała quinoa"},
+      {"quantity": 2, "unit": "sztuki", "name": "marchewki"},
+      {"quantity": 1, "unit": "sztuka", "name": "papryka czerwona"},
+      {"quantity": 1, "unit": "sztuka", "name": "papryka żółta"},
+      {"quantity": 1, "unit": "pęczek", "name": "natka pietruszki"},
+      {"quantity": 50, "unit": "gram", "name": "orzechy włoskie"},
+      {"quantity": 2, "unit": "łyżki", "name": "oliwa z oliwek"},
+      {"quantity": 2, "unit": "łyżki", "name": "sok z cytryny"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "miód"},
+      {"quantity": 1, "unit": "szczypta", "name": "sól"},
+      {"quantity": 1, "unit": "szczypta", "name": "pieprz"}
+    ],
+    "steps": [
+      {"description": "Quinoę ugotuj zgodnie z instrukcjami na opakowaniu."},
+      {"description": "Marchewki obierz i pokrój w kostkę, papryki pokrój w kostkę, natkę pietruszki posiekaj."},
+      {"description": "W dużej misce wymieszaj ugotowaną quinoę, pokrojone warzywa i posiekane orzechy."},
+      {"description": "W małej misce wymieszaj oliwę z oliwek, sok z cytryny, miód, sól i pieprz."},
+      {"description": "Dressingiem polej sałatkę i delikatnie wymieszaj."},
+      {"description": "Sałatkę podawaj schłodzoną lub w temperaturze pokojowej."}
+    ]
+  },
+  {
+    "name": "Sałatka z grillowanymi krewetkami i mango",
+    "description": "Ekskluzywna sałatka z soczystymi grillowanymi krewetkami, słodkim mango i świeżymi ziołami. Doskonała na specjalne okazje lub jako lekki posiłek.",
+    "image": "https://example.com/salad5.jpg",
+    "difficulty": "HARD",
+    "preparationTime": 45,
+    "servings": 2,
+    "ingredients": [
+      {"quantity": 200, "unit": "gram", "name": "krewetki"},
+      {"quantity": 1, "unit": "sztuka", "name": "mango"},
+      {"quantity": 1, "unit": "pęczek", "name": "rukola"},
+      {"quantity": 1, "unit": "pęczek", "name": "świeża kolendra"},
+      {"quantity": 1, "unit": "sztuka", "name": "limonka"},
+      {"quantity": 2, "unit": "łyżki", "name": "oliwa z oliwek"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "papryka chili"},
+      {"quantity": 1, "unit": "szczypta", "name": "sól"},
+      {"quantity": 1, "unit": "szczypta", "name": "pieprz"}
+    ],
+    "steps": [
+      {"description": "Obierz i pokrój mango w kostkę."},
+      {"description": "Obrane krewetki umieść na grillu i grilluj przez około 2-3 minuty z każdej strony, aż będą różowe i dobrze ugotowane."},
+      {"description": "W dużej misce wymieszaj rukolę, pokrojone mango i krewetki."},
+      {"description": "W małej misce wymieszaj sok z limonki, oliwę z oliwek, posiekaną paprykę chili, sól i pieprz."},
+      {"description": "Dressingiem polej sałatkę i delikatnie wymieszaj."},
+      {"description": "Na wierzchu posyp posiekaną kolendrą."},
+      {"description": "Podawaj sałatkę od razu, aby zachować świeżość."}
+    ]
+  }
+]

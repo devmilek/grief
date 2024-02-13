@@ -1,0 +1,319 @@
+[
+  {
+    "name": "Tarta z malinami i białą czekoladą",
+    "description": "Delikatna tarta z chrupiącym spodem, kremowym nadzieniem z białej czekolady i świeżymi malinami.",
+    "image": "tarta_maliny_biala_czekolada.jpg",
+    "difficulty": "MEDIUM",
+    "preparationTime": 60,
+    "servings": 8,
+    "ingredients": [
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "maliny"
+      },
+      {
+        "quantity": 150,
+        "unit": "g",
+        "name": "biała czekolada"
+      },
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "mąka"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "masło"
+      },
+      {
+        "quantity": 3,
+        "unit": "",
+        "name": "jajka"
+      }
+    ],
+    "steps": [
+      {
+        "description": "Przygotuj kruchy spód tartowy, mieszając mąkę z roztopionym masłem i jajkami.",
+        "position": 1
+      },
+      {
+        "description": "Wylej ciasto do formy i wstaw do lodówki na 30 minut.",
+        "position": 2
+      },
+      {
+        "description": "Roztop białą czekoladę w kąpieli wodnej.",
+        "position": 3
+      },
+      {
+        "description": "Na kruchy spód tartowy wyłóż roztopioną czekoladę.",
+        "position": 4
+      },
+      {
+        "description": "Ułóż na czekoladzie maliny.",
+        "position": 5
+      },
+      {
+        "description": "Piecz tartę w piekarniku nagrzanym do 180°C przez około 25-30 minut.",
+        "position": 6
+      },
+      {
+        "description": "Po upieczeniu pozostaw do ostygnięcia przed podaniem.",
+        "position": 7
+      }
+    ]
+  },
+  {
+    "name": "Pavlova z owocami",
+    "description": "Lekkie i delikatne bezy, podawane z kremem śmietankowym i świeżymi owocami sezonowymi.",
+    "image": "pavlova_owoce.jpg",
+    "difficulty": "EASY",
+    "preparationTime": 90,
+    "servings": 6,
+    "ingredients": [
+      {
+        "quantity": 4,
+        "unit": "",
+        "name": "białka jaj"
+      },
+      {
+        "quantity": 250,
+        "unit": "g",
+        "name": "cukier"
+      },
+      {
+        "quantity": 300,
+        "unit": "ml",
+        "name": "śmietana kremówka"
+      },
+      {
+        "quantity": 1,
+        "unit": "łyżeczka",
+        "name": "ocet winny"
+      },
+      {
+        "quantity": 1,
+        "unit": "łyżka",
+        "name": "mąka ziemniaczana"
+      }
+    ],
+    "steps": [
+      {
+        "description": "Ubij białka na sztywno, stopniowo dodając cukier.",
+        "position": 1
+      },
+      {
+        "description": "Dodaj ocet winny i mąkę ziemniaczaną, delikatnie mieszając.",
+        "position": 2
+      },
+      {
+        "description": "Formuj bezy na blasze wyłożonej papierem do pieczenia.",
+        "position": 3
+      },
+      {
+        "description": "Piec bezy w piekarniku nagrzanym do 120°C przez około 90 minut.",
+        "position": 4
+      },
+      {
+        "description": "Ubij śmietanę kremówkę na sztywno.",
+        "position": 5
+      },
+      {
+        "description": "Na każdą bezę nałóż krem śmietankowy i posyp świeżymi owocami.",
+        "position": 6
+      },
+      {
+        "description": "Podawaj od razu.",
+        "position": 7
+      }
+    ]
+  },
+  {
+    "name": "Ciasto Sernik z malinami",
+    "description": "Puszyste ciasto sernikowe z dodatkiem świeżych malin, idealne na letnie popołudnie.",
+    "image": "ciasto_sernik_maliny.jpg",
+    "difficulty": "MEDIUM",
+    "preparationTime": 75,
+    "servings": 10,
+    "ingredients": [
+      {
+        "quantity": 500,
+        "unit": "g",
+        "name": "ser twarogowy"
+      },
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "cukier"
+      },
+      {
+        "quantity": 4,
+        "unit": "",
+        "name": "jajka"
+      },
+      {
+        "quantity": 200,
+        "unit": "ml",
+        "name": "śmietana 30%"
+      },
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "maliny"
+      }
+    ],
+    "steps": [
+      {
+        "description": "Ubij jajka z cukrem na puszystą masę.",
+        "position": 1
+      },
+      {
+        "description": "Dodaj ser twarogowy i zmiksuj.",
+        "position": 2
+      },
+      {
+        "description": "Wlej śmietanę i kontynuuj miksowanie.",
+        "position": 3
+      },
+      {
+        "description": "Delikatnie wmieszaj maliny do masy serowej.",
+        "position": 4
+      },
+      {
+        "description": "Przełóż masę do formy i piecz w piekarniku nagrzanym do 160°C przez około 60 minut.",
+        "position": 5
+      },
+      {
+        "description": "Po upieczeniu pozostaw ciasto do ostygnięcia przed podaniem.",
+        "position": 6
+      }
+    ]
+  },
+  {
+    "name": "Clafoutis z czereśniami",
+    "description": "Tradycyjne francuskie ciasto z czereśniami, idealne na romantyczną kolację.",
+    "image": "clafoutis_czeresnie.jpg",
+    "difficulty": "EASY",
+    "preparationTime": 50,
+    "servings": 6,
+    "ingredients": [
+      {
+        "quantity": 500,
+        "unit": "g",
+        "name": "czereśnie"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "cukier"
+      },
+      {
+        "quantity": 3,
+        "unit": "",
+        "name": "jajka"
+      },
+      {
+        "quantity": 80,
+        "unit": "g",
+        "name": "mąka"
+      },
+      {
+        "quantity": 250,
+        "unit": "ml",
+        "name": "mleko"
+      }
+    ],
+    "steps": [
+      {
+        "description": "Umieść czereśnie w formie do pieczenia, posypaną cukrem.",
+        "position": 1
+      },
+      {
+        "description": "Ubij jajka z cukrem na puszystą masę.",
+        "position": 2
+      },
+      {
+        "description": "Dodaj mąkę i mleko, mieszając do uzyskania gładkiego ciasta.",
+        "position": 3
+      },
+      {
+        "description": "Wlej ciasto nad czereśnie.",
+        "position": 4
+      },
+      {
+        "description": "Piec w piekarniku nagrzanym do 180°C przez około 35-40 minut.",
+        "position": 5
+      },
+      {
+        "description": "Podawaj na ciepło z gałką lodów waniliowych.",
+        "position": 6
+      }
+    ]
+  },
+  {
+    "name": "Tiramisu z truskawkami",
+    "description": "Klasyczne włoskie tiramisu w wersji z truskawkami, idealne na letnie wieczory.",
+    "image": "tiramisu_truskawki.jpg",
+    "difficulty": "MEDIUM",
+    "preparationTime": 45,
+    "servings": 4,
+    "ingredients": [
+      {
+        "quantity": 250,
+        "unit": "g",
+        "name": "truskawki"
+      },
+      {
+        "quantity": 250,
+        "unit": "g",
+        "name": "ser mascarpone"
+      },
+      {
+        "quantity": 200,
+        "unit": "ml",
+        "name": "śmietana kremówka"
+      },
+      {
+        "quantity": 100,
+        "unit": "g",
+        "name": "cukier pudr"
+      },
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "biszkopty"
+      }
+    ],
+    "steps": [
+      {
+        "description": "Pokrój truskawki na plasterki.",
+        "position": 1
+      },
+      {
+        "description": "Ubij śmietanę z cukrem pudrem na sztywno.",
+        "position": 2
+      },
+      {
+        "description": "Delikatnie wymieszaj mascarpone z ubitą śmietaną.",
+        "position": 3
+      },
+      {
+        "description": "Na dno szklanek ułóż pokrojone biszkopty, następnie warstwę kremu mascarpone.",
+        "position": 4
+      },
+      {
+        "description": "Dodaj warstwę truskawek.",
+        "position": 5
+      },
+      {
+        "description": "Powtórz warstwy, kończąc kremem i dekorując truskawkami na wierzchu.",
+        "position": 6
+      },
+      {
+        "description": "Wstaw do lodówki na co najmniej 4 godziny przed podaniem.",
+        "position": 7
+      }
+    ]
+  }
+]

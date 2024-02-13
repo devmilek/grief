@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Słodki dżem z papai",
+    "description": "Pyszny dżem z papai, idealny na smarowanie pieczywa lub dodatek do deserów.",
+    "image": "papaya_jam.jpg",
+    "difficulty": "MEDIUM",
+    "preparationTime": 60,
+    "servings": 10,
+    "ingredients": [
+      { "quantity": 2, "unit": "szklanki", "name": "papaja (ugotowana i zmiksowana)" },
+      { "quantity": 1, "unit": "szklanka", "name": "cukier" },
+      { "quantity": 1, "unit": "łyżka", "name": "sok z cytryny" },
+      { "quantity": 1, "unit": "łyżeczka", "name": "pektyna" }
+    ],
+    "steps": [
+      { "description": "W dużym garnku połącz zmiksowaną papają, cukier i sok z cytryny.", "position": 1 },
+      { "description": "Podgrzewaj na średnim ogniu, mieszając, aż cukier się rozpuści.", "position": 2 },
+      { "description": "Dodaj pektynę i gotuj, mieszając, przez kolejne 20-30 minut, aż dżem zgęstnieje.", "position": 3 },
+      { "description": "Przelej gorący dżem do słoików i szczelnie zakręć. Odstaw do wystygnięcia.", "position": 4 }
+    ]
+  },
+  {
+    "name": "Marynowane oliwki ziołowe",
+    "description": "Aromatyczne oliwki marynowane w ziołach, idealne jako przekąska lub dodatek do sałatek.",
+    "image": "marinated_olives.jpg",
+    "difficulty": "EASY",
+    "preparationTime": 15,
+    "servings": 6,
+    "ingredients": [
+      { "quantity": 2, "unit": "szklanki", "name": "zielone oliwki" },
+      { "quantity": 1, "unit": "ząbek", "name": "czosnek (posiekany)" },
+      { "quantity": 2, "unit": "łyżki", "name": "świeże zioła (np. rozmaryn, tymianek, oregano)" },
+      { "quantity": 1, "unit": "szklanka", "name": "oliwa z oliwek" },
+      { "quantity": 1, "unit": "łyżeczka", "name": "sól" }
+    ],
+    "steps": [
+      { "description": "W misce wymieszaj oliwki, posiekany czosnek, zioła i sól.", "position": 1 },
+      { "description": "Zalej oliwą z oliwek i delikatnie wymieszaj.", "position": 2 },
+      { "description": "Przełóż oliwki do słoika i przechowuj w lodówce przez co najmniej 24 godziny przed podaniem.", "position": 3 }
+    ]
+  },
+  {
+    "name": "Pikantny sos salsa",
+    "description": "Ostry sos salsa z pomidorów, papryki i cebuli, idealny do nachosów lub jako dodatek do dań meksykańskich.",
+    "image": "salsa.jpg",
+    "difficulty": "EASY",
+    "preparationTime": 20,
+    "servings": 8,
+    "ingredients": [
+      { "quantity": 4, "unit": "średnie", "name": "pomidory (posiekane)" },
+      { "quantity": 1, "unit": "średnia", "name": "cebula (posiekana)" },
+      { "quantity": 1, "unit": "mała", "name": "papryka chilli (posiekana)" },
+      { "quantity": 1, "unit": "pęczek", "name": "świeża kolendra (posiekana)" },
+      { "quantity": 1, "unit": "łyżeczka", "name": "ocet jabłkowy" },
+      { "quantity": 1, "unit": "łyżeczka", "name": "sok z limonki" },
+      { "quantity": 1, "unit": "łyżeczka", "name": "sól" }
+    ],
+    "steps": [
+      { "description": "W misce wymieszaj posiekane pomidory, cebulę, paprykę chilli i kolendrę.", "position": 1 },
+      { "description": "Dodaj ocet jabłkowy, sok z limonki i sól, mieszając dokładnie.", "position": 2 },
+      { "description": "Odstaw sos do lodówki na około 10-15 minut przed podaniem.", "position": 3 }
+    ]
+  },
+  {
+    "name": "Kiszone ogórki z chrupiącą skórką",
+    "description": "Tradycyjne kiszone ogórki przygotowane z chrupiącą skórką, doskonałe jako przekąska lub dodatek do kanapek.",
+    "image": "pickles.jpg",
+    "difficulty": "HARD",
+    "preparationTime": 1440,
+    "servings": 12,
+    "ingredients": [
+      { "quantity": 2, "unit": "kg", "name": "małe ogórki" },
+      { "quantity": 1, "unit": "szklanka", "name": "sól" },
+      { "quantity": 1, "unit": "szklanka", "name": "cukier" },
+      { "quantity": 1, "unit": "garść", "name": "świeża dalia (kwiaty)" },
+      { "quantity": 1, "unit": "garść", "name": "liście wiśni" }
+    ],
+    "steps": [
+      { "description": "Ogórki dokładnie umyj, a następnie delikatnie przekrój na pół, ale nie do końca.", "position": 1 },
+      { "description": "Posyp ogórki solą i cukrem, a następnie delikatnie wymieszaj.", "position": 2 },
+      { "description": "Przełóż ogórki do dużego słoika warstwami, między nimi umieszczając kwiaty dali i liście wiśni.", "position": 3 },
+      { "description": "Zalej ogórki wodą tak, aby były całkowicie zanurzone.", "position": 4 },
+      { "description": "Zamknij słoik i pozostaw w temperaturze pokojowej przez 2-3 dni, a następnie przechowuj w lodówce przez co najmniej tydzień przed podaniem.", "position": 5 }
+    ]
+  },
+  {
+    "name": "Domowy ketchup z dyni",
+    "description": "Klasyczny ketchup z dodatkiem dyni, idealny do frytek, burgerów lub jako dodatek do dań mięsnych.",
+    "image": "pumpkin_ketchup.jpg",
+    "difficulty": "MEDIUM",
+    "preparationTime": 90,
+    "servings": 8,
+    "ingredients": [
+      { "quantity": 1, "unit": "kg", "name": "dynia (obrana i pokrojona na kawałki)" },
+      { "quantity": 1, "unit": "szklanka", "name": "cukier" },
+      { "quantity": 1, "unit": "szklanka", "name": "ocet jabłkowy" },
+      { "quantity": 1, "unit": "łyżka", "name": "sól" },
+      { "quantity": 1, "unit": "łyżeczka", "name": "imbir mielony" },
+      { "quantity": 1, "unit": "łyżeczka", "name": "mielona czerwona papryka" },
+      { "quantity": 1, "unit": "łyżeczka", "name": "mielony cynamon" }
+    ],
+    "steps": [
+      { "description": "W dużym garnku zagotuj dynię z cukrem, octem jabłkowym i solą.", "position": 1 },
+      { "description": "Gotuj na wolnym ogniu przez około 60-70 minut, aż dynia się rozpadnie.", "position": 2 },
+      { "description": "Dodaj przyprawy: imbir, czerwoną paprykę i cynamon. Gotuj jeszcze przez 10 minut, mieszając.", "position": 3 },
+      { "description": "Zmiksuj ketchup na gładką masę, a następnie przecedź przez sitko.", "position": 4 },
+      { "description": "Przelej do butelek i przechowuj w lodówce.", "position": 5 }
+    ]
+  }
+]
