@@ -6,12 +6,11 @@ import {
 } from "../ui/accordion";
 import { CheckboxItem } from "./checkbox-item";
 
-export const FilterItem = ({
+const FilterItem = ({
   name,
   value,
   items,
   selectedItems,
-  // setSelectedItems,
   onChecked,
 }: {
   name: string;
@@ -22,7 +21,6 @@ export const FilterItem = ({
   }[];
   selectedItems: string[];
   onChecked: (slug: string) => void;
-  // setSelectedItems: (value: string[] | ((prev: string[]) => string[])) => void;
 }) => {
   return (
     <AccordionItem value={value}>
@@ -33,7 +31,6 @@ export const FilterItem = ({
             name={item.name}
             slug={item.slug}
             checked={selectedItems.includes(item.slug)}
-            // setSelectedItems={setSelectedItems}
             key={item.slug}
             onChecked={onChecked}
           />
@@ -42,3 +39,5 @@ export const FilterItem = ({
     </AccordionItem>
   );
 };
+
+export default React.memo(FilterItem);
