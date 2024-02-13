@@ -28,11 +28,11 @@ const CreateRecipeCard = ({ className }: { className?: string }) => {
       </div>
       {/* <button
         onClick={async () => {
-          await seedDb();
+          await seedFromJson();
           toast.success("Seeded db");
         }}
       >
-        test
+        import
       </button> */}
     </Link>
   );
