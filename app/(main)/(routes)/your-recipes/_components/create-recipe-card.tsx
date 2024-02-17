@@ -1,6 +1,6 @@
 "use client";
 
-import { seedDb } from "@/actions/seed-db";
+import { seedDb } from "@/actions/seed-from-json";
 import { ROUTES } from "@/constants";
 import { cn } from "@/lib/utils";
 import { PlusIcon } from "lucide-react";
@@ -26,14 +26,14 @@ const CreateRecipeCard = ({ className }: { className?: string }) => {
           Podziel się z innymi twoim talentem.
         </p>
       </div>
-      {/* <button
+      <button
         onClick={async () => {
-          await seedFromJson();
+          await seedDb();
           toast.success("Seeded db");
         }}
       >
         import
-      </button> */}
+      </button>
     </Link>
   );
 };

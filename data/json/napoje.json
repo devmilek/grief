@@ -16,10 +16,10 @@
       {"quantity": 1, "unit": "garść", "name": "lód"}
     ],
     "steps": [
-      {"description": "Obierz i pokrój mango."},
-      {"description": "Włóż mango do blendera razem z pozostałymi składnikami."},
-      {"description": "Zblenduj aż do uzyskania jednolitej konsystencji."},
-      {"description": "Podawaj schłodzone."}
+      {"description": "Obierz i pokrój mango.", "position": 1},
+      {"description": "Włóż mango do blendera razem z pozostałymi składnikami.", "position": 2},
+      {"description": "Zblenduj aż do uzyskania jednolitej konsystencji.", "position": 3},
+      {"description": "Podawaj schłodzone.", "position": 4}
     ]
   },
   {
@@ -36,11 +36,11 @@
       {"quantity": 1, "unit": "sztuka", "name": "cytryna (pokrojona w plastry)"}
     ],
     "steps": [
-      {"description": "W garnku zagotuj wodę."},
-      {"description": "Dodaj kwiaty hibiskusa i ewentualnie miód."},
-      {"description": "Gotuj na małym ogniu przez około 10 minut."},
-      {"description": "Zdejmij z ognia i ostudź."},
-      {"description": "Podawaj z plasterkami cytryny, schłodzone lub z lodem."}
+      {"description": "W garnku zagotuj wodę.", "position": 1},
+      {"description": "Dodaj kwiaty hibiskusa i ewentualnie miód.", "position": 2},
+      {"description": "Gotuj na małym ogniu przez około 10 minut.", "position": 3},
+      {"description": "Zdejmij z ognia i ostudź.", "position": 4},
+      {"description": "Podawaj z plasterkami cytryny, schłodzone lub z lodem.", "position": 5}
     ]
   },
   {
@@ -60,12 +60,12 @@
       {"quantity": 1, "unit": "garść", "name": "lód"}
     ],
     "steps": [
-      {"description": "Pokrój arbuza na kawałki."},
-      {"description": "Włóż arbuza i miętę do blendera i zblenduj."},
-      {"description": "Przecedź przez drobne sitko, aby usunąć pestki."},
-      {"description": "Wlej sok z arbuza do dzbanka i wymieszaj z sokiem z limonki i cytryny."},
-      {"description": "Dodaj wodę gazowaną i ewentualnie cukier, wymieszaj."},
-      {"description": "Podawaj schłodzone z kostkami lodu."}
+      {"description": "Pokrój arbuza na kawałki.", "position": 1},
+      {"description": "Włóż arbuza i miętę do blendera i zblenduj.", "position": 2},
+      {"description": "Przecedź przez drobne sitko, aby usunąć pestki.", "position": 3},
+      {"description": "Wlej sok z arbuza do dzbanka i wymieszaj z sokiem z limonki i cytryny.", "position": 4},
+      {"description": "Dodaj wodę gazowaną i ewentualnie cukier, wymieszaj.", "position": 5},
+      {"description": "Podawaj schłodzone z kostkami lodu.", "position": 6}
     ]
   },
   {
@@ -85,11 +85,11 @@
       {"quantity": 1, "unit": "garść", "name": "lód"}
     ],
     "steps": [
-      {"description": "W małej miseczce wymieszaj nasiona chia z 1/2 szklanki mleka roślinnego."},
-      {"description": "Odstaw na około 15 minut, aby nasiona chia napęczniały."},
-      {"description": "Włóż napęczniałe nasiona chia, pozostałe mleko, kakao, i ewentualnie miód do blendera."},
-      {"description": "Blenduj aż do uzyskania jednolitej konsystencji."},
-      {"description": "Podawaj posypane posiekanymi orzechami laskowymi i ewentualnie cynamonem."}
+      {"description": "W małej miseczce wymieszaj nasiona chia z 1/2 szklanki mleka roślinnego.","position": 1},
+      {"description": "Odstaw na około 15 minut, aby nasiona chia napęczniały.","position": 2},
+      {"description": "Włóż napęczniałe nasiona chia, pozostałe mleko, kakao, i ewentualnie miód do blendera.","position": 3},
+      {"description": "Blenduj aż do uzyskania jednolitej konsystencji.","position": 4},
+      {"description": "Podawaj posypane posiekanymi orzechami laskowymi i ewentualnie cynamonem.","position": 5}
     ]
   },
   {
@@ -111,9 +111,9 @@
       {"quantity": 1, "unit": "łyżka", "name": "miodu (opcjonalnie)"}
     ],
     "steps": [
-      {"description": "Włóż szpinak, jabłko, banan, awokado, mleko kokosowe, wodę kokosową i ewentualnie miód do blendera."},
-      {"description": "Blenduj aż do uzyskania gładkiej konsystencji."},
-      {"description": "Podawaj w szklankach, udekorowane pokrojonym kiwi i posiekanymi migdałami."}
+      {"description": "Włóż szpinak, jabłko, banan, awokado, mleko kokosowe, wodę kokosową i ewentualnie miód do blendera.", "position": 1},
+      {"description": "Blenduj aż do uzyskania gładkiej konsystencji.", "position": 2},
+      {"description": "Podawaj w szklankach, udekorowane pokrojonym kiwi i posiekanymi migdałami.", "position": 3}
     ]
   }
 ]

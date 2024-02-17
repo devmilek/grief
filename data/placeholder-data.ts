@@ -4,6 +4,7 @@ import {
   CuisinesOnRecipes,
   Diet,
   DietsOnRecipes,
+  Difficulty,
   Ingredient,
   Occasion,
   OccasionsOnRecipes,

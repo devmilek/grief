@@ -107,7 +107,7 @@
       {"quantity": 250, "unit": "ml", "name": "ciepłe mleko"},
       {"quantity": 10, "unit": "g", "name": "drożdże"},
       {"quantity": 50, "unit": "g", "name": "cukier"},
-      {"quantity": 2, "unit": "jajka"},
+      {"quantity": 2, "unit": "", "name": "jajka"},
       {"quantity": 50, "unit": "g", "name": "masło"},
       {"quantity": 200, "unit": "g", "name": "dżem różany"}
     ],

@@ -1,0 +1,421 @@
+[
+  {
+    "name": "Krem z dyni i imbirem",
+    "description": "Delikatny krem z dyni o przyjemnym aromacie imbira.",
+    "image": "krem_dyni_imbir.jpg",
+    "difficulty": "MEDIUM",
+    "preparationTime": 45,
+    "servings": 4,
+    "ingredients": [
+      {
+        "quantity": 1,
+        "unit": "kg",
+        "name": "dynia, obrana i pokrojona w kostkę"
+      },
+      {
+        "quantity": 1,
+        "unit": "łyżeczka",
+        "name": "starty imbir"
+      },
+      {
+        "quantity": 1,
+        "unit": "cebula",
+        "name": "duża cebula, posiekana"
+      },
+      {
+        "quantity": 2,
+        "unit": "ząbki",
+        "name": "czosnek, posiekany"
+      },
+      {
+        "quantity": 4,
+        "unit": "szklanki",
+        "name": "bulion warzywny"
+      },
+      {
+        "quantity": 1,
+        "unit": "szklanka",
+        "name": "mleko kokosowe"
+      },
+      {
+        "quantity": 2,
+        "unit": "łyżki",
+        "name": "oliwa z oliwek"
+      },
+      {
+        "quantity": 1,
+        "unit": "łyżeczka",
+        "name": "curry"
+      },
+      {
+        "quantity": 1,
+        "unit": "łyżka",
+        "name": "sok z limonki"
+      },
+      {
+        "quantity": 1,
+        "unit": "do smaku",
+        "name": "sól i pieprz"
+      }
+    ],
+    "steps": [
+      {
+        "description": "W dużym garnku rozgrzej oliwę, podsmaż cebulę i czosnek przez około 5 minut, aż będą miękkie.",
+        "position": 1
+      },
+      {
+        "description": "Dodaj dynię, imbier i curry, gotuj przez 8-10 minut, mieszając od czasu do czasu.",
+        "position": 2
+      },
+      {
+        "description": "Wlej bulion i mleko kokosowe, gotuj na wolnym ogniu przez kolejne 20-25 minut.",
+        "position": 3
+      },
+      {
+        "description": "Zmiksuj zupę na gładki krem za pomocą blendera ręcznego lub klasycznego blendera.",
+        "position": 4
+      },
+      {
+        "description": "Dodaj sok z limonki oraz dopraw solą i pieprzem do smaku. Podawaj gorącą zupę, udekorowaną świeżą kolendrą.",
+        "position": 5
+      }
+    ]
+  },
+  {
+    "name": "Zupa pomidorowa z pieczonymi paprykami",
+    "description": "Klasyczna zupa pomidorowa wzbogacona o intensywny smak pieczonych papryk.",
+    "image": "zupa_pomidorowa_papryki.jpg",
+    "difficulty": "EASY",
+    "preparationTime": 60,
+    "servings": 6,
+    "ingredients": [
+      {
+        "quantity": 6,
+        "unit": "średnie",
+        "name": "pomidory, obrane i pokrojone na ćwiartki"
+      },
+      {
+        "quantity": 2,
+        "unit": "czerwone",
+        "name": "papryki, pozbawione nasion i pokrojone w paski"
+      },
+      {
+        "quantity": 1,
+        "unit": "duża",
+        "name": "cebula, pokrojona w cienkie piórka"
+      },
+      {
+        "quantity": 2,
+        "unit": "ząbki",
+        "name": "czosnek, posiekany"
+      },
+      {
+        "quantity": 1,
+        "unit": "łyżka",
+        "name": "oliwa z oliwek"
+      },
+      {
+        "quantity": 1,
+        "unit": "litr",
+        "name": "bulion warzywny"
+      },
+      {
+        "quantity": 1,
+        "unit": "łyżeczka",
+        "name": "suszone oregano"
+      },
+      {
+        "quantity": 1,
+        "unit": "łyżeczka",
+        "name": "suszone bazylia"
+      },
+      {
+        "quantity": 1,
+        "unit": "do smaku",
+        "name": "sól i pieprz"
+      },
+      {
+        "quantity": 1,
+        "unit": "szklanka",
+        "name": "śmietana kremówka"
+      },
+      {
+        "quantity": 2,
+        "unit": "łyżki",
+        "name": "posiekana natka pietruszki (do dekoracji)"
+      }
+    ],
+    "steps": [
+      {
+        "description": "Rozgrzej piekarnik do 200°C. Ułóż na blasze do pieczenia pomidory i papryki. Skrop oliwą, posyp solą i pieprzem. Piecz przez 30-40 minut, aż warzywa będą miękkie i lekko zrumienione.",
+        "position": 1
+      },
+      {
+        "description": "W dużym garnku podsmaż cebulę i czosnek na oliwie przez 5 minut.",
+        "position": 2
+      },
+      {
+        "description": "Dodaj pieczone pomidory i papryki, zalej bulionem, dodaj oregano i bazylie. Gotuj przez kolejne 15-20 minut.",
+        "position": 3
+      },
+      {
+        "description": "Zmiksuj zupę na gładki krem za pomocą blendera.",
+        "position": 4
+      },
+      {
+        "description": "Dopraw solą i pieprzem do smaku, dodaj śmietanę i dokładnie wymieszaj.",
+        "position": 5
+      },
+      {
+        "description": "Podawaj zupę posypaną posiekaną natką pietruszki.",
+        "position": 6
+      }
+    ]
+  },
+  {
+    "name": "Krem z brokułów i serem cheddar",
+    "description": "Gładki krem z brokułów z intensywnym smakiem sera cheddar.",
+    "image": "krem_brokuly_cheddar.jpg",
+    "difficulty": "HARD",
+    "preparationTime": 50,
+    "servings": 4,
+    "ingredients": [
+      {
+        "quantity": 500,
+        "unit": "g",
+        "name": "świeże brokuły, podzielone na różyczki"
+      },
+      {
+        "quantity": 1,
+        "unit": "mała",
+        "name": "cebula, posiekana"
+      },
+      {
+        "quantity": 2,
+        "unit": "ząbki",
+        "name": "czosnek, posiekany"
+      },
+      {
+        "quantity": 2,
+        "unit": "łyżki",
+        "name": "masło"
+      },
+      {
+        "quantity": 2,
+        "unit": "łyżki",
+        "name": "mąka"
+      },
+      {
+        "quantity": 500,
+        "unit": "ml",
+        "name": "bulion warzywny"
+      },
+      {
+        "quantity": 250,
+        "unit": "ml",
+        "name": "śmietana kremówka"
+      },
+      {
+        "quantity": 200,
+        "unit": "g",
+        "name": "starty ser cheddar"
+      },
+      {
+        "quantity": 1,
+        "unit": "do smaku",
+        "name": "sól i pieprz"
+      }
+    ],
+    "steps": [
+      {
+        "description": "Gotuj brokuły na parze przez 5-7 minut, aż będą miękkie. Ostudź.",
+        "position": 1
+      },
+      {
+        "description": "W dużym garnku rozgrzej masło. Smaż cebulę i czosnek przez 3-4 minuty, aż będą miękkie.",
+        "position": 2
+      },
+      {
+        "description": "Dodaj mąkę i mieszaj przez 1-2 minuty, aż powstanie gładka masa.",
+        "position": 3
+      },
+      {
+        "description": "Stopniowo wlej bulion, ciągle mieszając, aby nie powstały grudki. Gotuj przez 5 minut, aż sos zgęstnieje.",
+        "position": 4
+      },
+      {
+        "description": "Dodaj brokuły i śmietanę, gotuj przez kolejne 5 minut.",
+        "position": 5
+      },
+      {
+        "description": "Zmiksuj zupę na gładki krem za pomocą blendera.",
+        "position": 6
+      },
+      {
+        "description": "Dodaj ser cheddar, mieszaj aż się rozpuści. Dopraw solą i pieprzem do smaku.",
+        "position": 7
+      }
+    ]
+  },
+  {
+    "name": "Zupa krem z cukinii i grzankami czosnkowymi",
+    "description": "Delikatna zupa krem z cukinii podana z chrupiącymi grzankami z czosnkiem.",
+    "image": "zupa_cukinia_grzanki.jpg",
+    "difficulty": "MEDIUM",
+    "preparationTime": 40,
+    "servings": 4,
+    "ingredients": [
+      {
+        "quantity": 4,
+        "unit": "średnie",
+        "name": "cukinie, obrane i pokrojone w kostkę"
+      },
+      {
+        "quantity": 1,
+        "unit": "mała",
+        "name": "cebula, posiekana"
+      },
+      {
+        "quantity": 2,
+        "unit": "ząbki",
+        "name": "czosnek, posiekany"
+      },
+      {
+        "quantity": 4,
+        "unit": "plasterki",
+        "name": "chleb pszenny"
+      },
+      {
+        "quantity": 2,
+        "unit": "łyżki",
+        "name": "oliwa z oliwek"
+      },
+      {
+        "quantity": 500,
+        "unit": "ml",
+        "name": "bulion warzywny"
+      },
+      {
+        "quantity": 1,
+        "unit": "szklanka",
+        "name": "śmietana kremówka"
+      },
+      {
+        "quantity": 1,
+        "unit": "do smaku",
+        "name": "sól i pieprz"
+      }
+    ],
+    "steps": [
+      {
+        "description": "W garnku podsmaż cebulę i czosnek na oliwie przez 3-4 minuty, aż będą miękkie.",
+        "position": 1
+      },
+      {
+        "description": "Dodaj cukinie i smaż przez kolejne 5 minut.",
+        "position": 2
+      },
+      {
+        "description": "Zalej bulionem i gotuj na małym ogniu przez 20 minut, aż cukinia będzie miękka.",
+        "position": 3
+      },
+      {
+        "description": "W międzyczasie przygotuj grzanki: skrop chleb oliwą z oliwek, posyp posiekanym czosnkiem i podpiecz w piekarniku przez 5-7 minut, aż będą chrupiące.",
+        "position": 4
+      },
+      {
+        "description": "Zupę zmiksuj na gładki krem za pomocą blendera.",
+        "position": 5
+      },
+      {
+        "description": "Dodaj śmietanę, dokładnie wymieszaj. Dopraw solą i pieprzem do smaku.",
+        "position": 6
+      },
+      {
+        "description": "Podawaj zupę gorącą, dekorując ją grzankami z czosnkiem.",
+        "position": 7
+      }
+    ]
+  },
+  {
+    "name": "Zupa krem z marchewki i pomarańczy",
+    "description": "Aksamitna zupa krem z marchewki ożywiona nutą świeżości pomarańczy.",
+    "image": "zupa_marchew_pomarancze.jpg",
+    "difficulty": "EASY",
+    "preparationTime": 35,
+    "servings": 4,
+    "ingredients": [
+      {
+        "quantity": 500,
+        "unit": "g",
+        "name": "marchewki, obrane i pokrojone w kostkę"
+      },
+      {
+        "quantity": 1,
+        "unit": "duża",
+        "name": "cebula, pokrojona w kostkę"
+      },
+      {
+        "quantity": 1,
+        "unit": "ząbek",
+        "name": "czosnek, posiekany"
+      },
+      {
+        "quantity": 1,
+        "unit": "łyżka",
+        "name": "masło"
+      },
+      {
+        "quantity": 1,
+        "unit": "litr",
+        "name": "bulion warzywny"
+      },
+      {
+        "quantity": 1,
+        "unit": "pomarańcza",
+        "name": "sok z pomarańczy"
+      },
+      {
+        "quantity": 1,
+        "unit": "szklanka",
+        "name": "śmietana kremówka"
+      },
+      {
+        "quantity": 1,
+        "unit": "do smaku",
+        "name": "sól i pieprz"
+      },
+      {
+        "quantity": 1,
+        "unit": "do dekoracji",
+        "name": "skórka z pomarańczy"
+      }
+    ],
+    "steps": [
+      {
+        "description": "W dużym garnku rozgrzej masło. Smaż cebulę i czosnek przez 3-4 minuty.",
+        "position": 1
+      },
+      {
+        "description": "Dodaj marchewkę i smaż przez kolejne 5 minut.",
+        "position": 2
+      },
+      {
+        "description": "Zalej bulionem i gotuj na małym ogniu przez 20 minut, aż marchewka będzie miękka.",
+        "position": 3
+      },
+      {
+        "description": "Zmiksuj zupę na gładki krem za pomocą blendera.",
+        "position": 4
+      },
+      {
+        "description": "Dodaj sok z pomarańczy i śmietanę, dokładnie wymieszaj. Dopraw solą i pieprzem do smaku.",
+        "position": 5
+      },
+      {
+        "description": "Podawaj zupę gorącą, dekorując ją skórką z pomarańczy.",
+        "position": 6
+      }
+    ]
+  }
+]

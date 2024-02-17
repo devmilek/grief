@@ -1,0 +1,185 @@
+[
+  {
+    "name": "Krewetki w sosie curry z kokosem",
+    "description": "Delikatne krewetki gotowane w aromatycznym sosie curry z dodatkiem mleczka kokosowego.",
+    "image": "krewetki_curry.jpg",
+    "difficulty": "MEDIUM",
+    "preparationTime": 30,
+    "servings": 4,
+    "ingredients": [
+      {"quantity": 500, "unit": "g", "name": "krewetki"},
+      {"quantity": 1, "unit": "puszka", "name": "mleczko kokosowe"},
+      {"quantity": 2, "unit": "łyżeczki", "name": "curry"},
+      {"quantity": 1, "unit": "cebula", "name": "cebula"},
+      {"quantity": 2, "unit": "ząbki", "name": "czosnek"},
+      {"quantity": 1, "unit": "łyżka", "name": "oliwa z oliwek"}
+    ],
+    "steps": [
+      {"description": "Na patelni rozgrzej oliwę, podsmaż posiekaną cebulę i czosnek.", "position": 1},
+      {"description": "Dodaj curry i smaż przez chwilę.", "position": 2},
+      {"description": "Wlej mleczko kokosowe, gotuj kilka minut.", "position": 3},
+      {"description": "Dodaj krewetki, gotuj do momentu, aż staną się różowe.", "position": 4},
+      {"description": "Podawaj z ryżem basmati.", "position": 5}
+    ]
+  },
+  {
+    "name": "Kaczka pieczona z żurawiną i imbirem",
+    "description": "Soczysta kaczka pieczona w piekarniku z dodatkiem słodkiej żurawiny i pikantnego imbiru.",
+    "image": "kaczka_zurawina.jpg",
+    "difficulty": "HARD",
+    "preparationTime": 180,
+    "servings": 6,
+    "ingredients": [
+      {"quantity": 1, "unit": "kaczka", "name": "kaczka"},
+      {"quantity": 200, "unit": "g", "name": "żurawina"},
+      {"quantity": 3, "unit": "plasterki", "name": "imbir"},
+      {"quantity": 2, "unit": "łyżki", "name": "miodu"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "sól"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "pieprz"}
+    ],
+    "steps": [
+      {"description": "Rozgrzej piekarnik do 180°C.", "position": 1},
+      {"description": "Przygotuj kaczkę, natrzyj solą, pieprzem i posiekanym imbirem.", "position": 2},
+      {"description": "Włóż kaczkę do piekarnika i piecz przez 2 godziny, co jakiś czas polewając miodem.", "position": 3},
+      {"description": "Pod koniec pieczenia dodaj żurawinę i podpiecz jeszcze przez 10 minut.", "position": 4},
+      {"description": "Podawaj z pieczonymi ziemniakami i surówką z kiszonej kapusty.", "position": 5}
+    ]
+  },
+  {
+    "name": "Ratatouille",
+    "description": "Klasyczne francuskie danie z warzyw gotowanych na maśle, idealne na letni obiad.",
+    "image": "ratatouille.jpg",
+    "difficulty": "EASY",
+    "preparationTime": 60,
+    "servings": 6,
+    "ingredients": [
+      {"quantity": 1, "unit": "bakłażan", "name": "bakłażan"},
+      {"quantity": 2, "unit": "cukinia", "name": "cukinia"},
+      {"quantity": 2, "unit": "papryka", "name": "papryka"},
+      {"quantity": 4, "unit": "pomidor", "name": "pomidor"},
+      {"quantity": 2, "unit": "cebula", "name": "cebula"},
+      {"quantity": 4, "unit": "ząbki", "name": "czosnek"}
+    ],
+    "steps": [
+      {"description": "Pokrój warzywa na grube plastry.", "position": 1},
+      {"description": "Na patelni rozgrzej masło, podsmaż cebulę i czosnek.", "position": 2},
+      {"description": "Dodaj pokrojone warzywa i smaż przez około 20 minut.", "position": 3},
+      {"description": "Przypraw solą, pieprzem i ziołami prowansalskimi.", "position": 4},
+      {"description": "Podawaj z bagietką.", "position": 5}
+    ]
+  },
+  {
+    "name": "Kotlety jagnięce z miętą",
+    "description": "Delikatne kotlety jagnięce, idealne na romantyczną kolację.",
+    "image": "kotlety_jagnie.jpg",
+    "difficulty": "MEDIUM",
+    "preparationTime": 45,
+    "servings": 2,
+    "ingredients": [
+      {"quantity": 4, "unit": "kotlety", "name": "kotlety jagnięce"},
+      {"quantity": 1, "unit": "pęczek", "name": "świeża mięta"},
+      {"quantity": 2, "unit": "ząbki", "name": "czosnek"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "sól"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "pieprz"},
+      {"quantity": 2, "unit": "łyżki", "name": "oliwa z oliwek"}
+    ],
+    "steps": [
+      {"description": "Posiekaj miętę i czosnek, wymieszaj z oliwą, solą i pieprzem.", "position": 1},
+      {"description": "Natrzyj marynatą kotlety i odstaw na 30 minut.", "position": 2},
+      {"description": "Na patelni rozgrzej oliwę, usmaż kotlety po 3-4 minuty z każdej strony.", "position": 3},
+      {"description": "Podawaj z pieczonymi ziemniakami i sałatą rzymską.", "position": 4}
+    ]
+  },
+  {
+    "name": "Krewetki w sosie śmietanowym z szpinakiem",
+    "description": "Krewetki podsmażane z czosnkiem i gotowane w gęstym sosie śmietanowym z dodatkiem szpinaku.",
+    "image": "krewetki_smietana.jpg",
+    "difficulty": "MEDIUM",
+    "preparationTime": 40,
+    "servings": 4,
+    "ingredients": [
+      {"quantity": 500, "unit": "g", "name": "krewetki"},
+      {"quantity": 200, "unit": "g", "name": "śmietana"},
+      {"quantity": 200, "unit": "g", "name": "świeży szpinak"},
+      {"quantity": 3, "unit": "ząbki", "name": "czosnek"},
+      {"quantity": 1, "unit": "łyżka", "name": "masło"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "sól"}
+    ],
+    "steps": [
+      {"description": "Na patelni rozgrzej masło, podsmaż posiekany czosnek.", "position": 1},
+      {"description": "Dodaj krewetki i smaż przez kilka minut.", "position": 2},
+      {"description": "Wlej śmietanę, dodaj szpinak i gotuj na małym ogniu, aż sos zgęstnieje.", "position": 3},
+      {"description": "Przypraw solą i pieprzem.", "position": 4},
+      {"description": "Podawaj z makaronem spaghetti.", "position": 5}
+    ]
+  },
+  {
+    "name": "Sałatka z grillowanym kurczakiem i awokado",
+    "description": "Lekka sałatka z grillowanym kurczakiem, kremowym awokado i aromatycznym dressingiem balsamicznym.",
+    "image": "salatka_kurczak_awokado.jpg",
+    "difficulty": "EASY",
+    "preparationTime": 30,
+    "servings": 2,
+    "ingredients": [
+      {"quantity": 2, "unit": "filety", "name": "kurczak"},
+      {"quantity": 1, "unit": "awokado", "name": "awokado"},
+      {"quantity": 1, "unit": "pomidor", "name": "pomidor"},
+      {"quantity": 100, "unit": "g", "name": "rukola"},
+      {"quantity": 2, "unit": "łyżki", "name": "oliwa z oliwek"},
+      {"quantity": 2, "unit": "łyżki", "name": "sos balsamiczny"}
+    ],
+    "steps": [
+      {"description": "Posmaruj filety kurczaka oliwą, przypraw solą i pieprzem.", "position": 1},
+      {"description": "Grilluj kurczaka przez około 5-7 minut z każdej strony.", "position": 2},
+      {"description": "Pokrój awokado i pomidora na plasterki.", "position": 3},
+      {"description": "Ułóż na talerzu rukolę, awokado, pomidora i pokrojonego kurczaka.", "position": 4},
+      {"description": "Skrop sosem balsamicznym przed podaniem.", "position": 5}
+    ]
+  },
+  {
+    "name": "Pieczony łosoś z koperkiem i cytryną",
+    "description": "Łosoś pieczony w folii z dodatkiem świeżego koperku i cytryny, delikatnie aromatyczny.",
+    "image": "losos_koper.jpg",
+    "difficulty": "EASY",
+    "preparationTime": 25,
+    "servings": 4,
+    "ingredients": [
+      {"quantity": 4, "unit": "filety", "name": "łosoś"},
+      {"quantity": 1, "unit": "pęczek", "name": "świeży koper"},
+      {"quantity": 1, "unit": "cytryna", "name": "cytryna"},
+      {"quantity": 2, "unit": "łyżki", "name": "oliwa z oliwek"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "sól"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "pieprz"}
+    ],
+    "steps": [
+      {"description": "Rozgrzej piekarnik do 180°C.", "position": 1},
+      {"description": "Przygotuj folię aluminiową, nałóż na nią filety łososia.", "position": 2},
+      {"description": "Posmaruj filety oliwą, posyp pokrojonym koperkiem i cytryną.", "position": 3},
+      {"description": "Zawinięte filety umieść w piekarniku i piecz przez 15-20 minut.", "position": 4},
+      {"description": "Podawaj z ugotowanym ryżem i surówką z marchewki.", "position": 5}
+    ]
+  },
+  {
+    "name": "Karkówka po amerykańsku z sosem BBQ",
+    "description": "Karkówka marynowana w sosie BBQ i pieczona, soczysta i aromatyczna.",
+    "image": "karkowka_bbq.jpg",
+    "difficulty": "MEDIUM",
+    "preparationTime": 180,
+    "servings": 6,
+    "ingredients": [
+      {"quantity": 1, "unit": "kg", "name": "karkówka wieprzowa"},
+      {"quantity": 1, "unit": "butelka", "name": "sos BBQ"},
+      {"quantity": 3, "unit": "ząbki", "name": "czosnek"},
+      {"quantity": 2, "unit": "łyżki", "name": "oliwa z oliwek"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "sól"},
+      {"quantity": 1, "unit": "łyżeczka", "name": "pieprz"}
+    ],
+    "steps": [
+      {"description": "Naciąć karkówkę, natrzeć solą, pieprzem i posiekanym czosnkiem.", "position": 1},
+      {"description": "Zalać karkówkę sosem BBQ, odstaw na co najmniej 2 godziny do marynowania.", "position": 2},
+      {"description": "Rozgrzej piekarnik do 180°C.", "position": 3},
+      {"description": "Umieść karkówkę w naczyniu żaroodpornym, piecz przez około 2 godziny.", "position": 4},
+      {"description": "Podawaj z ulubionymi dodatkami i sosem BBQ.", "position": 5}
+    ]
+  }
+]
