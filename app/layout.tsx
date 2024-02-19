@@ -48,6 +48,9 @@ export const metadata: Metadata = {
     "przepisy kulinarne",
   ],
   metadataBase: new URL(baseUrl!),
+  other: {
+    "google-site-verification": "0Md1_G4NwNu_GzvoQ0ZCIzBDNOoZDAg36Zr-HJ3VIE8",
+  },
 };
 
 moment.locale("pl");
