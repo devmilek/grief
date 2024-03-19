@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "moment/locale/pl";
 import moment from "moment";
+// test
 
 const baseUrl = process.env.BASE_URL;
 
